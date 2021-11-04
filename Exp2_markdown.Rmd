@@ -1,0 +1,950 @@
+---
+title: "Exp2 - analysis"
+date: "01/07/2021"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+rm(list = ls())
+library(tidyverse)
+library(summarytools)
+library(exactRankTests)
+library(lme4)
+library(naniar)
+library(gazer)
+library(zoo)
+source("../../../../R scripts/Roger/diagnostic_fcns.r")
+source("../../../../R scripts/Roger/glmm_stability.r")
+source("../../../../R scripts/Roger/glmmTMB_stability.r")
+source("../../../../R scripts/Roger/boot_glmm.r")
+source("../../../../R scripts/Roger/drop1_para.r")
+
+##GAMM
+library(itsadug)
+packageVersion("itsadug")
+library(plotfunctions)
+packageVersion("plotfunctions")
+library(colorspace)
+packageVersion("colorspace")
+## Define colors:
+col1 <- 'pink1'
+col2 <- 'black'
+col3 <- 'indianred'
+library(cowplot)
+
+#load("animacy_gamm_workspace3.RData")
+```
+
+
+## Notes: 
+
+### Loading data
+
+```{r}
+sample.data<-read.csv(file = "data/variable_motion_sample_data_anonymised.csv")
+```
+
+## Pupil size preprocessing
+
+```{r}
+## time.frame for interpolation
+max.time <- 20000
+min.time <- 0
+time.frame <- seq(from = min.time, to = max.time, by = 1)
+xx <- as.data.frame(time.frame)
+
+baseline.end<-1000
+```
+
+*Plot raw data
+```{r}
+raw.pupil_trial4<-ggplot(data = sample.data, aes(x = time.frame, y = RIGHT_PUPIL_SIZE)) +
+  ylab("Pupil size") +
+  xlab("Time (in ms)") +
+  geom_point(aes(color = condition), alpha = 0.3, size = 0.5) +
+  facet_grid(trial~subject)+
+  xlim(0, 20000) +
+    theme_bw()+
+  scale_color_manual(values=c("darkorange", "dodgerblue", "darkgreen", "yellow"))+
+  scale_fill_manual(values=c("darkorange", "dodgerblue",  "darkgreen", "yellow"))+
+  theme(panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank(),
+        panel.grid.major.y = element_blank(),
+        panel.grid.minor.y = element_blank(),
+        legend.title = element_blank(), legend.position = "none", legend.text=element_text(size=12))
+
+raw.pupil_trial4
+
+ggsave(raw.pupil_trial4, filename = "graphics/Exp2_pupil_size_raw.png", width=20, height = 8, scale = 0.8)
+```
+* Plot with blink artefacts removed
+```{r}
+sample.data<-sample.data%>%
+        mutate(RIGHT_PUPIL_SIZE_no_blinks=extend_blinks(RIGHT_PUPIL_SIZE,  hz=1000, fillback=100, fillforward=100), RIGHT_GAZE_X_no_blinks=extend_blinks(RIGHT_GAZE_X,  hz=1000, fillback=100, fillforward=100), RIGHT_GAZE_Y_no_blinks=extend_blinks(RIGHT_GAZE_Y,  hz=1000, fillback=100, fillforward=100))#Extends blinks
+```
+
+
+```{r}
+artefact_check_t4<-ggplot(data = sample.data, aes(x = time.frame, y = RIGHT_PUPIL_SIZE_no_blinks)) +
+  ylab("Pupil size") +
+  xlab("Time (in ms)") +
+  geom_point(aes(color = condition), alpha = 0.1, size = 0.5) +
+   facet_grid(trial~subject)+
+  xlim(0, 20000) +
+    theme_bw()+
+  scale_color_manual(values=c("darkorange", "dodgerblue", "darkgreen", "yellow"))+
+  scale_fill_manual(values=c("darkorange", "dodgerblue",  "darkgreen", "yellow"))+
+  theme(panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank(),
+        panel.grid.major.y = element_blank(),
+        panel.grid.minor.y = element_blank(),
+        legend.title = element_blank(), legend.position = "none", legend.text=element_text(size=12))
+
+#artefact_check_t4
+
+ggsave(artefact_check_t4, filename = "graphics/Exp2_contact_artefact_check.png", width=20, height=8)
+```
+
+
+* Plot distribution of pupil sizes
+```{r eval=FALSE}
+puphist <- ggplot(sample.data, aes(x = RIGHT_PUPIL_SIZE_no_blinks)) + geom_histogram(aes(y = ..count..), 
+    colour = "green", binwidth = 0.5)  + 
+    xlab("Pupil Size") + ylab("Count") + theme_bw() 
+puphist
+```
+
+### Preprocessing: interpolation, baseline correction, down sampling
+```{r}
+# subtractive baseline correction
+exp.data.pupil.base <- sample.data %>%
+  filter(time.frame < baseline.end & time.frame > 0) %>%
+    group_by(subject, condition_trial) %>%
+  summarise(median.base.pupil = median(RIGHT_PUPIL_SIZE_no_blinks, na.rm = TRUE))
+
+
+exp.data.pupil.processed <- sample.data %>%
+  filter(time.frame < max.time) %>% 
+  select(subject, sex, time.frame, condition, stimulus, motion, trial, condition_trial, RIGHT_GAZE_X_no_blinks, RIGHT_GAZE_Y_no_blinks, RIGHT_PUPIL_SIZE_no_blinks) %>%
+  group_by(subject, sex, condition_trial, time.frame) %>%
+  full_join(xx%>%select(time.frame)) %>% #add missing time.frames
+  ungroup() %>%
+  group_by(subject, sex, condition_trial) %>%
+  mutate(pupil.inter = na.approx(RIGHT_PUPIL_SIZE_no_blinks, na.rm = FALSE, maxgap = 500)) %>% #linear interpolation
+  full_join(exp.data.pupil.base) %>% #add baseline data
+  mutate(pupil.base.corrected = pupil.inter - median.base.pupil)%>% #subtractive baseline correction
+  ungroup()%>%
+    mutate(bin = cut(time.frame, seq(min(time.frame), max(time.frame), 100), right = FALSE))%>% #addition of time bins (100 ms = 10 hz)
+  separate(bin, c("bin_low", "bin_high"), sep=",", remove=FALSE)%>%
+  select(-bin_high)%>%
+  mutate(bin_low=as.numeric(str_replace_all(bin_low, "\\[|\\]", "")))
+  
+exp.data.pupil.processed.downsampled <- exp.data.pupil.processed %>%  
+  group_by(subject, sex, condition, stimulus, motion, condition_trial,trial, bin_low)%>%
+  summarise(pupil.base.corrected.binned=median(pupil.base.corrected), Xgaze=mean(RIGHT_GAZE_X_no_blinks), Ygaze=mean(RIGHT_GAZE_Y_no_blinks)) #down sampling to 10hz using median values
+```
+
+
+* Plot interpolated data
+```{r}
+plot_individual_interpolated<-ggplot(data = exp.data.pupil.processed.downsampled%>%filter(!is.na(subject) & !is.na(trial)), aes(x = bin_low, y =pupil.base.corrected.binned )) +
+  ylab("Pupil size") +
+  xlab("Time (in ms)") +
+  geom_point(aes(color = condition), alpha = 0.8, size = 0.5) +
+ facet_grid(trial~subject)+
+  xlim(0, 20000) +
+    theme_bw()+
+  scale_color_manual(values=c("darkorange", "dodgerblue", "darkgreen", "yellow"))+
+  scale_fill_manual(values=c("darkorange", "dodgerblue",  "darkgreen", "yellow"))+
+  theme(panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank(),
+        panel.grid.major.y = element_blank(),
+        panel.grid.minor.y = element_blank(),
+        legend.title = element_blank(), legend.position = "none",#c(0.85, 0.8),
+        legend.text=element_text(size=12))
+
+plot_individual_interpolated
+
+ggsave(plot_individual_interpolated, filename = "graphics/Exp2_pupil_size_individual_interpolated.png", width=24, height=8)
+
+```
+
+* Plot group level data
+```{r}
+exp.data.pupil.processed.downsampled$condition<-relevel(as.factor(exp.data.pupil.processed.downsampled$condition), "B-C", "B-V", "F-C", "F-V")
+
+pupil.group.level <- exp.data.pupil.processed.downsampled %>%
+    mutate(condition=as.factor(condition), stimulus=as.factor(stimulus), motion=as.factor(motion))%>%
+  group_by(bin_low, condition, stimulus, motion) %>%
+  summarise(mean.pupil.corrected.binned = mean(pupil.base.corrected.binned, na.rm = TRUE), sd.pupil.corrected.binned= sd(pupil.base.corrected.binned, na.rm = TRUE), se.pupil.corrected.binned = sd(pupil.base.corrected.binned, na.rm = TRUE) / sqrt(length(pupil.base.corrected.binned)))%>%
+  mutate(condition=fct_recode(condition, "Ball-constant"="B-C", "Ball-variable"="B-V", "Fur-constant"="F-C", "Fur-variable"="F-V"))%>%
+    mutate(motion=fct_recode(motion, "Constant"="C", "Variable"="V"), stimulus=fct_recode(stimulus, "Fur"="F", "Ball"="B"))%>%
+  droplevels()
+
+plot.animacy.pupil <- ggplot(data = pupil.group.level%>%filter(!is.na(condition)), aes(x = bin_low, y = mean.pupil.corrected.binned)) +
+  facet_wrap(~stimulus)+
+  ylab("Pupil size") +
+  xlab("Time (in ms)") +
+   geom_vline(aes(xintercept=4000), lty=1, col="darkgrey")+
+   geom_vline(aes(xintercept=5000), lty=2, col="darkgrey", alpha=0.5)+
+     geom_vline(aes(xintercept=6000), lty=2, col="darkgrey", alpha=0.5)+
+     geom_vline(aes(xintercept=12320), lty=2, col="darkgrey", alpha=0.5)+
+     geom_vline(aes(xintercept=12740), lty=2, col="darkgrey", alpha=0.5)+
+       geom_vline(aes(xintercept=13990), lty=2, col="darkgrey", alpha=0.5)+
+     geom_vline(aes(xintercept=14600), lty=2, col="darkgrey", alpha=0.5)+
+         geom_vline(aes(xintercept=8700), lty=2, col="darkgrey", alpha=0.5)+
+     geom_vline(aes(xintercept=8870), lty=2, col="darkgrey", alpha=0.5)+
+      geom_vline(aes(xintercept=8000), lty=1, col="darkgrey")+
+    geom_vline(aes(xintercept=12000), lty=1, col="darkgrey")+
+      geom_vline(aes(xintercept=16000), lty=1, col="darkgrey")+
+  geom_path(aes(x = bin_low, y = mean.pupil.corrected.binned, color = motion), alpha = 0.6, size = 0.6) +
+  geom_ribbon(aes(ymin = mean.pupil.corrected.binned - se.pupil.corrected.binned, ymax = mean.pupil.corrected.binned + se.pupil.corrected.binned, fill = motion), alpha = 0.4) +
+    xlim(0, 19000) +
+    theme_bw()+
+  scale_color_manual(values=c("darkorange", "dodgerblue" ))+
+  scale_fill_manual(values=c("darkorange", "dodgerblue" ))+
+  theme(panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank(),
+        panel.grid.major.y = element_blank(),
+        panel.grid.minor.y = element_blank(),
+        legend.title = element_blank(), legend.position = c(0.1, 0.85), legend.text=element_text(size=12),
+        strip.text.x = element_text(size = 12))
+
+plot.animacy.pupil
+
+ggsave(plot.animacy.pupil, filename = "graphics/Exp2.pupil_baseline_corrected.png", height = 6, width = 14, scale = 0.6)
+```
+
+
+* Plot group level data by trial number
+```{r}
+
+pupil.group.level.trial <- exp.data.pupil.processed.downsampled %>%
+  mutate(condition=as.factor(condition))%>%
+  group_by(bin_low, condition, motion, stimulus, trial) %>%
+  summarise(mean.pupil.corrected.binned = mean(pupil.base.corrected.binned, na.rm = TRUE), sd.pupil.corrected.binned= sd(pupil.base.corrected.binned, na.rm = TRUE), se.pupil.corrected.binned = sd(pupil.base.corrected.binned, na.rm = TRUE) / sqrt(length(pupil.base.corrected.binned)))%>%
+  mutate(condition=fct_recode(condition, "Ball-constant"="B-C", "Ball-variable"="B-V", "Fur-constant"="F-C", "Fur-variable"="F-V"))%>%
+  droplevels()
+
+plot.animacy.pupil.trial <- ggplot(data = pupil.group.level.trial%>%filter(!is.na(condition), trial==1), aes(x = bin_low, y = mean.pupil.corrected.binned)) +
+  facet_wrap(~motion)+
+  ylab("Pupil size") +
+  xlab("Time (in ms)") +
+  geom_vline(aes(xintercept=4000), lty=1, col="darkgrey")+
+   geom_vline(aes(xintercept=5000), lty=2, col="darkgrey")+
+     geom_vline(aes(xintercept=6000), lty=2, col="darkgrey")+
+     geom_vline(aes(xintercept=12320), lty=2, col="darkgrey")+
+     geom_vline(aes(xintercept=12740), lty=2, col="darkgrey")+
+       geom_vline(aes(xintercept=13990), lty=2, col="darkgrey")+
+     geom_vline(aes(xintercept=14600), lty=2, col="darkgrey")+
+         geom_vline(aes(xintercept=8700), lty=2, col="darkgrey")+
+     geom_vline(aes(xintercept=8870), lty=2, col="darkgrey")+
+   # geom_vline(aes(xintercept=6660), lty=4, col="darkgrey")+
+      geom_vline(aes(xintercept=8000), lty=1, col="darkgrey")+
+    geom_vline(aes(xintercept=12000), lty=1, col="darkgrey")+
+      geom_vline(aes(xintercept=16000), lty=1, col="darkgrey")+
+    #  geom_vline(aes(xintercept=8700), lty=2, col="darkgrey")+
+     #   geom_vline(aes(xintercept=8870), lty=2, col="darkgrey")+
+  geom_path(aes(x = bin_low, y = mean.pupil.corrected.binned, color = condition), alpha = 0.5, size = 0.5) +
+  geom_ribbon(aes(ymin = mean.pupil.corrected.binned - se.pupil.corrected.binned, ymax = mean.pupil.corrected.binned + se.pupil.corrected.binned, fill = condition), alpha = 0.5) +
+    xlim(0, 20000) +
+    theme_bw()+
+  scale_color_manual(values=c("darkorange", "dodgerblue", "darkgreen", "yellow"))+
+  scale_fill_manual(values=c("darkorange", "dodgerblue", "darkgreen", "yellow"))+
+  theme(panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank(),
+        panel.grid.major.y = element_blank(),
+        panel.grid.minor.y = element_blank(),
+        legend.title = element_blank(), legend.position = c(0.8, 0.12), legend.text=element_text(size=12))
+
+
+plot.animacy.pupil.trial
+
+ggsave(plot.animacy.pupil.trial, filename = "graphics/Exp2_pupil_baseline_corrected_bytrial.png", height = 6, width = 28, scale = 0.6)
+```
+
+```{r}
+save.image(file = "animacy_gamm_workspace.RData")
+```
+
+
+### GAMM
+
+* Plot gaze positions
+```{r}
+emptyPlot(c(0,1024), c(768, 0), bty='o',
+          main="Gaze positions", xlab="Xgaze", ylab="Ygaze")
+points(exp.data.pupil.processed.downsampled$Xgaze, exp.data.pupil.processed.downsampled$Ygaze, pch=16, cex=.5, col=alpha(1), xpd=TRUE)
+abline(h=768/2, v=1024/2, lty=1, col='white')
+abline(h=768/2, v=1024/2, lty=2, col=1)
+```
+
+* Plot pupil size by subject
+```{r}
+par(cex=1.1)
+bp <- sortBoxplot(exp.data.pupil.processed.downsampled$pupil.base.corrected.binned ~ exp.data.pupil.processed.downsampled$subject, col=alpha(1), decreasing=FALSE,
+                  ylab="Pupil size", xlab="Subject", bty='n', pch=".")
+
+
+```
+
+##  GAMM
+
+* select interest period
+```{r}
+dat <- exp.data.pupil.processed.downsampled%>%
+  filter(bin_low >= baseline.end & bin_low <= (baseline.end+19000))%>% #select interest period
+  rename(pupil_base="pupil.base.corrected.binned", time="bin_low")%>%
+  arrange(subject, condition, time)%>%#order dataframe
+  droplevels()
+dat$motion<-as.factor(dat$motion)
+dat$stimulus<-as.factor(dat$stimulus)
+dat$condition<-as.factor(dat$condition)
+dat$subject<-as.factor(dat$subject)
+```
+
+
+```{r}
+dat2 <- exp.data.pupil.processed.downsampled%>%
+  filter(bin_low >= (baseline.end+3000) & bin_low <= (baseline.end+7000))%>% #select interest period
+  rename(pupil_base="pupil.base.corrected.binned", time="bin_low")%>%
+  arrange(subject, condition, time)%>%#order dataframe
+  droplevels()
+dat2$motion<-as.factor(dat2$motion)
+dat2$stimulus<-as.factor(dat2$stimulus)
+dat2$condition<-as.factor(dat2$condition)
+dat2$subject<-as.factor(dat2$subject)
+```
+
+```{r}
+# Defining events (time series):
+dat$Event <- interaction(dat$subject, dat$condition_trial, drop=TRUE)
+dat$IsFur<- ifelse(dat$stimulus=="F",1,0)
+dat$IsVariable<- ifelse(dat$motion=="V",1,0)
+dat$IsFurVariable<- ifelse(dat$stimulus=="F",1,0)
+
+m2 <- bam(pupil_base ~ condition + s(time, k=20)+ s(time, by=condition, k=20) 
+          + s(Xgaze, Ygaze)
+          + s(time, Event, bs='fs', m=1)
+          , data=dat, discrete=TRUE, nthreads=40, method="ML")
+
+save.image(file = "animacy_gamm_workspace.RData")
+
+m3 <- bam(pupil_base ~  s(time, k=20)+ s(time, by=IsFur, k=20) + s(time, by=IsVariable, k=20)+ s(time, by=IsFurVariable, k=20)
+          + s(Xgaze, Ygaze)
+          + s(time, Event, bs='fs', m=1)
+          , data=dat, discrete=TRUE, nthreads=40, method="ML")
+
+save.image(file = "animacy_gamm_workspace3.RData")
+```
+
+
+```{r}
+m2.null <- bam(pupil_base ~ s(time, k=20)+ 
+          + s(Xgaze, Ygaze)
+          + s(time, Event, bs='fs', m=1)
+          , data=dat, discrete=TRUE, nthreads=40, method="ML")
+
+save.image(file = "animacy_gamm_workspace3.RData")
+#concurvity(m2, full = FALSE)
+```
+
+
+```{r}
+summary(m2)
+
+gam.check(m2)
+acf(resid(m2), bty='n', main="ACF residuals model1")
+acf(resid(m2), plot=FALSE)
+
+compareML(m2, m2.null)
+AIC(m2, m2.null)
+
+```
+
+
+```{r}
+summary(m3)
+gam.check(m3)
+acf(resid(m3), bty='n', main="ACF residuals model1")
+acf(resid(m3), plot=FALSE)
+
+compareML(m3, m2.null)
+AIC(m3, m2.null)
+
+```
+
+
+
+
+* difference curve
+```{r}
+
+
+plot_diff(m2, view="time", 
+          comp=list(condition=c("B-C", "F-C")), rm.ranef=TRUE, main="Ball-constant - Fur-constant", 
+          las=1, ylab="Est. difference in pupil size", 
+            col=col2, hide.label = TRUE, plot = TRUE)#col.diff=alpha(1,f=0),v0=1800,
+
+plot_diff(m2, view="time", 
+          comp=list(condition=c("B-V", "F-V")), rm.ranef=TRUE, main="Ball-variable - Fur-variable", 
+          las=1, ylab="Est. difference in pupil size", 
+            col=col2, hide.label = TRUE, plot = TRUE)#col.diff=alpha(1,f=0),v0=1800,
+
+plot_diff_nc_bs<-plot_diff(m2, view="time", 
+          comp=list(condition=c("nc", "bs")), rm.ranef=TRUE, main="Disappear - Reappear", 
+          las=1, ylab="Est. difference in pupil size", 
+            col=col2, hide.label = TRUE, plot = FALSE)
+
+plot_diff_nc_sb<-plot_diff(m2, view="time", 
+          comp=list(condition=c("nc", "sb")), rm.ranef=TRUE, main="Disappear - Reappear", 
+          las=1, ylab="Est. difference in pupil size", 
+            col=col2, hide.label = TRUE, plot = FALSE)
+
+plot_diff_bs_sb<-plot_diff(m2, view="time", 
+          comp=list(condition=c("bs", "sb")), rm.ranef=TRUE, main="Disappear - Reappear", 
+          las=1, ylab="Est. difference in pupil size", 
+            col=col2, hide.label = TRUE, plot = FALSE)
+
+
+plot_diff_m2_nc_bs<-ggplot(data=plot_diff_nc_bs, aes(x=time, y=est))+
+  geom_hline(yintercept = 0)+
+  geom_path(lty=2)+
+  geom_ribbon(aes(x=time, ymin=est-CI, ymax=est+CI), alpha=0.2)+
+  theme_bw()+
+  scale_x_continuous(name="Time (in ms)", breaks=c(3000, 4000, 5000, 6000))+ ylab("Est. difference in pupil size")+ggtitle("No change - Shrinking")+
+    theme(panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank(),
+        panel.grid.major.y = element_blank(),
+        panel.grid.minor.y = element_blank())
+
+plot_diff_m2_nc_sb<-ggplot(data=plot_diff_nc_sb, aes(x=time, y=est))+
+  geom_hline(yintercept = 0)+
+  geom_path(lty=2)+
+  geom_ribbon(aes(x=time, ymin=est-CI, ymax=est+CI), alpha=0.2)+
+  theme_bw()+
+  scale_x_continuous(name="Time (in ms)", breaks=c(3000, 4000, 5000, 6000))+ ylab("Est. difference in pupil size")+ggtitle("No change - Expanding")+
+    theme(panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank(),
+        panel.grid.major.y = element_blank(),
+        panel.grid.minor.y = element_blank())
+
+plot_diff_m2_bs_sb<-ggplot(data=plot_diff_bs_sb, aes(x=time, y=est))+
+  geom_hline(yintercept = 0)+
+  geom_path(lty=2)+
+  geom_ribbon(aes(x=time, ymin=est-CI, ymax=est+CI), alpha=0.2)+
+  theme_bw()+
+  scale_x_continuous(name="Time (in ms)", breaks=c(3000, 4000, 5000, 6000))+ ylab("Est. difference in pupil size")+ggtitle("Shrinking - Expanding")+
+    theme(panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank(),
+        panel.grid.major.y = element_blank(),
+        panel.grid.minor.y = element_blank())
+
+library(cowplot)
+pg.diff<-plot_grid(plot_diff_m2_nc_bs, plot_diff_m2_nc_sb, plot_diff_m2_bs_sb, nrow=1, labels = c("A", "B", "C"))
+pg.diff
+ggsave(pg.diff, filename = "graphics/plot_diff_m2_size_constancy.png", width=15, height=5, scale=0.6)
+
+
+
+```
+
+* plotting partial effects
+```{r}
+pdf("graphics/VoE_animacy_GAMM_partical_effect_m2.pdf", width=10, height=8)
+plot(m2, pages = 1, all.terms = TRUE, residuals = TRUE, rug=FALSE, pch = 1, cex = 0.5, seWithMean = TRUE, shade = TRUE, shade.col = "lightblue")
+dev.off()
+
+library(mgcViz)
+b <- getViz(m2)
+png("graphics/VoE_animacy_GAMM_partical_effect2_m2.png", width=20, height=17, units="cm", res=300)
+p1<-plot(b, allTerms = T)+theme_classic() + labs(title = NULL)
+print(p1, pages = 1 )
+dev.off()
+
+
+#ggsave(p1, filename = "graphics/VoE_occlusion2screens_GAMM_partical_effect.png", width=10, height = 8, scale=0.8)
+```
+
+
+* Summed effects
+```{r}
+
+plot_smooth(m3, view="time", cond=list(IsVariable=0), rm.ranef=TRUE,
+  v0=0, col=col2, lwd=2, lty=6, rug=FALSE, se=1.96,
+  main="Estimated effects", ylab="Pupil (baselined)", las=1,
+  ylim=c(-2000,2500))
+plot_smooth(m3, view="time", cond=list(IsVariable=1), rm.ranef=TRUE,
+  v0=0, col=col3, lwd=2, lty=6, rug=FALSE, add=TRUE, xpd=TRUE, se=1.96)
+
+
+# legend
+legend('bottomright',
+       legend=c('Constant', "Variable"),
+       lty=rep(c(1,6), each=2), lwd=rep(c(1,2), each=2),
+       col=rep(c(col2, col3), 2), seg.len=1.5,
+       bty='n', cex=.85, ncol=2, xpd=TRUE)
+
+```
+
+```{r}
+
+tmp <- m2$model
+
+plot_modelfit(m2, view="time", event=tmp$Event,n = 3)
+
+```
+
+
+
+```{r}
+save.image(file = "Exp2_gamm_workspace.RData")
+```
+
+
+
+
+### Shorter interest period
+
+```{r}
+# Defining events (time series):
+dat2$Event <- interaction(dat2$subject, dat2$condition_trial, drop=TRUE)
+dat2$IsFur<- ifelse(dat2$stimulus=="F",1,0)
+dat2$IsVariable<- ifelse(dat2$motion=="V",1,0)
+dat2$IsFurVariable<- ifelse(dat2$stimulus=="F",1,0)
+
+m4 <- bam(pupil_base ~ condition + s(time, k=20)+ s(time, by=condition, k=20) 
+          + s(Xgaze, Ygaze)
+          + s(time, Event, bs='fs', m=1)
+          , data=dat2, discrete=TRUE, nthreads=40, method="ML")
+
+save.image(file = "animacy_gamm_workspace4.RData")
+```
+
+
+```{r}
+m5 <- bam(pupil_base ~  s(time, k=20)+ s(time, by=IsFur, k=20) + s(time, by=IsVariable, k=20)+ s(time, by=IsFurVariable, k=20)
+          + s(Xgaze, Ygaze)
+          + s(time, Event, bs='fs', m=1)
+          , data=dat2, discrete=TRUE, nthreads=40, method="ML")
+
+save.image(file = "animacy_gamm_workspace.RData")
+
+m4.null <- bam(pupil_base ~ s(time, k=20) 
+          + s(Xgaze, Ygaze)
+          + s(time, Event, bs='fs', m=1)
+          , data=dat2, discrete=TRUE, nthreads=40, method="ML")
+
+
+save.image(file = "Exp2_gamm_workspace.RData")
+```
+
+
+```{r}
+summary(m4)
+
+gam.check(m4)
+acf(resid(m4), bty='n', main="ACF residuals model1")
+acf(resid(m4), plot=FALSE)
+
+compareML(m4, m4.null)
+AIC(m4, m4.null)
+
+plot_diff(m4, view="time", 
+          comp=list(condition=c("B-C", "B-V")), rm.ranef=TRUE, main="", 
+          las=1, ylab="Est. difference in pupil size", 
+            col=col2, hide.label = TRUE, plot = TRUE)#col.diff=alpha(1,f=0),v0=1800,
+
+plot_diff(m4, view="time", 
+          comp=list(condition=c("F-C", "F-V")), rm.ranef=TRUE, main="", 
+          las=1, ylab="Est. difference in pupil size", 
+            col=col2, hide.label = TRUE, plot = TRUE)#col.diff=alpha(1,f=0),v0=1800,
+plot_diff(m4, view="time", 
+          comp=list(condition=c("B-C", "F-C")), rm.ranef=TRUE, main="", 
+          las=1, ylab="Est. difference in pupil size", 
+            col=col2, hide.label = TRUE, plot = TRUE)#col.diff=alpha(1,f=0),v0=1800,
+plot_diff(m4, view="time", 
+          comp=list(condition=c("B-V", "F-V")), rm.ranef=TRUE, main="", 
+          las=1, ylab="Est. difference in pupil size", 
+            col=col2, hide.label = TRUE, plot = TRUE)#col.diff=alpha(1,f=0),v0=1800,
+```
+```{r}
+summary(m5)
+
+gam.check(m5)
+acf(resid(m5), bty='n', main="ACF residuals model1")
+acf(resid(m5), plot=FALSE)
+
+compareML(m5, m4.null)
+AIC(m5, m4.null)
+
+plot_diff(m5, view="time", 
+          comp=list(IsVariable=c(1,0)), rm.ranef=TRUE, main="", 
+          las=1, ylab="Est. difference in pupil size", 
+            col=col2, hide.label = TRUE, plot = TRUE)#col.diff=alpha(1,f=0),v0=1800,
+
+plot_diff(m5, view="time", 
+          comp=list(condition=c("F-C", "F-V")), rm.ranef=TRUE, main="", 
+          las=1, ylab="Est. difference in pupil size", 
+            col=col2, hide.label = TRUE, plot = TRUE)#col.diff=alpha(1,f=0),v0=1800,
+
+
+```
+
+
+```{r}
+library(mgcViz)
+b <- getViz(m4)
+png("graphics/Exp2_GAMM_partical_effect2_M4.png", width=20, height=18, units="cm", res=300)
+p1<-plot(b, allTerms = T)+theme_classic() + labs(title = NULL)
+print(p1, pages = 1 )
+dev.off()
+```
+
+
+
+### Plot gaze data
+Interpolate AI values
+
+```{r}
+ai.data <- read_csv("data/ET_animacy_dynamic_IA.csv") %>%
+  mutate(x_average = (x_l + x_r)/2, time.frame = start)
+
+ai.data.constant<-ai.data%>% filter(label=="ball_IA_constant")
+ai.data.variable<-ai.data%>% filter(label=="ball_IA_variable")
+
+## interpolation
+max.time <- max(ai.data.constant$end)
+min.time <- min(ai.data.constant$start)
+time.frame <- seq(from = min.time, to = max.time, by = 1)
+xx <- as.data.frame(time.frame)
+
+library(zoo)
+
+ball.constant.data <- xx %>%
+  full_join(ai.data.constant, by = "time.frame") %>%
+  mutate(x_approx = na.approx(x_average), x_l_approx = na.approx(x_l), x_r_approx = na.approx(x_r))
+
+## interpolation
+max.time <- max(ai.data.variable$end)
+min.time <- min(ai.data.variable$start)
+time.frame <- seq(from = min.time, to = max.time, by = 1)
+xx <- as.data.frame(time.frame)
+
+ball.variable.data <- xx %>%
+  full_join(ai.data.variable, by = "time.frame") %>%
+  mutate(x_approx = na.approx(x_average), x_l_approx = na.approx(x_l), x_r_approx = na.approx(x_r))
+
+```
+
+
+```{r}
+gaze_plot_data <- exp.data.pupil.processed.downsampled %>%
+  filter(bin_low < 20000 ) %>%
+  group_by(bin_low, condition, stimulus, motion) %>%
+  summarise(mean.x = mean(Xgaze, na.rm=TRUE), median.x = median(Xgaze,  na.rm=TRUE), se.x = sd(Xgaze, na.rm=TRUE) / sqrt(length(Xgaze))) %>%
+  mutate(time.frame=bin_low)%>%
+   left_join(ball.constant.data%>%select(time.frame, x_l_approx, x_r_approx, x_approx)%>%rename(x_l_constant=x_l_approx, x_r_constant=x_r_approx, x_constant=x_approx))%>%
+        left_join(ball.variable.data%>%select(time.frame, x_l_approx, x_r_approx, x_approx)%>%rename(x_l_variable=x_l_approx, x_r_variable=x_r_approx, x_variable=x_approx)) %>%  
+  ungroup()%>%
+  mutate(motion=fct_recode(as.factor(motion), "Constant"="C", "Variable"="V"), stimulus=fct_recode(as.factor(stimulus), "Fur"="F", "Ball"="B"))
+```
+
+```{r}
+
+
+#gaze_plot_data$condition<-relevel(as.factor(gaze_plot_data$condition), "nc",  "bs", "sb")
+
+con.labs <- c("Ball constant", "Ball variable", "Fur constant", "Fur variable")
+names(con.labs) <- c(levels(as.factor(gaze_plot_data$condition)))
+
+
+
+gaze_animacy_plot<-ggplot(data = gaze_plot_data%>%filter(!is.na(condition)), aes(x = time.frame, y = mean.x)) +
+     # facet_wrap(~condition,labeller=labeller(condition=con.labs)) +
+  facet_grid(motion~stimulus)+
+  #moving ball:
+  geom_ribbon(data = gaze_plot_data %>% filter(motion=="Constant"), aes(x = time.frame, ymin = x_l_constant, ymax = x_r_constant), fill = "#988B2D", alpha = 0.8) +
+    geom_ribbon(data = gaze_plot_data %>% filter(motion=="Variable"), aes(x = time.frame, ymin = x_l_variable, ymax = x_r_variable), fill = "#988B2D", alpha = 0.8) +
+# gaze data:
+    geom_point(alpha = 0.1, size=0.5) +
+  geom_path(aes(y = median.x), size = 1.2) +
+   geom_ribbon(aes(ymin = mean.x - se.x, ymax = mean.x + se.x), alpha = 0.5)+
+  ylab("Horizontal coordinates (in px)") +
+  xlab("Time (in ms)") +
+    theme_bw()+
+  theme(panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank(),
+        panel.grid.major.y = element_blank(),
+        panel.grid.minor.y = element_blank(),
+        strip.text.x = element_text(size = 12),
+        strip.text.y = element_text(size = 12))
+
+gaze_animacy_plot
+ggsave(gaze_animacy_plot,filename="graphics/animacy_mean_x_gaze.png", height = 5, width = 8, scale = 0.7)
+```
+
+
+### Adding screenshots
+
+```{r}
+library(cowplot)
+ball_photo <- "screenshots/animacy_constant_motion_ball.mkv_snapshot_00.02.000.jpg"
+fur_photo <- "screenshots/animacy_constant_motion_fur.mkv_snapshot_00.02.000.jpg"
+
+
+ball_photo <- ggdraw(theme(plot.margin = unit(c(0, 0, 0, 0), "cm"))) + draw_image(ball_photo)
+fur_photo <- ggdraw(theme(plot.margin = unit(c(0, 0, 0,0), "cm"))) + draw_image(fur_photo)
+
+animacy_pics<-plot_grid(ball_photo, fur_photo, nrow=1)
+
+```
+
+```{r}
+pg.animacy1<-plot_grid(gaze_animacy_plot, plot.animacy.pupil , ncol=1, nrow=2, rel_heights = c(1.0, 1.0), labels = c("B", "C"))
+
+
+pg.animacy<-plot_grid(animacy_pics, pg.animacy1 , ncol=1, nrow=2, rel_heights = c(0.75, 2), labels = c("A", "", ""), label_colour = "white")
+
+pg.animacy
+
+ggsave(pg.animacy, filename = "graphics/ET_VoE_animcy_plotgrid.png", width = 9, height=12, scale=0.75)
+ggsave(pg.animacy, filename = "graphics/ET_VoE_animcy_plotgrid.pdf", width = 9, height=14, scale=0.75)
+```
+
+
+
+## Dynamic AoI analysis: r-squared
+
+
+```{r}
+dynamic.aoi.data <- sample.data %>%
+  filter(time.frame < 16000) %>%
+  group_by(condition, time.frame, subject) %>%
+  summarise(mean.x = mean(RIGHT_GAZE_X_no_blinks), mean.y = mean(RIGHT_GAZE_Y)) %>%
+     left_join(ball.constant.data%>%select(time.frame,x_approx)%>%rename(x_constant=x_approx))%>%
+        left_join(ball.variable.data%>%select(time.frame,  x_approx)%>%rename( x_variable=x_approx))
+
+
+dynamic.aoi.data$condition<-as.factor(dynamic.aoi.data$condition)
+levels(dynamic.aoi.data$condition)
+
+
+```
+
+
+```{r}
+library(broom)
+
+r2.constant <- dynamic.aoi.data %>%
+  filter(time.frame < 16000 & time.frame > 500 & (condition=="B-C" | condition=="F-C")) %>% #ip until the ball stops
+  droplevels() %>%
+  nest(-subject, -condition) %>%
+  mutate(
+    fit = map(data, ~ lm(mean.x ~ x_constant, data = .)),
+    results = map(fit, glance)
+  ) %>%
+  unnest(results) %>%
+  select(subject, condition, r.squared) %>%
+  rename(r.sq.exp = r.squared) %>%
+  mutate(across(where(is.numeric), round, 3))
+
+r2.variable <- dynamic.aoi.data %>%
+  filter(time.frame < 16000 & time.frame > 500 & (condition=="B-V" | condition=="F-V")) %>% #ip until the ball disappeared
+  droplevels() %>%
+  nest(-subject, -condition) %>%
+  mutate(
+    fit = map(data, ~ lm(mean.x ~ x_variable, data = .)),
+    results = map(fit, glance)
+  ) %>%
+  unnest(results) %>%
+  select(subject, condition, r.squared) %>%
+  rename(r.sq.exp = r.squared) %>%
+  mutate(across(where(is.numeric), round, 3))
+
+r2.constant %>%
+  group_by(condition) %>%
+  summarise(mean = mean(r.sq.exp), se = sd(r.sq.exp)/length(r.sq.exp),median = median(r.sq.exp), min = min(r.sq.exp), max = max(r.sq.exp), sd = sd(r.sq.exp))
+
+r2.variable %>%
+  group_by(condition) %>%
+  summarise(mean = mean(r.sq.exp), se = sd(r.sq.exp)/length(r.sq.exp), median = median(r.sq.exp), min = min(r.sq.exp), max = max(r.sq.exp), sd = sd(r.sq.exp))
+
+```
+
+
+
+## Trial report analysis
+
+* Read Data
+
+```{r}
+trial.data<-read.csv(file="data/Exp2_Trial_report_anonymised.csv")
+```
+
+
+
+
+* descriptives
+```{r}
+trial.data.ind<-trial.data%>%
+  group_by(condition, subject)%>%
+  summarise(fix_duration=mean(AVERAGE_FIXATION_DURATION), sacc_amplitude=mean(AVERAGE_SACCADE_AMPLITUDE), fix_count=mean(	FIXATION_COUNT), max_pupil_size=mean(PUPIL_SIZE_MAX), sacc_count=mean(SACCADE_COUNT))%>%
+ungroup()
+
+trial.data.ind.motion<-trial.data%>%
+  group_by(motion, subject)%>%
+  summarise(fix_duration=mean(AVERAGE_FIXATION_DURATION), sacc_amplitude=mean(AVERAGE_SACCADE_AMPLITUDE), fix_count=mean(	FIXATION_COUNT), max_pupil_size=mean(PUPIL_SIZE_MAX), sacc_count=mean(SACCADE_COUNT))%>%
+ungroup()
+
+trial.data.ind.stimulus<-trial.data%>%
+  group_by(stimulus, subject)%>%
+  summarise(fix_duration=mean(AVERAGE_FIXATION_DURATION), sacc_amplitude=mean(AVERAGE_SACCADE_AMPLITUDE), fix_count=mean(	FIXATION_COUNT), max_pupil_size=mean(PUPIL_SIZE_MAX), sacc_count=mean(SACCADE_COUNT))%>%
+ungroup()
+
+trial_descriptives<-trial.data.ind%>%
+  group_by(condition)%>%
+  summarise(mean_fix_duration=mean(fix_duration), se_fix_duration=sd(fix_duration)/length(fix_duration), mean_fix_count=mean(fix_count), se_fix_count=sd(fix_count)/length(fix_count), mean_sacc_amplitude=mean(sacc_amplitude), se_sacc_amplitude=sd(sacc_amplitude)/length(sacc_amplitude), mean_sacc_count=mean(sacc_count),se_sacc_count=sd(sacc_count)/length(sacc_count), n=length(sacc_count))
+
+write.csv(trial_descriptives, file = "saves/trial_descriptives_exp2.csv")
+
+```
+* motion comparison
+```{r}
+
+
+
+library(broom)
+
+x1<-trial.data.ind.motion%>%
+  summarise(ttest_fix_duration = list(t.test(fix_duration ~ motion, paired=TRUE)))%>%
+  mutate(ttest_fix_duration = map(ttest_fix_duration, tidy)) %>%
+  unnest()
+
+
+x2<-trial.data.ind.motion%>%
+  summarise(ttest = list(t.test(fix_count ~ motion, paired=TRUE)))%>%
+  mutate(ttest = map(ttest, tidy)) %>%
+  unnest()
+
+x3<-trial.data.ind.motion%>%
+  summarise(ttest = list(t.test(sacc_amplitude ~ motion, paired=TRUE)))%>%
+  mutate(ttest = map(ttest, tidy)) %>%
+  unnest()
+
+x4<-trial.data.ind.motion%>%
+  summarise(ttest = list(t.test(sacc_count ~ motion, paired=TRUE)))%>%
+  mutate(ttest = map(ttest, tidy)) %>%
+  unnest()
+rowname<-c("fix_duration", "fix_count", "sacc_amp", "sacc_count")
+xx<-cbind(rowname,rbind(x1,x2, x3,x4))
+write.csv(xx, file = "saves/trial_ttest_exp2_motion.csv")
+
+```
+* stimulus comparison
+```{r}
+
+
+
+library(broom)
+
+x1<-trial.data.ind.stimulus%>%
+  summarise(ttest_fix_duration = list(t.test(fix_duration ~ stimulus, paired=TRUE)))%>%
+  mutate(ttest_fix_duration = map(ttest_fix_duration, tidy)) %>%
+  unnest()
+
+
+x2<-trial.data.ind.stimulus%>%
+  summarise(ttest = list(t.test(fix_count ~ stimulus, paired=TRUE)))%>%
+  mutate(ttest = map(ttest, tidy)) %>%
+  unnest()
+
+x3<-trial.data.ind.stimulus%>%
+  summarise(ttest = list(t.test(sacc_amplitude ~ stimulus, paired=TRUE)))%>%
+  mutate(ttest = map(ttest, tidy)) %>%
+  unnest()
+
+x4<-trial.data.ind.stimulus%>%
+  summarise(ttest = list(t.test(sacc_count ~ stimulus, paired=TRUE)))%>%
+  mutate(ttest = map(ttest, tidy)) %>%
+  unnest()
+rowname<-c("fix_duration", "fix_count", "sacc_amp", "sacc_count")
+xx<-cbind(rowname,rbind(x1,x2, x3,x4))
+write.csv(xx, file = "saves/trial_ttest_exp2_stimulus.csv")
+
+```
+
+## Dwell time analysis
+
+
+Read Data
+
+```{r}
+end.ip.data<-read.csv(file="data/Exp2_IA_report_anonymised.csv")
+```
+
+GLMM
+```{r}
+library(glmmTMB)
+```
++preprocessing of data for model
+```{r}
+model.data<-end.ip.data%>%filter(IP_DURATION>0)
+
+model.data$z.trial<-scale(model.data$trial, center = TRUE, scale=TRUE)
+model.data$motion<- as.factor(model.data$motion)
+model.data$motion.c<- as.numeric(model.data$motion)-mean(as.numeric(model.data$motion))
+model.data$stimulus<- as.factor(model.data$stimulus)
+model.data$stimulus.c<- as.numeric(model.data$stimulus)-mean(as.numeric(model.data$stimulus))
+model.data$prop.dwell.time<-model.data$IA_DWELL_TIME/model.data$IP_DURATION
+hist((model.data$prop.dwell.time))
+hist((log(model.data$IA_DWELL_TIME+1)))
+
+
+model.data$prop.dwell.time.scaled <- (model.data$prop.dwell.time*(length(model.data$prop.dwell.time) - 1) + 0.5)/length(model.data$prop.dwell.time)#transform DV to exclude 0 and 1s
+hist((model.data$prop.dwell.time.scaled))
+
+```
++ fitting model
+```{r}
+m1.end.ip<-glmmTMB(prop.dwell.time.scaled ~ motion*stimulus + z.trial + (1+motion.c+stimulus.c+z.trial||subject), family=beta_family, data=model.data,  control=glmmTMBControl(optCtrl=list(iter.max=100000000, eval.max=100000000)))
+
+
+overdisp.test(m1.end.ip)
+summary(m1.end.ip)
+```
+
+
+```{r}
+drop1(m1.end.ip, test="Chisq")
+
+```
+
+* removing nonsignificant interaction
+
+
+```{r}
+
+m2.end.ip<-glmmTMB(prop.dwell.time.scaled ~ motion+stimulus + z.trial + (1+motion.c+stimulus.c+z.trial||subject), family=beta_family, data=model.data,  control=glmmTMBControl(optCtrl=list(iter.max=100000000, eval.max=100000000)))
+
+
+overdisp.test(m2.end.ip)
+summary(m2.end.ip)
+```
+```{r}
+drop1(m2.end.ip, test="Chisq")
+```
+
+* Collinearity
+
+```{r}
+library(car)
+xx=lm(prop.dwell.time.scaled ~ motion+stimulus + z.trial, data=model.data)
+vif(xx)
+```
+

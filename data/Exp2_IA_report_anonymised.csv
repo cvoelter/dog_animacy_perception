@@ -1,0 +1,204 @@
+"","subject","IP_LABEL","IA_LABEL","trial","condition","condition_trial","motion","stimulus","session","IA_DWELL_TIME","TRIAL_DWELL_TIME","IP_DURATION","Breed","sex","neutered","age"
+"1","subj.01","end_IP","end_position",1,"B-C","B-C _ 1","constant","ball",1,1142,2953,3030,"Border Collie","m","yes",23
+"2","subj.01","end_IP","end_position",2,"B-C","B-C _ 2","constant","ball",1,0,2722,3029,"Border Collie","m","yes",23
+"3","subj.01","end_IP","end_position",3,"B-C","B-C _ 3","constant","ball",1,0,1840,3002,"Border Collie","m","yes",23
+"4","subj.01","end_IP","end_position",1,"B-V","B-V _ 1","variable","ball",2,934,2874,3031,"Border Collie","m","yes",23
+"5","subj.01","end_IP","end_position",2,"B-V","B-V _ 2","variable","ball",2,0,2806,3031,"Border Collie","m","yes",23
+"6","subj.01","end_IP","end_position",3,"B-V","B-V _ 3","variable","ball",2,0,1245,3000,"Border Collie","m","yes",23
+"7","subj.01","end_IP","end_position",1,"F-V","F-V _ 1","variable","fur",3,2206,2889,3028,"Border Collie","m","yes",23
+"8","subj.01","end_IP","end_position",2,"F-V","F-V _ 2","variable","fur",3,0,2061,3028,"Border Collie","m","yes",23
+"9","subj.01","end_IP","end_position",3,"F-V","F-V _ 3","variable","fur",3,3001,3001,3001,"Border Collie","m","yes",23
+"10","subj.01","end_IP","end_position",1,"F-C","F-C _ 1","constant","fur",4,329,2999,3008,"Border Collie","m","yes",23
+"11","subj.01","end_IP","end_position",2,"F-C","F-C _ 2","constant","fur",4,0,3023,3023,"Border Collie","m","yes",23
+"12","subj.01","end_IP","end_position",3,"F-C","F-C _ 3","constant","fur",4,2973,2973,3000,"Border Collie","m","yes",23
+"13","subj.02","end_IP","end_position",2,"B-V","B-V _ 2","variable","ball",1,2516,2656,3031,"Border Collie","f","no",28
+"14","subj.02","end_IP","end_position",3,"B-V","B-V _ 3","variable","ball",1,1009,2664,3002,"Border Collie","f","no",28
+"15","subj.02","end_IP","end_position",1,"B-C","B-C _ 1","constant","ball",2,523,2611,3002,"Border Collie","f","no",28
+"16","subj.02","end_IP","end_position",2,"B-C","B-C _ 2","constant","ball",2,0,2546,3002,"Border Collie","f","no",28
+"17","subj.02","end_IP","end_position",3,"B-C","B-C _ 3","constant","ball",2,982,2565,3002,"Border Collie","f","no",28
+"18","subj.02","end_IP","end_position",1,"F-C","F-C _ 1","constant","fur",3,2996,2996,3002,"Border Collie","f","no",28
+"19","subj.02","end_IP","end_position",2,"F-C","F-C _ 2","constant","fur",3,175,2554,3002,"Border Collie","f","no",28
+"20","subj.02","end_IP","end_position",3,"F-C","F-C _ 3","constant","fur",3,0,2770,3002,"Border Collie","f","no",28
+"21","subj.02","end_IP","end_position",1,"F-V","F-V _ 1","variable","fur",4,1014,2670,3030,"Border Collie","f","no",28
+"22","subj.02","end_IP","end_position",2,"F-V","F-V _ 2","variable","fur",4,2317,2765,3001,"Border Collie","f","no",28
+"23","subj.02","end_IP","end_position",3,"F-V","F-V _ 3","variable","fur",4,2378,2818,3030,"Border Collie","f","no",28
+"24","subj.03","end_IP","end_position",1,"F-V","F-V _ 1","variable","fur",1,2999,2999,2999,"Mix","m","yes",22
+"25","subj.03","end_IP","end_position",2,"F-V","F-V _ 2","variable","fur",1,0,2999,2999,"Mix","m","yes",22
+"26","subj.03","end_IP","end_position",3,"F-V","F-V _ 3","variable","fur",1,0,3001,3001,"Mix","m","yes",22
+"27","subj.03","end_IP","end_position",1,"F-C","F-C _ 1","constant","fur",2,2353,2911,3001,"Mix","m","yes",22
+"28","subj.03","end_IP","end_position",2,"F-C","F-C _ 2","constant","fur",2,0,3030,3030,"Mix","m","yes",22
+"29","subj.03","end_IP","end_position",3,"F-C","F-C _ 3","constant","fur",2,0,3006,3006,"Mix","m","yes",22
+"30","subj.03","end_IP","end_position",1,"B-V","B-V _ 1","variable","ball",3,0,3002,3002,"Mix","m","yes",22
+"31","subj.03","end_IP","end_position",2,"B-V","B-V _ 2","variable","ball",3,0,3029,3029,"Mix","m","yes",22
+"32","subj.03","end_IP","end_position",3,"B-V","B-V _ 3","variable","ball",3,0,3003,3003,"Mix","m","yes",22
+"33","subj.03","end_IP","end_position",1,"B-C","B-C _ 1","constant","ball",4,0,2901,3003,"Mix","m","yes",22
+"34","subj.03","end_IP","end_position",2,"B-C","B-C _ 2","constant","ball",4,0,2493,2661,"Mix","m","yes",22
+"35","subj.03","end_IP","end_position",3,"B-C","B-C _ 3","constant","ball",4,0,2848,3002,"Mix","m","yes",22
+"36","subj.04","end_IP","end_position",1,"F-C","F-C _ 1","constant","fur",1,0,2867,3029,"Australian Shepherd","f","no",81
+"37","subj.04","end_IP","end_position",2,"F-C","F-C _ 2","constant","fur",1,0,2711,3004,"Australian Shepherd","f","no",81
+"38","subj.04","end_IP","end_position",3,"F-C","F-C _ 3","constant","fur",1,1983,2853,3030,"Australian Shepherd","f","no",81
+"39","subj.04","end_IP","end_position",1,"F-V","F-V _ 1","variable","fur",2,0,3001,3001,"Australian Shepherd","f","no",81
+"40","subj.04","end_IP","end_position",2,"F-V","F-V _ 2","variable","fur",2,0,2787,3002,"Australian Shepherd","f","no",81
+"41","subj.04","end_IP","end_position",3,"F-V","F-V _ 3","variable","fur",2,0,3002,3002,"Australian Shepherd","f","no",81
+"42","subj.04","end_IP","end_position",1,"B-C","B-C _ 1","constant","ball",3,0,3002,3002,"Australian Shepherd","f","no",81
+"43","subj.04","end_IP","end_position",2,"B-C","B-C _ 2","constant","ball",3,0,2987,3002,"Australian Shepherd","f","no",81
+"44","subj.04","end_IP","end_position",3,"B-C","B-C _ 3","constant","ball",3,0,2962,3030,"Australian Shepherd","f","no",81
+"45","subj.04","end_IP","end_position",1,"B-V","B-V _ 1","variable","ball",4,0,3003,3003,"Australian Shepherd","f","no",81
+"46","subj.04","end_IP","end_position",2,"B-V","B-V _ 2","variable","ball",4,0,3001,3001,"Australian Shepherd","f","no",81
+"47","subj.04","end_IP","end_position",3,"B-V","B-V _ 3","variable","ball",4,0,2848,3003,"Australian Shepherd","f","no",81
+"48","subj.05","end_IP","end_position",1,"F-V","F-V _ 1","variable","fur",1,168,2707,3002,"Border Collie","m","no",60
+"49","subj.05","end_IP","end_position",2,"F-V","F-V _ 2","variable","fur",1,0,2749,3002,"Border Collie","m","no",60
+"50","subj.05","end_IP","end_position",3,"F-V","F-V _ 3","variable","fur",1,0,2723,3029,"Border Collie","m","no",60
+"51","subj.05","end_IP","end_position",1,"F-C","F-C _ 1","constant","fur",2,1113,2786,3002,"Border Collie","m","no",60
+"52","subj.05","end_IP","end_position",2,"F-C","F-C _ 2","constant","fur",2,0,2842,2998,"Border Collie","m","no",60
+"53","subj.05","end_IP","end_position",3,"F-C","F-C _ 3","constant","fur",2,0,2844,3030,"Border Collie","m","no",60
+"54","subj.05","end_IP","end_position",1,"B-C","B-C _ 1","constant","ball",3,694,2495,3002,"Border Collie","m","no",60
+"55","subj.05","end_IP","end_position",2,"B-C","B-C _ 2","constant","ball",3,942,2739,3000,"Border Collie","m","no",60
+"56","subj.05","end_IP","end_position",3,"B-C","B-C _ 3","constant","ball",3,0,2504,3029,"Border Collie","m","no",60
+"57","subj.05","end_IP","end_position",1,"B-V","B-V _ 1","variable","ball",4,2014,2607,3029,"Border Collie","m","no",60
+"58","subj.05","end_IP","end_position",2,"B-V","B-V _ 2","variable","ball",4,2111,2736,3002,"Border Collie","m","no",60
+"59","subj.05","end_IP","end_position",3,"B-V","B-V _ 3","variable","ball",4,0,2782,3031,"Border Collie","m","no",60
+"60","subj.06","end_IP","end_position",1,"B-C","B-C _ 1","constant","ball",1,2846,2846,3028,"Collie","m","no",21
+"61","subj.06","end_IP","end_position",2,"B-C","B-C _ 2","constant","ball",1,0,3002,3002,"Collie","m","no",21
+"62","subj.06","end_IP","end_position",3,"B-C","B-C _ 3","constant","ball",1,0,3030,3030,"Collie","m","no",21
+"63","subj.06","end_IP","end_position",1,"B-V","B-V _ 1","variable","ball",2,0,2815,3003,"Collie","m","no",21
+"64","subj.06","end_IP","end_position",2,"B-V","B-V _ 2","variable","ball",2,518,2781,3002,"Collie","m","no",21
+"65","subj.06","end_IP","end_position",3,"B-V","B-V _ 3","variable","ball",2,0,2975,3000,"Collie","m","no",21
+"66","subj.06","end_IP","end_position",1,"F-C","F-C _ 1","constant","fur",3,1104,2829,3001,"Collie","m","no",21
+"67","subj.06","end_IP","end_position",2,"F-C","F-C _ 2","constant","fur",3,643,2852,3002,"Collie","m","no",21
+"68","subj.06","end_IP","end_position",3,"F-C","F-C _ 3","constant","fur",3,0,2828,3002,"Collie","m","no",21
+"69","subj.06","end_IP","end_position",1,"F-V","F-V _ 1","variable","fur",4,0,2821,3002,"Collie","m","no",21
+"70","subj.06","end_IP","end_position",2,"F-V","F-V _ 2","variable","fur",4,0,2879,3030,"Collie","m","no",21
+"71","subj.06","end_IP","end_position",3,"F-V","F-V _ 3","variable","fur",4,0,3003,3003,"Collie","m","no",21
+"72","subj.07","end_IP","end_position",1,"B-V","B-V _ 1","variable","ball",1,240,3017,3028,"Labrador Retriever","f","yes",37
+"73","subj.07","end_IP","end_position",2,"B-V","B-V _ 2","variable","ball",1,0,2968,3005,"Labrador Retriever","f","yes",37
+"74","subj.07","end_IP","end_position",3,"B-V","B-V _ 3","variable","ball",1,0,3029,3029,"Labrador Retriever","f","yes",37
+"75","subj.07","end_IP","end_position",1,"B-C","B-C _ 1","constant","ball",2,884,2950,3030,"Labrador Retriever","f","yes",37
+"76","subj.07","end_IP","end_position",2,"B-C","B-C _ 2","constant","ball",2,0,0,3032,"Labrador Retriever","f","yes",37
+"77","subj.07","end_IP","end_position",3,"B-C","B-C _ 3","constant","ball",2,0,2980,3002,"Labrador Retriever","f","yes",37
+"78","subj.07","end_IP","end_position",1,"F-C","F-C _ 1","constant","fur",3,0,2998,2998,"Labrador Retriever","f","yes",37
+"79","subj.07","end_IP","end_position",2,"F-C","F-C _ 2","constant","fur",3,0,2999,2999,"Labrador Retriever","f","yes",37
+"80","subj.07","end_IP","end_position",3,"F-C","F-C _ 3","constant","fur",3,0,3024,3028,"Labrador Retriever","f","yes",37
+"81","subj.07","end_IP","end_position",1,"F-V","F-V _ 1","variable","fur",4,0,3006,3006,"Labrador Retriever","f","yes",37
+"82","subj.07","end_IP","end_position",2,"F-V","F-V _ 2","variable","fur",4,0,3007,3007,"Labrador Retriever","f","yes",37
+"83","subj.07","end_IP","end_position",3,"F-V","F-V _ 3","variable","fur",4,0,3004,3004,"Labrador Retriever","f","yes",37
+"84","subj.08","end_IP","end_position",1,"F-V","F-V _ 1","variable","fur",1,15,2986,3002,"Mix","f","no",25
+"85","subj.08","end_IP","end_position",2,"F-V","F-V _ 2","variable","fur",1,2970,2970,3002,"Mix","f","no",25
+"86","subj.08","end_IP","end_position",3,"F-V","F-V _ 3","variable","fur",1,0,0,3002,"Mix","f","no",25
+"87","subj.08","end_IP","end_position",1,"F-C","F-C _ 1","constant","fur",2,0,0,3002,"Mix","f","no",25
+"88","subj.08","end_IP","end_position",2,"F-C","F-C _ 2","constant","fur",2,1818,2917,3002,"Mix","f","no",25
+"89","subj.08","end_IP","end_position",3,"F-C","F-C _ 3","constant","fur",2,0,3001,3001,"Mix","f","no",25
+"90","subj.08","end_IP","end_position",1,"B-C","B-C _ 1","constant","ball",3,2999,2999,2999,"Mix","f","no",25
+"91","subj.08","end_IP","end_position",2,"B-C","B-C _ 2","constant","ball",3,0,2977,3030,"Mix","f","no",25
+"92","subj.08","end_IP","end_position",3,"B-C","B-C _ 3","constant","ball",3,932,2773,3027,"Mix","f","no",25
+"93","subj.08","end_IP","end_position",1,"B-V","B-V _ 1","variable","ball",4,470,2771,3030,"Mix","f","no",25
+"94","subj.08","end_IP","end_position",2,"B-V","B-V _ 2","variable","ball",4,2830,2983,3002,"Mix","f","no",25
+"95","subj.08","end_IP","end_position",3,"B-V","B-V _ 3","variable","ball",4,19,2634,3001,"Mix","f","no",25
+"96","subj.09","end_IP","end_position",1,"B-C","B-C _ 1","constant","ball",1,2693,2946,3003,"Australian Shepherd","m","no",54
+"97","subj.09","end_IP","end_position",2,"B-C","B-C _ 2","constant","ball",1,0,2066,3001,"Australian Shepherd","m","no",54
+"98","subj.09","end_IP","end_position",3,"B-C","B-C _ 3","constant","ball",1,2647,2955,3029,"Australian Shepherd","m","no",54
+"99","subj.09","end_IP","end_position",1,"B-V","B-V _ 1","variable","ball",2,2301,2888,3002,"Australian Shepherd","m","no",54
+"100","subj.09","end_IP","end_position",2,"B-V","B-V _ 2","variable","ball",2,292,334,2999,"Australian Shepherd","m","no",54
+"101","subj.09","end_IP","end_position",3,"B-V","B-V _ 3","variable","ball",2,0,3000,3000,"Australian Shepherd","m","no",54
+"102","subj.09","end_IP","end_position",1,"F-C","F-C _ 1","constant","fur",3,0,3002,3002,"Australian Shepherd","m","no",54
+"103","subj.09","end_IP","end_position",2,"F-C","F-C _ 2","constant","fur",3,2385,2892,3030,"Australian Shepherd","m","no",54
+"104","subj.09","end_IP","end_position",3,"F-C","F-C _ 3","constant","fur",3,1414,2863,3002,"Australian Shepherd","m","no",54
+"105","subj.09","end_IP","end_position",1,"F-V","F-V _ 1","variable","fur",4,2699,2996,3031,"Australian Shepherd","m","no",54
+"106","subj.09","end_IP","end_position",2,"F-V","F-V _ 2","variable","fur",4,0,3031,3031,"Australian Shepherd","m","no",54
+"107","subj.09","end_IP","end_position",3,"F-V","F-V _ 3","variable","fur",4,0,2690,3032,"Australian Shepherd","m","no",54
+"108","subj.10","end_IP","end_position",1,"F-V","F-V _ 1","variable","fur",1,2292,2292,3003,"Flat Coated Retriever","f","no",62
+"109","subj.10","end_IP","end_position",2,"F-V","F-V _ 2","variable","fur",1,0,2592,3002,"Flat Coated Retriever","f","no",62
+"110","subj.10","end_IP","end_position",3,"F-V","F-V _ 3","variable","fur",1,0,3003,3003,"Flat Coated Retriever","f","no",62
+"111","subj.10","end_IP","end_position",1,"F-C","F-C _ 1","constant","fur",2,0,2971,3030,"Flat Coated Retriever","f","no",62
+"112","subj.10","end_IP","end_position",2,"F-C","F-C _ 2","constant","fur",2,0,2968,3030,"Flat Coated Retriever","f","no",62
+"113","subj.10","end_IP","end_position",3,"F-C","F-C _ 3","constant","fur",2,0,3003,3003,"Flat Coated Retriever","f","no",62
+"114","subj.10","end_IP","end_position",1,"B-V","B-V _ 1","variable","ball",3,262,2608,3003,"Flat Coated Retriever","f","no",62
+"115","subj.10","end_IP","end_position",2,"B-V","B-V _ 2","variable","ball",3,0,3002,3002,"Flat Coated Retriever","f","no",62
+"116","subj.10","end_IP","end_position",3,"B-V","B-V _ 3","variable","ball",3,0,2952,3001,"Flat Coated Retriever","f","no",62
+"117","subj.10","end_IP","end_position",1,"B-C","B-C _ 1","constant","ball",4,0,2958,3029,"Flat Coated Retriever","f","no",62
+"118","subj.10","end_IP","end_position",2,"B-C","B-C _ 2","constant","ball",4,0,3004,3031,"Flat Coated Retriever","f","no",62
+"119","subj.10","end_IP","end_position",3,"B-C","B-C _ 3","constant","ball",4,0,3030,3030,"Flat Coated Retriever","f","no",62
+"120","subj.11","end_IP","end_position",1,"B-C","B-C _ 1","constant","ball",1,0,2938,3030,"Mix","f","yes",41
+"121","subj.11","end_IP","end_position",2,"B-C","B-C _ 2","constant","ball",1,0,1348,1348,"Mix","f","yes",41
+"122","subj.11","end_IP","end_position",3,"B-C","B-C _ 3","constant","ball",1,0,3003,3003,"Mix","f","yes",41
+"123","subj.11","end_IP","end_position",1,"B-V","B-V _ 1","variable","ball",2,0,3002,3002,"Mix","f","yes",41
+"124","subj.11","end_IP","end_position",2,"B-V","B-V _ 2","variable","ball",2,0,3002,3002,"Mix","f","yes",41
+"125","subj.11","end_IP","end_position",3,"B-V","B-V _ 3","variable","ball",2,0,2905,3004,"Mix","f","yes",41
+"126","subj.11","end_IP","end_position",1,"F-V","F-V _ 1","variable","fur",3,2586,2817,2999,"Mix","f","yes",41
+"127","subj.11","end_IP","end_position",2,"F-V","F-V _ 2","variable","fur",3,0,2810,3001,"Mix","f","yes",41
+"128","subj.11","end_IP","end_position",3,"F-V","F-V _ 3","variable","fur",3,2743,2961,2999,"Mix","f","yes",41
+"129","subj.11","end_IP","end_position",1,"F-C","F-C _ 1","constant","fur",4,0,3000,3000,"Mix","f","yes",41
+"130","subj.11","end_IP","end_position",2,"F-C","F-C _ 2","constant","fur",4,0,2899,3026,"Mix","f","yes",41
+"131","subj.11","end_IP","end_position",3,"F-C","F-C _ 3","constant","fur",4,0,3002,3002,"Mix","f","yes",41
+"132","subj.12","end_IP","end_position",1,"F-C","F-C _ 1","constant","fur",1,2991,2991,3002,"Border Collie","f","no",19
+"133","subj.12","end_IP","end_position",2,"F-C","F-C _ 2","constant","fur",1,2028,2915,3002,"Border Collie","f","no",19
+"134","subj.12","end_IP","end_position",3,"F-C","F-C _ 3","constant","fur",1,0,2724,3001,"Border Collie","f","no",19
+"135","subj.12","end_IP","end_position",1,"F-V","F-V _ 1","variable","fur",2,2659,2936,3032,"Border Collie","f","no",19
+"136","subj.12","end_IP","end_position",2,"F-V","F-V _ 2","variable","fur",2,2152,2862,3031,"Border Collie","f","no",19
+"137","subj.12","end_IP","end_position",3,"F-V","F-V _ 3","variable","fur",2,0,2892,3002,"Border Collie","f","no",19
+"138","subj.12","end_IP","end_position",1,"B-V","B-V _ 1","variable","ball",3,2592,2902,3003,"Border Collie","f","no",19
+"139","subj.12","end_IP","end_position",2,"B-V","B-V _ 2","variable","ball",3,2418,2901,3031,"Border Collie","f","no",19
+"140","subj.12","end_IP","end_position",3,"B-V","B-V _ 3","variable","ball",3,1125,2811,3002,"Border Collie","f","no",19
+"141","subj.12","end_IP","end_position",1,"B-C","B-C _ 1","constant","ball",4,2806,2978,3029,"Border Collie","f","no",19
+"142","subj.12","end_IP","end_position",2,"B-C","B-C _ 2","constant","ball",4,2684,2919,3007,"Border Collie","f","no",19
+"143","subj.12","end_IP","end_position",3,"B-C","B-C _ 3","constant","ball",4,1065,2701,3002,"Border Collie","f","no",19
+"144","subj.13","end_IP","end_position",1,"B-V","B-V _ 1","variable","ball",1,3004,3004,3028,"Mix","m","yes",63
+"145","subj.13","end_IP","end_position",2,"B-V","B-V _ 2","variable","ball",1,2784,2946,3027,"Mix","m","yes",63
+"146","subj.13","end_IP","end_position",3,"B-V","B-V _ 3","variable","ball",1,2948,2948,3007,"Mix","m","yes",63
+"147","subj.13","end_IP","end_position",1,"B-C","B-C _ 1","constant","ball",2,3003,3003,3003,"Mix","m","yes",63
+"148","subj.13","end_IP","end_position",2,"B-C","B-C _ 2","constant","ball",2,0,3002,3002,"Mix","m","yes",63
+"149","subj.13","end_IP","end_position",3,"B-C","B-C _ 3","constant","ball",2,0,3002,3002,"Mix","m","yes",63
+"150","subj.13","end_IP","end_position",1,"F-V","F-V _ 1","variable","fur",3,2985,2985,3000,"Mix","m","yes",63
+"151","subj.13","end_IP","end_position",2,"F-V","F-V _ 2","variable","fur",3,3027,3027,3027,"Mix","m","yes",63
+"152","subj.13","end_IP","end_position",3,"F-V","F-V _ 3","variable","fur",3,2997,2997,2997,"Mix","m","yes",63
+"153","subj.13","end_IP","end_position",1,"F-C","F-C _ 1","constant","fur",4,3031,3031,3031,"Mix","m","yes",63
+"154","subj.13","end_IP","end_position",2,"F-C","F-C _ 2","constant","fur",4,2981,2981,3003,"Mix","m","yes",63
+"155","subj.13","end_IP","end_position",3,"F-C","F-C _ 3","constant","fur",4,3003,3003,3003,"Mix","m","yes",63
+"156","subj.14","end_IP","end_position",1,"F-C","F-C _ 1","constant","fur",1,3003,3003,3003,"Labrador Retriever","f","yes",29
+"157","subj.14","end_IP","end_position",2,"F-C","F-C _ 2","constant","fur",1,2707,2927,3031,"Labrador Retriever","f","yes",29
+"158","subj.14","end_IP","end_position",3,"F-C","F-C _ 3","constant","fur",1,3031,3031,3031,"Labrador Retriever","f","yes",29
+"159","subj.14","end_IP","end_position",1,"F-V","F-V _ 1","variable","fur",2,2983,2983,3002,"Labrador Retriever","f","yes",29
+"160","subj.14","end_IP","end_position",2,"F-V","F-V _ 2","variable","fur",2,2981,2981,3002,"Labrador Retriever","f","yes",29
+"161","subj.14","end_IP","end_position",3,"F-V","F-V _ 3","variable","fur",2,2752,2894,3002,"Labrador Retriever","f","yes",29
+"162","subj.14","end_IP","end_position",1,"B-V","B-V _ 1","variable","ball",3,2978,2978,3001,"Labrador Retriever","f","yes",29
+"163","subj.14","end_IP","end_position",2,"B-V","B-V _ 2","variable","ball",3,3002,3002,3002,"Labrador Retriever","f","yes",29
+"164","subj.14","end_IP","end_position",3,"B-V","B-V _ 3","variable","ball",3,2379,2966,3031,"Labrador Retriever","f","yes",29
+"165","subj.14","end_IP","end_position",1,"B-C","B-C _ 1","constant","ball",4,0,3030,3030,"Labrador Retriever","f","yes",29
+"166","subj.14","end_IP","end_position",2,"B-C","B-C _ 2","constant","ball",4,2674,2953,3030,"Labrador Retriever","f","yes",29
+"167","subj.14","end_IP","end_position",3,"B-C","B-C _ 3","constant","ball",4,0,3029,3029,"Labrador Retriever","f","yes",29
+"168","subj.15","end_IP","end_position",1,"F-C","F-C _ 1","constant","fur",1,3002,3002,3002,"Mix","m","no",24
+"169","subj.15","end_IP","end_position",2,"F-C","F-C _ 2","constant","fur",1,2962,2969,3001,"Mix","m","no",24
+"170","subj.15","end_IP","end_position",3,"F-C","F-C _ 3","constant","fur",1,3002,3002,3002,"Mix","m","no",24
+"171","subj.15","end_IP","end_position",1,"F-V","F-V _ 1","variable","fur",2,2904,2933,3006,"Mix","m","no",24
+"172","subj.15","end_IP","end_position",2,"F-V","F-V _ 2","variable","fur",2,0,2842,3002,"Mix","m","no",24
+"173","subj.15","end_IP","end_position",3,"F-V","F-V _ 3","variable","fur",2,0,3003,3003,"Mix","m","no",24
+"174","subj.15","end_IP","end_position",1,"B-C","B-C _ 1","constant","ball",3,0,2871,3003,"Mix","m","no",24
+"175","subj.15","end_IP","end_position",2,"B-C","B-C _ 2","constant","ball",3,0,2935,3003,"Mix","m","no",24
+"176","subj.15","end_IP","end_position",3,"B-C","B-C _ 3","constant","ball",3,0,2581,3002,"Mix","m","no",24
+"177","subj.15","end_IP","end_position",1,"B-V","B-V _ 1","variable","ball",4,3008,3008,3008,"Mix","m","no",24
+"178","subj.15","end_IP","end_position",2,"B-V","B-V _ 2","variable","ball",4,2055,2800,3030,"Mix","m","no",24
+"179","subj.15","end_IP","end_position",3,"B-V","B-V _ 3","variable","ball",4,2893,2930,3007,"Mix","m","no",24
+"180","subj.16","end_IP","end_position",1,"B-V","B-V _ 1","variable","ball",1,1883,2928,3031,"Border Collie","f","no",18
+"181","subj.16","end_IP","end_position",2,"B-V","B-V _ 2","variable","ball",1,1375,2886,3000,"Border Collie","f","no",18
+"182","subj.16","end_IP","end_position",3,"B-V","B-V _ 3","variable","ball",1,0,2597,3003,"Border Collie","f","no",18
+"183","subj.16","end_IP","end_position",1,"B-C","B-C _ 1","constant","ball",2,706,2982,3002,"Border Collie","f","no",18
+"184","subj.16","end_IP","end_position",2,"B-C","B-C _ 2","constant","ball",2,0,1996,3002,"Border Collie","f","no",18
+"185","subj.16","end_IP","end_position",3,"B-C","B-C _ 3","constant","ball",2,2700,2991,3031,"Border Collie","f","no",18
+"186","subj.16","end_IP","end_position",1,"F-V","F-V _ 1","variable","fur",3,0,3003,3003,"Border Collie","f","no",18
+"187","subj.16","end_IP","end_position",2,"F-V","F-V _ 2","variable","fur",3,0,3003,3003,"Border Collie","f","no",18
+"188","subj.16","end_IP","end_position",3,"F-V","F-V _ 3","variable","fur",3,2907,2907,3002,"Border Collie","f","no",18
+"189","subj.16","end_IP","end_position",1,"F-C","F-C _ 1","constant","fur",4,1690,2360,3019,"Border Collie","f","no",18
+"190","subj.16","end_IP","end_position",2,"F-C","F-C _ 2","constant","fur",4,1249,2828,3002,"Border Collie","f","no",18
+"191","subj.16","end_IP","end_position",3,"F-C","F-C _ 3","constant","fur",4,1848,2815,3002,"Border Collie","f","no",18
+"192","subj.17","end_IP","end_position",1,"F-V","F-V _ 1","variable","fur",1,2719,2719,3030,"Small M<fc>nsterl<e4>nder","m","no",14
+"193","subj.17","end_IP","end_position",2,"F-V","F-V _ 2","variable","fur",1,436,1204,3001,"Small M<fc>nsterl<e4>nder","m","no",14
+"194","subj.17","end_IP","end_position",3,"F-V","F-V _ 3","variable","fur",1,2835,2902,3027,"Small M<fc>nsterl<e4>nder","m","no",14
+"195","subj.17","end_IP","end_position",1,"F-C","F-C _ 1","constant","fur",2,2690,2970,3002,"Small M<fc>nsterl<e4>nder","m","no",14
+"196","subj.17","end_IP","end_position",2,"F-C","F-C _ 2","constant","fur",2,2346,2813,3029,"Small M<fc>nsterl<e4>nder","m","no",14
+"197","subj.17","end_IP","end_position",3,"F-C","F-C _ 3","constant","fur",2,3003,3003,3003,"Small M<fc>nsterl<e4>nder","m","no",14
+"198","subj.17","end_IP","end_position",1,"B-V","B-V _ 1","variable","ball",3,2479,2896,3006,"Small M<fc>nsterl<e4>nder","m","no",14
+"199","subj.17","end_IP","end_position",2,"B-V","B-V _ 2","variable","ball",3,1046,2717,3003,"Small M<fc>nsterl<e4>nder","m","no",14
+"200","subj.17","end_IP","end_position",3,"B-V","B-V _ 3","variable","ball",3,2856,2856,3003,"Small M<fc>nsterl<e4>nder","m","no",14
+"201","subj.17","end_IP","end_position",1,"B-C","B-C _ 1","constant","ball",4,1098,2605,3030,"Small M<fc>nsterl<e4>nder","m","no",14
+"202","subj.17","end_IP","end_position",2,"B-C","B-C _ 2","constant","ball",4,2777,2928,3003,"Small M<fc>nsterl<e4>nder","m","no",14
+"203","subj.17","end_IP","end_position",3,"B-C","B-C _ 3","constant","ball",4,2996,2996,3002,"Small M<fc>nsterl<e4>nder","m","no",14

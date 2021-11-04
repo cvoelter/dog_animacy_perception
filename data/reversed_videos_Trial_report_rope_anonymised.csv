@@ -1,0 +1,113 @@
+"","subject","trial","condition","object","session","AVERAGE_FIXATION_DURATION","AVERAGE_SACCADE_AMPLITUDE","FIXATION_COUNT","PUPIL_SIZE_MAX","SACCADE_COUNT","Breed","sex","neutered","age"
+"1","subj.01",5,"normal","rope",1,402.71,2.82,7,3086,6,"Border Collie","m","no",56
+"2","subj.01",6,"normal","rope",1,299.67,4.73,9,2806,8,"Border Collie","m","no",56
+"3","subj.01",7,"normal","rope",1,574,3.75,5,3283,4,"Border Collie","m","no",56
+"4","subj.01",8,"normal","rope",1,464.83,4.37,6,3126,6,"Border Collie","m","no",56
+"5","subj.02",5,"normal","rope",1,469.17,6.75,6,7213,5,"Labrador Retriever","f","yes",34
+"6","subj.02",6,"normal","rope",1,560.4,7,5,6954,4,"Labrador Retriever","f","yes",34
+"7","subj.02",7,"normal","rope",1,715.25,7.32,4,7060,3,"Labrador Retriever","f","yes",34
+"8","subj.02",8,"normal","rope",1,558.6,6.3,5,7329,4,"Labrador Retriever","f","yes",34
+"9","subj.03",5,"normal","rope",1,270.2,4,10,6495,9,"Mix","f","no",20
+"10","subj.03",6,"normal","rope",1,565.6,6.04,5,5578,4,"Mix","f","no",20
+"11","subj.03",7,"normal","rope",1,375,7.41,7,5917,6,"Mix","f","no",20
+"12","subj.03",8,"normal","rope",1,382.43,6.57,7,4726,6,"Mix","f","no",20
+"13","subj.03",5,"reversed","rope",2,477,4.24,6,5277,5,"Mix","f","no",20
+"14","subj.03",6,"reversed","rope",2,396,5.99,7,4733,6,"Mix","f","no",20
+"15","subj.03",7,"reversed","rope",2,576,3.42,5,5008,4,"Mix","f","no",20
+"16","subj.03",8,"reversed","rope",2,471.5,4.78,6,4641,5,"Mix","f","no",20
+"17","subj.04",5,"reversed","rope",1,393.86,4.69,7,4042,6,"Mix","f","yes",37
+"18","subj.04",6,"reversed","rope",1,378.71,8.18,7,3827,6,"Mix","f","yes",37
+"19","subj.04",7,"reversed","rope",1,533.6,7.65,5,4928,4,"Mix","f","yes",37
+"20","subj.04",8,"reversed","rope",1,709,7.47,4,5144,3,"Mix","f","yes",37
+"21","subj.04",5,"normal","rope",2,477.17,3.92,6,4388,5,"Mix","f","yes",37
+"22","subj.04",6,"normal","rope",2,668.75,8.41,4,4376,3,"Mix","f","yes",37
+"23","subj.04",7,"normal","rope",2,712,5.51,4,4535,3,"Mix","f","yes",37
+"24","subj.04",8,"normal","rope",2,531.8,7.53,5,4383,4,"Mix","f","yes",37
+"25","subj.05",5,"reversed","rope",1,395.57,6.16,7,2766,6,"Labrador Retriever","f","yes",26
+"26","subj.05",6,"reversed","rope",1,405.86,3.38,7,2844,6,"Labrador Retriever","f","yes",26
+"27","subj.05",7,"reversed","rope",1,470,3.6,6,3560,5,"Labrador Retriever","f","yes",26
+"28","subj.05",8,"reversed","rope",1,570.6,5.31,5,3007,4,"Labrador Retriever","f","yes",26
+"29","subj.05",5,"normal","rope",2,570.2,7.06,5,3161,4,"Labrador Retriever","f","yes",26
+"30","subj.05",6,"normal","rope",2,397.86,4.64,7,4419,6,"Labrador Retriever","f","yes",26
+"31","subj.05",7,"normal","rope",2,566,5.38,5,3108,4,"Labrador Retriever","f","yes",26
+"32","subj.05",8,"normal","rope",2,568.4,6.31,5,3189,4,"Labrador Retriever","f","yes",26
+"33","subj.06",5,"normal","rope",1,571.4,6.8,5,5769,4,"Mix","m","no",20
+"34","subj.06",6,"normal","rope",1,467.17,8.88,6,5633,5,"Mix","m","no",20
+"35","subj.06",7,"normal","rope",1,565,10.69,5,5905,5,"Mix","m","no",20
+"36","subj.06",8,"normal","rope",1,712,8.19,4,9289,4,"Mix","m","no",20
+"37","subj.06",5,"reversed","rope",2,476.17,4.39,6,4147,5,"Mix","m","no",20
+"38","subj.06",6,"reversed","rope",2,479,3.68,6,3621,5,"Mix","m","no",20
+"39","subj.06",7,"reversed","rope",2,475.5,4.63,6,3629,5,"Mix","m","no",20
+"40","subj.06",8,"reversed","rope",2,464.5,5.6,6,3264,5,"Mix","m","no",20
+"41","subj.07",5,"reversed","rope",1,245.73,4.77,11,3825,10,"Border Collie","f","no",14
+"42","subj.07",6,"reversed","rope",1,525.6,8.94,5,3906,4,"Border Collie","f","no",14
+"43","subj.07",7,"reversed","rope",1,921,9.97,3,4129,3,"Border Collie","f","no",14
+"44","subj.07",8,"reversed","rope",1,545.8,9.67,5,3508,4,"Border Collie","f","no",14
+"45","subj.07",5,"normal","rope",2,292.44,7.29,9,4211,8,"Border Collie","f","no",14
+"46","subj.07",6,"normal","rope",2,390.14,5.92,7,4263,6,"Border Collie","f","no",14
+"47","subj.07",7,"normal","rope",2,365.29,7.42,7,4271,6,"Border Collie","f","no",14
+"48","subj.07",8,"normal","rope",2,339.5,5.31,8,3892,7,"Border Collie","f","no",14
+"49","subj.08",5,"normal","rope",1,345.12,6.02,8,7021,7,"Border Collie","m","yes",19
+"50","subj.08",6,"normal","rope",1,242.27,3.97,11,6368,10,"Border Collie","m","yes",19
+"51","subj.08",7,"normal","rope",1,228.92,2.42,12,6824,11,"Border Collie","m","yes",19
+"52","subj.08",8,"normal","rope",1,266.2,3.96,10,6535,10,"Border Collie","m","yes",19
+"53","subj.08",5,"reversed","rope",2,307.78,3.52,9,7735,8,"Border Collie","m","yes",19
+"54","subj.08",6,"reversed","rope",2,474.67,3.29,6,7941,5,"Border Collie","m","yes",19
+"55","subj.08",7,"reversed","rope",2,290.57,3.97,7,6379,7,"Border Collie","m","yes",19
+"56","subj.08",8,"reversed","rope",2,468.67,2.3,6,7362,7,"Border Collie","m","yes",19
+"57","subj.09",5,"reversed","rope",1,304.67,3.4,9,2199,8,"Border Collie","f","no",25
+"58","subj.09",6,"reversed","rope",1,466,4.79,6,2188,5,"Border Collie","f","no",25
+"59","subj.09",7,"reversed","rope",1,443.5,7.12,6,2021,5,"Border Collie","f","no",25
+"60","subj.09",8,"reversed","rope",1,459.83,4.36,6,2130,5,"Border Collie","f","no",25
+"61","subj.09",5,"normal","rope",2,375.57,7.77,7,1837,6,"Border Collie","f","no",25
+"62","subj.09",6,"normal","rope",2,975.33,4.55,3,2095,2,"Border Collie","f","no",25
+"63","subj.09",7,"normal","rope",2,706.75,5.63,4,2117,3,"Border Collie","f","no",25
+"64","subj.09",8,"normal","rope",2,459.17,7.8,6,1934,5,"Border Collie","f","no",25
+"65","subj.10",5,"normal","rope",1,557,7.57,5,4922,4,"Mix","m","yes",18
+"66","subj.10",6,"normal","rope",1,559,7.41,5,5851,4,"Mix","m","yes",18
+"67","subj.10",7,"normal","rope",1,388.86,6.89,7,4085,6,"Mix","m","yes",18
+"68","subj.10",8,"normal","rope",1,453.83,9.47,6,4381,5,"Mix","m","yes",18
+"69","subj.10",5,"reversed","rope",2,729.75,4.32,4,8356,3,"Mix","m","yes",18
+"70","subj.10",6,"reversed","rope",2,729,3.71,4,5414,3,"Mix","m","yes",18
+"71","subj.10",7,"reversed","rope",2,986.67,3.93,3,4640,2,"Mix","m","yes",18
+"72","subj.10",8,"reversed","rope",2,914.67,2.2,3,4168,3,"Mix","m","yes",18
+"73","subj.11",5,"reversed","rope",1,1478.5,7.63,2,5574,1,"Australian Shepherd","f","no",80
+"74","subj.11",6,"reversed","rope",1,467.83,5.52,6,5186,5,"Australian Shepherd","f","no",80
+"75","subj.11",7,"reversed","rope",1,709.75,6.74,4,5213,3,"Australian Shepherd","f","no",80
+"76","subj.11",8,"reversed","rope",1,565.2,6.89,5,5138,4,"Australian Shepherd","f","no",80
+"77","subj.11",5,"normal","rope",2,466.17,6.71,6,5668,5,"Australian Shepherd","f","no",80
+"78","subj.11",6,"normal","rope",2,716.5,7.29,4,5847,3,"Australian Shepherd","f","no",80
+"79","subj.11",7,"normal","rope",2,712,7.63,4,5911,3,"Australian Shepherd","f","no",80
+"80","subj.11",8,"normal","rope",2,706.75,8,4,5678,3,"Australian Shepherd","f","no",80
+"81","subj.01",5,"reversed","rope",2,471.17,5.33,6,3804,5,"Border Collie","m","no",56
+"82","subj.01",6,"reversed","rope",2,573.2,5.7,5,3570,4,"Border Collie","m","no",56
+"83","subj.01",7,"reversed","rope",2,551.4,7.52,5,3486,4,"Border Collie","m","no",56
+"84","subj.01",8,"reversed","rope",2,722.5,5.7,4,3497,3,"Border Collie","m","no",56
+"85","subj.12",5,"reversed","rope",1,564.2,8.59,5,4509,4,"Collie","m","no",18
+"86","subj.12",6,"reversed","rope",1,381.71,9.45,7,4063,6,"Collie","m","no",18
+"87","subj.12",7,"reversed","rope",1,378,10.89,7,4358,6,"Collie","m","no",18
+"88","subj.12",8,"reversed","rope",1,551.8,10.44,5,4391,4,"Collie","m","no",18
+"89","subj.12",5,"normal","rope",2,321.75,4.87,8,5277,7,"Collie","m","no",18
+"90","subj.12",6,"normal","rope",2,296.44,4.23,9,5048,8,"Collie","m","no",18
+"91","subj.12",7,"normal","rope",2,448.83,7.36,6,5351,5,"Collie","m","no",18
+"92","subj.12",8,"normal","rope",2,458.33,6.75,6,5743,5,"Collie","m","no",18
+"93","subj.02",5,"reversed","rope",2,396.43,8.49,7,6123,6,"Labrador Retriever","f","yes",34
+"94","subj.02",6,"reversed","rope",2,557,8.38,5,6881,4,"Labrador Retriever","f","yes",34
+"95","subj.02",7,"reversed","rope",2,550.8,9.74,5,6113,5,"Labrador Retriever","f","yes",34
+"96","subj.02",8,"reversed","rope",2,1478,7.59,2,6510,1,"Labrador Retriever","f","yes",34
+"97","subj.13",5,"reversed","rope",1,346,4.18,8,4851,7,"Border Collie","f","no",16
+"98","subj.13",6,"reversed","rope",1,608.5,10.6,4,5543,4,"Border Collie","f","no",16
+"99","subj.13",7,"reversed","rope",1,453.33,8.99,6,6952,5,"Border Collie","f","no",16
+"100","subj.13",8,"reversed","rope",1,452.17,6.94,6,5327,5,"Border Collie","f","no",16
+"101","subj.13",5,"normal","rope",2,556.8,8.75,5,4346,4,"Border Collie","f","no",16
+"102","subj.13",6,"normal","rope",2,548,6.99,5,4051,5,"Border Collie","f","no",16
+"103","subj.13",7,"normal","rope",2,457,9.67,6,3869,5,"Border Collie","f","no",16
+"104","subj.13",8,"normal","rope",2,720.25,7.01,4,4066,3,"Border Collie","f","no",16
+"105","subj.14",5,"normal","rope",1,719.75,9.45,4,7414,3,"Mix","m","yes",62
+"106","subj.14",6,"normal","rope",1,439.8,9.38,5,6601,5,"Mix","m","yes",62
+"107","subj.14",7,"normal","rope",1,540.6,11.46,5,7014,4,"Mix","m","yes",62
+"108","subj.14",8,"normal","rope",1,547.2,11.7,5,7034,4,"Mix","m","yes",62
+"109","subj.14",5,"reversed","rope",2,694.25,13.54,4,6219,3,"Mix","m","yes",62
+"110","subj.14",6,"reversed","rope",2,522.4,11.47,5,5962,4,"Mix","m","yes",62
+"111","subj.14",7,"reversed","rope",2,781.67,13.87,3,6591,4,"Mix","m","yes",62
+"112","subj.14",8,"reversed","rope",2,679.25,15.53,4,6770,3,"Mix","m","yes",62

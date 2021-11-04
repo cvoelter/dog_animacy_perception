@@ -1,0 +1,225 @@
+"","subject","IP_LABEL","IA_LABEL","trial","condition","object","session","IA_DWELL_TIME","TRIAL_DWELL_TIME","IP_DURATION","Breed","sex","neutered","age"
+"1","subj.01","end_rope_IP","Rope_up",5,"normal","rope",1,0,1019,1035,"Border Collie","m","no",56
+"2","subj.01","end_rope_IP","Rope_low",5,"normal","rope",1,1019,1019,1035,"Border Collie","m","no",56
+"3","subj.01","end_rope_IP","Rope_up",6,"normal","rope",1,0,981,1035,"Border Collie","m","no",56
+"4","subj.01","end_rope_IP","Rope_low",6,"normal","rope",1,981,981,1035,"Border Collie","m","no",56
+"5","subj.01","end_rope_IP","Rope_up",7,"normal","rope",1,0,1021,1035,"Border Collie","m","no",56
+"6","subj.01","end_rope_IP","Rope_low",7,"normal","rope",1,1021,1021,1035,"Border Collie","m","no",56
+"7","subj.01","end_rope_IP","Rope_up",8,"normal","rope",1,0,999,1034,"Border Collie","m","no",56
+"8","subj.01","end_rope_IP","Rope_low",8,"normal","rope",1,999,999,1034,"Border Collie","m","no",56
+"9","subj.02","end_rope_IP","Rope_up",5,"normal","rope",1,0,1021,1036,"Labrador Retriever","f","yes",34
+"10","subj.02","end_rope_IP","Rope_low",5,"normal","rope",1,261,1021,1036,"Labrador Retriever","f","yes",34
+"11","subj.02","end_rope_IP","Rope_up",6,"normal","rope",1,0,1036,1036,"Labrador Retriever","f","yes",34
+"12","subj.02","end_rope_IP","Rope_low",6,"normal","rope",1,0,1036,1036,"Labrador Retriever","f","yes",34
+"13","subj.02","end_rope_IP","Rope_up",7,"normal","rope",1,0,1036,1036,"Labrador Retriever","f","yes",34
+"14","subj.02","end_rope_IP","Rope_low",7,"normal","rope",1,1036,1036,1036,"Labrador Retriever","f","yes",34
+"15","subj.02","end_rope_IP","Rope_up",8,"normal","rope",1,0,1009,1009,"Labrador Retriever","f","yes",34
+"16","subj.02","end_rope_IP","Rope_low",8,"normal","rope",1,0,1009,1009,"Labrador Retriever","f","yes",34
+"17","subj.03","end_rope_IP","Rope_up",5,"normal","rope",1,0,991,1035,"Mix","f","no",20
+"18","subj.03","end_rope_IP","Rope_low",5,"normal","rope",1,991,991,1035,"Mix","f","no",20
+"19","subj.03","end_rope_IP","Rope_up",6,"normal","rope",1,0,1010,1035,"Mix","f","no",20
+"20","subj.03","end_rope_IP","Rope_low",6,"normal","rope",1,0,1010,1035,"Mix","f","no",20
+"21","subj.03","end_rope_IP","Rope_up",7,"normal","rope",1,923,923,1034,"Mix","f","no",20
+"22","subj.03","end_rope_IP","Rope_low",7,"normal","rope",1,0,923,1034,"Mix","f","no",20
+"23","subj.03","end_rope_IP","Rope_up",8,"normal","rope",1,971,971,1036,"Mix","f","no",20
+"24","subj.03","end_rope_IP","Rope_low",8,"normal","rope",1,0,971,1036,"Mix","f","no",20
+"25","subj.03","end_rope_IP","Rope_up",5,"reversed","rope",2,539,1017,1036,"Mix","f","no",20
+"26","subj.03","end_rope_IP","Rope_low",5,"reversed","rope",2,0,1017,1036,"Mix","f","no",20
+"27","subj.03","end_rope_IP","Rope_up",6,"reversed","rope",2,1002,1002,1035,"Mix","f","no",20
+"28","subj.03","end_rope_IP","Rope_low",6,"reversed","rope",2,0,1002,1035,"Mix","f","no",20
+"29","subj.03","end_rope_IP","Rope_up",7,"reversed","rope",2,1020,1020,1035,"Mix","f","no",20
+"30","subj.03","end_rope_IP","Rope_low",7,"reversed","rope",2,0,1020,1035,"Mix","f","no",20
+"31","subj.03","end_rope_IP","Rope_up",8,"reversed","rope",2,996,996,1036,"Mix","f","no",20
+"32","subj.03","end_rope_IP","Rope_low",8,"reversed","rope",2,0,996,1036,"Mix","f","no",20
+"33","subj.04","end_rope_IP","Rope_up",5,"reversed","rope",1,972,972,1036,"Mix","f","yes",37
+"34","subj.04","end_rope_IP","Rope_low",5,"reversed","rope",1,0,972,1036,"Mix","f","yes",37
+"35","subj.04","end_rope_IP","Rope_up",6,"reversed","rope",1,106,828,1036,"Mix","f","yes",37
+"36","subj.04","end_rope_IP","Rope_low",6,"reversed","rope",1,0,828,1036,"Mix","f","yes",37
+"37","subj.04","end_rope_IP","Rope_up",7,"reversed","rope",1,560,815,1037,"Mix","f","yes",37
+"38","subj.04","end_rope_IP","Rope_low",7,"reversed","rope",1,0,815,1037,"Mix","f","yes",37
+"39","subj.04","end_rope_IP","Rope_up",8,"reversed","rope",1,0,1031,1035,"Mix","f","yes",37
+"40","subj.04","end_rope_IP","Rope_low",8,"reversed","rope",1,0,1031,1035,"Mix","f","yes",37
+"41","subj.04","end_rope_IP","Rope_up",5,"normal","rope",2,0,1035,1035,"Mix","f","yes",37
+"42","subj.04","end_rope_IP","Rope_low",5,"normal","rope",2,1035,1035,1035,"Mix","f","yes",37
+"43","subj.04","end_rope_IP","Rope_up",6,"normal","rope",2,0,789,1037,"Mix","f","yes",37
+"44","subj.04","end_rope_IP","Rope_low",6,"normal","rope",2,0,789,1037,"Mix","f","yes",37
+"45","subj.04","end_rope_IP","Rope_up",7,"normal","rope",2,0,1035,1035,"Mix","f","yes",37
+"46","subj.04","end_rope_IP","Rope_low",7,"normal","rope",2,1035,1035,1035,"Mix","f","yes",37
+"47","subj.04","end_rope_IP","Rope_up",8,"normal","rope",2,0,837,1036,"Mix","f","yes",37
+"48","subj.04","end_rope_IP","Rope_low",8,"normal","rope",2,189,837,1036,"Mix","f","yes",37
+"49","subj.05","end_rope_IP","Rope_up",5,"reversed","rope",1,1011,1011,1035,"Labrador Retriever","f","yes",26
+"50","subj.05","end_rope_IP","Rope_low",5,"reversed","rope",1,0,1011,1035,"Labrador Retriever","f","yes",26
+"51","subj.05","end_rope_IP","Rope_up",6,"reversed","rope",1,1036,1036,1036,"Labrador Retriever","f","yes",26
+"52","subj.05","end_rope_IP","Rope_low",6,"reversed","rope",1,0,1036,1036,"Labrador Retriever","f","yes",26
+"53","subj.05","end_rope_IP","Rope_up",7,"reversed","rope",1,1036,1036,1036,"Labrador Retriever","f","yes",26
+"54","subj.05","end_rope_IP","Rope_low",7,"reversed","rope",1,0,1036,1036,"Labrador Retriever","f","yes",26
+"55","subj.05","end_rope_IP","Rope_up",8,"reversed","rope",1,1037,1037,1037,"Labrador Retriever","f","yes",26
+"56","subj.05","end_rope_IP","Rope_low",8,"reversed","rope",1,0,1037,1037,"Labrador Retriever","f","yes",26
+"57","subj.05","end_rope_IP","Rope_up",5,"normal","rope",2,0,1036,1036,"Labrador Retriever","f","yes",26
+"58","subj.05","end_rope_IP","Rope_low",5,"normal","rope",2,1036,1036,1036,"Labrador Retriever","f","yes",26
+"59","subj.05","end_rope_IP","Rope_up",6,"normal","rope",2,0,1036,1036,"Labrador Retriever","f","yes",26
+"60","subj.05","end_rope_IP","Rope_low",6,"normal","rope",2,1036,1036,1036,"Labrador Retriever","f","yes",26
+"61","subj.05","end_rope_IP","Rope_up",7,"normal","rope",2,0,1036,1036,"Labrador Retriever","f","yes",26
+"62","subj.05","end_rope_IP","Rope_low",7,"normal","rope",2,1036,1036,1036,"Labrador Retriever","f","yes",26
+"63","subj.05","end_rope_IP","Rope_up",8,"normal","rope",2,0,1036,1036,"Labrador Retriever","f","yes",26
+"64","subj.05","end_rope_IP","Rope_low",8,"normal","rope",2,1036,1036,1036,"Labrador Retriever","f","yes",26
+"65","subj.06","end_rope_IP","Rope_up",5,"normal","rope",1,0,1013,1035,"Mix","m","no",20
+"66","subj.06","end_rope_IP","Rope_low",5,"normal","rope",1,1013,1013,1035,"Mix","m","no",20
+"67","subj.06","end_rope_IP","Rope_up",6,"normal","rope",1,0,1036,1036,"Mix","m","no",20
+"68","subj.06","end_rope_IP","Rope_low",6,"normal","rope",1,1036,1036,1036,"Mix","m","no",20
+"69","subj.06","end_rope_IP","Rope_up",7,"normal","rope",1,0,1031,1036,"Mix","m","no",20
+"70","subj.06","end_rope_IP","Rope_low",7,"normal","rope",1,1031,1031,1036,"Mix","m","no",20
+"71","subj.06","end_rope_IP","Rope_up",8,"normal","rope",1,0,1018,1036,"Mix","m","no",20
+"72","subj.06","end_rope_IP","Rope_low",8,"normal","rope",1,0,1018,1036,"Mix","m","no",20
+"73","subj.06","end_rope_IP","Rope_up",5,"reversed","rope",2,1023,1023,1035,"Mix","m","no",20
+"74","subj.06","end_rope_IP","Rope_low",5,"reversed","rope",2,0,1023,1035,"Mix","m","no",20
+"75","subj.06","end_rope_IP","Rope_up",6,"reversed","rope",2,1017,1017,1034,"Mix","m","no",20
+"76","subj.06","end_rope_IP","Rope_low",6,"reversed","rope",2,0,1017,1034,"Mix","m","no",20
+"77","subj.06","end_rope_IP","Rope_up",7,"reversed","rope",2,1034,1034,1034,"Mix","m","no",20
+"78","subj.06","end_rope_IP","Rope_low",7,"reversed","rope",2,0,1034,1034,"Mix","m","no",20
+"79","subj.06","end_rope_IP","Rope_up",8,"reversed","rope",2,157,933,1035,"Mix","m","no",20
+"80","subj.06","end_rope_IP","Rope_low",8,"reversed","rope",2,0,933,1035,"Mix","m","no",20
+"81","subj.07","end_rope_IP","Rope_up",5,"reversed","rope",1,937,937,1036,"Border Collie","f","no",14
+"82","subj.07","end_rope_IP","Rope_low",5,"reversed","rope",1,0,937,1036,"Border Collie","f","no",14
+"83","subj.07","end_rope_IP","Rope_up",6,"reversed","rope",1,171,833,1022,"Border Collie","f","no",14
+"84","subj.07","end_rope_IP","Rope_low",6,"reversed","rope",1,0,833,1022,"Border Collie","f","no",14
+"85","subj.07","end_rope_IP","Rope_up",7,"reversed","rope",1,530,816,1036,"Border Collie","f","no",14
+"86","subj.07","end_rope_IP","Rope_low",7,"reversed","rope",1,0,816,1036,"Border Collie","f","no",14
+"87","subj.07","end_rope_IP","Rope_up",8,"reversed","rope",1,30,887,1036,"Border Collie","f","no",14
+"88","subj.07","end_rope_IP","Rope_low",8,"reversed","rope",1,0,887,1036,"Border Collie","f","no",14
+"89","subj.07","end_rope_IP","Rope_up",5,"normal","rope",2,389,951,1036,"Border Collie","f","no",14
+"90","subj.07","end_rope_IP","Rope_low",5,"normal","rope",2,0,951,1036,"Border Collie","f","no",14
+"91","subj.07","end_rope_IP","Rope_up",6,"normal","rope",2,539,943,1035,"Border Collie","f","no",14
+"92","subj.07","end_rope_IP","Rope_low",6,"normal","rope",2,0,943,1035,"Border Collie","f","no",14
+"93","subj.07","end_rope_IP","Rope_up",7,"normal","rope",2,900,900,1035,"Border Collie","f","no",14
+"94","subj.07","end_rope_IP","Rope_low",7,"normal","rope",2,0,900,1035,"Border Collie","f","no",14
+"95","subj.07","end_rope_IP","Rope_up",8,"normal","rope",2,394,971,1035,"Border Collie","f","no",14
+"96","subj.07","end_rope_IP","Rope_low",8,"normal","rope",2,0,971,1035,"Border Collie","f","no",14
+"97","subj.08","end_rope_IP","Rope_up",5,"normal","rope",1,0,1035,1035,"Border Collie","m","yes",19
+"98","subj.08","end_rope_IP","Rope_low",5,"normal","rope",1,0,1035,1035,"Border Collie","m","yes",19
+"99","subj.08","end_rope_IP","Rope_up",6,"normal","rope",1,152,930,1035,"Border Collie","m","yes",19
+"100","subj.08","end_rope_IP","Rope_low",6,"normal","rope",1,0,930,1035,"Border Collie","m","yes",19
+"101","subj.08","end_rope_IP","Rope_up",7,"normal","rope",1,224,998,1036,"Border Collie","m","yes",19
+"102","subj.08","end_rope_IP","Rope_low",7,"normal","rope",1,0,998,1036,"Border Collie","m","yes",19
+"103","subj.08","end_rope_IP","Rope_up",8,"normal","rope",1,985,985,1035,"Border Collie","m","yes",19
+"104","subj.08","end_rope_IP","Rope_low",8,"normal","rope",1,0,985,1035,"Border Collie","m","yes",19
+"105","subj.08","end_rope_IP","Rope_up",5,"reversed","rope",2,0,1031,1036,"Border Collie","m","yes",19
+"106","subj.08","end_rope_IP","Rope_low",5,"reversed","rope",2,0,1031,1036,"Border Collie","m","yes",19
+"107","subj.08","end_rope_IP","Rope_up",6,"reversed","rope",2,0,1036,1036,"Border Collie","m","yes",19
+"108","subj.08","end_rope_IP","Rope_low",6,"reversed","rope",2,0,1036,1036,"Border Collie","m","yes",19
+"109","subj.08","end_rope_IP","Rope_up",7,"reversed","rope",2,158,220,1036,"Border Collie","m","yes",19
+"110","subj.08","end_rope_IP","Rope_low",7,"reversed","rope",2,0,220,1036,"Border Collie","m","yes",19
+"111","subj.08","end_rope_IP","Rope_up",8,"reversed","rope",2,0,1013,1036,"Border Collie","m","yes",19
+"112","subj.08","end_rope_IP","Rope_low",8,"reversed","rope",2,0,1013,1036,"Border Collie","m","yes",19
+"113","subj.09","end_rope_IP","Rope_up",5,"reversed","rope",1,540,958,1037,"Border Collie","f","no",25
+"114","subj.09","end_rope_IP","Rope_low",5,"reversed","rope",1,0,958,1037,"Border Collie","f","no",25
+"115","subj.09","end_rope_IP","Rope_up",6,"reversed","rope",1,995,995,1036,"Border Collie","f","no",25
+"116","subj.09","end_rope_IP","Rope_low",6,"reversed","rope",1,0,995,1036,"Border Collie","f","no",25
+"117","subj.09","end_rope_IP","Rope_up",7,"reversed","rope",1,874,908,1038,"Border Collie","f","no",25
+"118","subj.09","end_rope_IP","Rope_low",7,"reversed","rope",1,0,908,1038,"Border Collie","f","no",25
+"119","subj.09","end_rope_IP","Rope_up",8,"reversed","rope",1,157,969,1035,"Border Collie","f","no",25
+"120","subj.09","end_rope_IP","Rope_low",8,"reversed","rope",1,0,969,1035,"Border Collie","f","no",25
+"121","subj.09","end_rope_IP","Rope_up",5,"normal","rope",2,0,933,1035,"Border Collie","f","no",25
+"122","subj.09","end_rope_IP","Rope_low",5,"normal","rope",2,0,933,1035,"Border Collie","f","no",25
+"123","subj.09","end_rope_IP","Rope_up",6,"normal","rope",2,1035,1035,1035,"Border Collie","f","no",25
+"124","subj.09","end_rope_IP","Rope_low",6,"normal","rope",2,0,1035,1035,"Border Collie","f","no",25
+"125","subj.09","end_rope_IP","Rope_up",7,"normal","rope",2,0,1036,1036,"Border Collie","f","no",25
+"126","subj.09","end_rope_IP","Rope_low",7,"normal","rope",2,0,1036,1036,"Border Collie","f","no",25
+"127","subj.09","end_rope_IP","Rope_up",8,"normal","rope",2,404,1014,1036,"Border Collie","f","no",25
+"128","subj.09","end_rope_IP","Rope_low",8,"normal","rope",2,0,1014,1036,"Border Collie","f","no",25
+"129","subj.10","end_rope_IP","Rope_up",5,"normal","rope",1,0,1036,1036,"Mix","m","yes",18
+"130","subj.10","end_rope_IP","Rope_low",5,"normal","rope",1,1036,1036,1036,"Mix","m","yes",18
+"131","subj.10","end_rope_IP","Rope_up",6,"normal","rope",1,0,1008,1008,"Mix","m","yes",18
+"132","subj.10","end_rope_IP","Rope_low",6,"normal","rope",1,1008,1008,1008,"Mix","m","yes",18
+"133","subj.10","end_rope_IP","Rope_up",7,"normal","rope",1,261,912,1037,"Mix","m","yes",18
+"134","subj.10","end_rope_IP","Rope_low",7,"normal","rope",1,213,912,1037,"Mix","m","yes",18
+"135","subj.10","end_rope_IP","Rope_up",8,"normal","rope",1,89,990,1035,"Mix","m","yes",18
+"136","subj.10","end_rope_IP","Rope_low",8,"normal","rope",1,0,990,1035,"Mix","m","yes",18
+"137","subj.10","end_rope_IP","Rope_up",5,"reversed","rope",2,1037,1037,1037,"Mix","m","yes",18
+"138","subj.10","end_rope_IP","Rope_low",5,"reversed","rope",2,0,1037,1037,"Mix","m","yes",18
+"139","subj.10","end_rope_IP","Rope_up",6,"reversed","rope",2,1036,1036,1036,"Mix","m","yes",18
+"140","subj.10","end_rope_IP","Rope_low",6,"reversed","rope",2,0,1036,1036,"Mix","m","yes",18
+"141","subj.10","end_rope_IP","Rope_up",7,"reversed","rope",2,1036,1036,1036,"Mix","m","yes",18
+"142","subj.10","end_rope_IP","Rope_low",7,"reversed","rope",2,0,1036,1036,"Mix","m","yes",18
+"143","subj.10","end_rope_IP","Rope_up",8,"reversed","rope",2,0,1026,1036,"Mix","m","yes",18
+"144","subj.10","end_rope_IP","Rope_low",8,"reversed","rope",2,0,1026,1036,"Mix","m","yes",18
+"145","subj.11","end_rope_IP","Rope_up",5,"reversed","rope",1,1038,1038,1038,"Australian Shepherd","f","no",80
+"146","subj.11","end_rope_IP","Rope_low",5,"reversed","rope",1,0,1038,1038,"Australian Shepherd","f","no",80
+"147","subj.11","end_rope_IP","Rope_up",6,"reversed","rope",1,1038,1038,1038,"Australian Shepherd","f","no",80
+"148","subj.11","end_rope_IP","Rope_low",6,"reversed","rope",1,0,1038,1038,"Australian Shepherd","f","no",80
+"149","subj.11","end_rope_IP","Rope_up",7,"reversed","rope",1,1036,1036,1036,"Australian Shepherd","f","no",80
+"150","subj.11","end_rope_IP","Rope_low",7,"reversed","rope",1,0,1036,1036,"Australian Shepherd","f","no",80
+"151","subj.11","end_rope_IP","Rope_up",8,"reversed","rope",1,1035,1035,1035,"Australian Shepherd","f","no",80
+"152","subj.11","end_rope_IP","Rope_low",8,"reversed","rope",1,0,1035,1035,"Australian Shepherd","f","no",80
+"153","subj.11","end_rope_IP","Rope_up",5,"normal","rope",2,0,1036,1036,"Australian Shepherd","f","no",80
+"154","subj.11","end_rope_IP","Rope_low",5,"normal","rope",2,0,1036,1036,"Australian Shepherd","f","no",80
+"155","subj.11","end_rope_IP","Rope_up",6,"normal","rope",2,1036,1036,1036,"Australian Shepherd","f","no",80
+"156","subj.11","end_rope_IP","Rope_low",6,"normal","rope",2,0,1036,1036,"Australian Shepherd","f","no",80
+"157","subj.11","end_rope_IP","Rope_up",7,"normal","rope",2,1035,1035,1035,"Australian Shepherd","f","no",80
+"158","subj.11","end_rope_IP","Rope_low",7,"normal","rope",2,0,1035,1035,"Australian Shepherd","f","no",80
+"159","subj.11","end_rope_IP","Rope_up",8,"normal","rope",2,1036,1036,1036,"Australian Shepherd","f","no",80
+"160","subj.11","end_rope_IP","Rope_low",8,"normal","rope",2,0,1036,1036,"Australian Shepherd","f","no",80
+"161","subj.01","end_rope_IP","Rope_up",5,"reversed","rope",2,245,1026,1035,"Border Collie","m","no",56
+"162","subj.01","end_rope_IP","Rope_low",5,"reversed","rope",2,0,1026,1035,"Border Collie","m","no",56
+"163","subj.01","end_rope_IP","Rope_up",6,"reversed","rope",2,0,1036,1036,"Border Collie","m","no",56
+"164","subj.01","end_rope_IP","Rope_low",6,"reversed","rope",2,0,1036,1036,"Border Collie","m","no",56
+"165","subj.01","end_rope_IP","Rope_up",7,"reversed","rope",2,1008,1008,1008,"Border Collie","m","no",56
+"166","subj.01","end_rope_IP","Rope_low",7,"reversed","rope",2,0,1008,1008,"Border Collie","m","no",56
+"167","subj.01","end_rope_IP","Rope_up",8,"reversed","rope",2,1035,1035,1035,"Border Collie","m","no",56
+"168","subj.01","end_rope_IP","Rope_low",8,"reversed","rope",2,0,1035,1035,"Border Collie","m","no",56
+"169","subj.12","end_rope_IP","Rope_up",5,"reversed","rope",1,0,1036,1036,"Collie","m","no",18
+"170","subj.12","end_rope_IP","Rope_low",5,"reversed","rope",1,0,1036,1036,"Collie","m","no",18
+"171","subj.12","end_rope_IP","Rope_up",6,"reversed","rope",1,0,922,1036,"Collie","m","no",18
+"172","subj.12","end_rope_IP","Rope_low",6,"reversed","rope",1,0,922,1036,"Collie","m","no",18
+"173","subj.12","end_rope_IP","Rope_up",7,"reversed","rope",1,0,863,1036,"Collie","m","no",18
+"174","subj.12","end_rope_IP","Rope_low",7,"reversed","rope",1,0,863,1036,"Collie","m","no",18
+"175","subj.12","end_rope_IP","Rope_up",8,"reversed","rope",1,0,1035,1035,"Collie","m","no",18
+"176","subj.12","end_rope_IP","Rope_low",8,"reversed","rope",1,0,1035,1035,"Collie","m","no",18
+"177","subj.12","end_rope_IP","Rope_up",5,"normal","rope",2,0,1037,1037,"Collie","m","no",18
+"178","subj.12","end_rope_IP","Rope_low",5,"normal","rope",2,0,1037,1037,"Collie","m","no",18
+"179","subj.12","end_rope_IP","Rope_up",6,"normal","rope",2,0,937,1036,"Collie","m","no",18
+"180","subj.12","end_rope_IP","Rope_low",6,"normal","rope",2,163,937,1036,"Collie","m","no",18
+"181","subj.12","end_rope_IP","Rope_up",7,"normal","rope",2,0,956,1036,"Collie","m","no",18
+"182","subj.12","end_rope_IP","Rope_low",7,"normal","rope",2,956,956,1036,"Collie","m","no",18
+"183","subj.12","end_rope_IP","Rope_up",8,"normal","rope",2,0,995,1035,"Collie","m","no",18
+"184","subj.12","end_rope_IP","Rope_low",8,"normal","rope",2,995,995,1035,"Collie","m","no",18
+"185","subj.02","end_rope_IP","Rope_up",5,"reversed","rope",2,0,1037,1037,"Labrador Retriever","f","yes",34
+"186","subj.02","end_rope_IP","Rope_low",5,"reversed","rope",2,0,1037,1037,"Labrador Retriever","f","yes",34
+"187","subj.02","end_rope_IP","Rope_up",6,"reversed","rope",2,0,1035,1035,"Labrador Retriever","f","yes",34
+"188","subj.02","end_rope_IP","Rope_low",6,"reversed","rope",2,0,1035,1035,"Labrador Retriever","f","yes",34
+"189","subj.02","end_rope_IP","Rope_up",7,"reversed","rope",2,0,1007,1007,"Labrador Retriever","f","yes",34
+"190","subj.02","end_rope_IP","Rope_low",7,"reversed","rope",2,0,1007,1007,"Labrador Retriever","f","yes",34
+"191","subj.02","end_rope_IP","Rope_up",8,"reversed","rope",2,0,1035,1035,"Labrador Retriever","f","yes",34
+"192","subj.02","end_rope_IP","Rope_low",8,"reversed","rope",2,0,1035,1035,"Labrador Retriever","f","yes",34
+"193","subj.13","end_rope_IP","Rope_up",5,"reversed","rope",1,585,974,1036,"Border Collie","f","no",16
+"194","subj.13","end_rope_IP","Rope_low",5,"reversed","rope",1,0,974,1036,"Border Collie","f","no",16
+"195","subj.13","end_rope_IP","Rope_up",6,"reversed","rope",1,0,536,1036,"Border Collie","f","no",16
+"196","subj.13","end_rope_IP","Rope_low",6,"reversed","rope",1,0,536,1036,"Border Collie","f","no",16
+"197","subj.13","end_rope_IP","Rope_up",7,"reversed","rope",1,63,840,1035,"Border Collie","f","no",16
+"198","subj.13","end_rope_IP","Rope_low",7,"reversed","rope",1,365,840,1035,"Border Collie","f","no",16
+"199","subj.13","end_rope_IP","Rope_up",8,"reversed","rope",1,104,848,1036,"Border Collie","f","no",16
+"200","subj.13","end_rope_IP","Rope_low",8,"reversed","rope",1,0,848,1036,"Border Collie","f","no",16
+"201","subj.13","end_rope_IP","Rope_up",5,"normal","rope",2,0,966,1036,"Border Collie","f","no",16
+"202","subj.13","end_rope_IP","Rope_low",5,"normal","rope",2,966,966,1036,"Border Collie","f","no",16
+"203","subj.13","end_rope_IP","Rope_up",6,"normal","rope",2,0,974,1035,"Border Collie","f","no",16
+"204","subj.13","end_rope_IP","Rope_low",6,"normal","rope",2,974,974,1035,"Border Collie","f","no",16
+"205","subj.13","end_rope_IP","Rope_up",7,"normal","rope",2,993,993,1036,"Border Collie","f","no",16
+"206","subj.13","end_rope_IP","Rope_low",7,"normal","rope",2,0,993,1036,"Border Collie","f","no",16
+"207","subj.13","end_rope_IP","Rope_up",8,"normal","rope",2,0,1035,1035,"Border Collie","f","no",16
+"208","subj.13","end_rope_IP","Rope_low",8,"normal","rope",2,1035,1035,1035,"Border Collie","f","no",16
+"209","subj.14","end_rope_IP","Rope_up",5,"normal","rope",1,0,1036,1036,"Mix","m","yes",62
+"210","subj.14","end_rope_IP","Rope_low",5,"normal","rope",1,1036,1036,1036,"Mix","m","yes",62
+"211","subj.14","end_rope_IP","Rope_up",6,"normal","rope",1,0,523,1036,"Mix","m","yes",62
+"212","subj.14","end_rope_IP","Rope_low",6,"normal","rope",1,0,523,1036,"Mix","m","yes",62
+"213","subj.14","end_rope_IP","Rope_up",7,"normal","rope",1,0,1035,1035,"Mix","m","yes",62
+"214","subj.14","end_rope_IP","Rope_low",7,"normal","rope",1,0,1035,1035,"Mix","m","yes",62
+"215","subj.14","end_rope_IP","Rope_up",8,"normal","rope",1,0,947,1036,"Mix","m","yes",62
+"216","subj.14","end_rope_IP","Rope_low",8,"normal","rope",1,0,947,1036,"Mix","m","yes",62
+"217","subj.14","end_rope_IP","Rope_up",5,"reversed","rope",2,204,876,1036,"Mix","m","yes",62
+"218","subj.14","end_rope_IP","Rope_low",5,"reversed","rope",2,0,876,1036,"Mix","m","yes",62
+"219","subj.14","end_rope_IP","Rope_up",6,"reversed","rope",2,1014,1014,1036,"Mix","m","yes",62
+"220","subj.14","end_rope_IP","Rope_low",6,"reversed","rope",2,0,1014,1036,"Mix","m","yes",62
+"221","subj.14","end_rope_IP","Rope_up",7,"reversed","rope",2,0,463,1008,"Mix","m","yes",62
+"222","subj.14","end_rope_IP","Rope_low",7,"reversed","rope",2,0,463,1008,"Mix","m","yes",62
+"223","subj.14","end_rope_IP","Rope_up",8,"reversed","rope",2,399,862,1008,"Mix","m","yes",62
+"224","subj.14","end_rope_IP","Rope_low",8,"reversed","rope",2,0,862,1008,"Mix","m","yes",62

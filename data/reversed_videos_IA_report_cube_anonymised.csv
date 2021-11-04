@@ -1,0 +1,337 @@
+"","subject","IP_LABEL","IA_LABEL","trial","condition","object","session","IA_DWELL_TIME","TRIAL_DWELL_TIME","IP_DURATION","Breed","sex","neutered","age"
+"1","subj.01","end_IP_cube","cube_human",1,"reversed","cube",1,0,1025,1035,"Border Collie","m","no",56
+"2","subj.01","end_IP_cube","cube_up",1,"reversed","cube",1,683,1025,1035,"Border Collie","m","no",56
+"3","subj.01","end_IP_cube","cube_low",1,"reversed","cube",1,0,1025,1035,"Border Collie","m","no",56
+"4","subj.01","end_IP_cube","cube_human",2,"reversed","cube",1,0,1020,1034,"Border Collie","m","no",56
+"5","subj.01","end_IP_cube","cube_up",2,"reversed","cube",1,903,1020,1034,"Border Collie","m","no",56
+"6","subj.01","end_IP_cube","cube_low",2,"reversed","cube",1,0,1020,1034,"Border Collie","m","no",56
+"7","subj.01","end_IP_cube","cube_human",3,"reversed","cube",1,882,990,1035,"Border Collie","m","no",56
+"8","subj.01","end_IP_cube","cube_up",3,"reversed","cube",1,0,990,1035,"Border Collie","m","no",56
+"9","subj.01","end_IP_cube","cube_low",3,"reversed","cube",1,0,990,1035,"Border Collie","m","no",56
+"10","subj.01","end_IP_cube","cube_human",4,"reversed","cube",1,1035,1035,1035,"Border Collie","m","no",56
+"11","subj.01","end_IP_cube","cube_up",4,"reversed","cube",1,0,1035,1035,"Border Collie","m","no",56
+"12","subj.01","end_IP_cube","cube_low",4,"reversed","cube",1,0,1035,1035,"Border Collie","m","no",56
+"13","subj.02","end_IP_cube","cube_human",1,"reversed","cube",1,0,1035,1035,"Labrador Retriever","f","yes",34
+"14","subj.02","end_IP_cube","cube_up",1,"reversed","cube",1,0,1035,1035,"Labrador Retriever","f","yes",34
+"15","subj.02","end_IP_cube","cube_low",1,"reversed","cube",1,0,1035,1035,"Labrador Retriever","f","yes",34
+"16","subj.02","end_IP_cube","cube_human",2,"reversed","cube",1,0,1035,1035,"Labrador Retriever","f","yes",34
+"17","subj.02","end_IP_cube","cube_up",2,"reversed","cube",1,0,1035,1035,"Labrador Retriever","f","yes",34
+"18","subj.02","end_IP_cube","cube_low",2,"reversed","cube",1,0,1035,1035,"Labrador Retriever","f","yes",34
+"19","subj.02","end_IP_cube","cube_human",3,"reversed","cube",1,0,1036,1036,"Labrador Retriever","f","yes",34
+"20","subj.02","end_IP_cube","cube_up",3,"reversed","cube",1,0,1036,1036,"Labrador Retriever","f","yes",34
+"21","subj.02","end_IP_cube","cube_low",3,"reversed","cube",1,0,1036,1036,"Labrador Retriever","f","yes",34
+"22","subj.02","end_IP_cube","cube_human",4,"reversed","cube",1,0,1036,1036,"Labrador Retriever","f","yes",34
+"23","subj.02","end_IP_cube","cube_up",4,"reversed","cube",1,0,1036,1036,"Labrador Retriever","f","yes",34
+"24","subj.02","end_IP_cube","cube_low",4,"reversed","cube",1,0,1036,1036,"Labrador Retriever","f","yes",34
+"25","subj.03","end_IP_cube","cube_human",1,"normal","cube",1,1028,1028,1036,"Mix","f","no",20
+"26","subj.03","end_IP_cube","cube_up",1,"normal","cube",1,0,1028,1036,"Mix","f","no",20
+"27","subj.03","end_IP_cube","cube_low",1,"normal","cube",1,0,1028,1036,"Mix","f","no",20
+"28","subj.03","end_IP_cube","cube_human",2,"normal","cube",1,564,900,1036,"Mix","f","no",20
+"29","subj.03","end_IP_cube","cube_up",2,"normal","cube",1,282,900,1036,"Mix","f","no",20
+"30","subj.03","end_IP_cube","cube_low",2,"normal","cube",1,0,900,1036,"Mix","f","no",20
+"31","subj.03","end_IP_cube","cube_human",3,"normal","cube",1,975,1011,1036,"Mix","f","no",20
+"32","subj.03","end_IP_cube","cube_up",3,"normal","cube",1,36,1011,1036,"Mix","f","no",20
+"33","subj.03","end_IP_cube","cube_low",3,"normal","cube",1,0,1011,1036,"Mix","f","no",20
+"34","subj.03","end_IP_cube","cube_human",4,"normal","cube",1,0,856,1007,"Mix","f","no",20
+"35","subj.03","end_IP_cube","cube_up",4,"normal","cube",1,189,856,1007,"Mix","f","no",20
+"36","subj.03","end_IP_cube","cube_low",4,"normal","cube",1,161,856,1007,"Mix","f","no",20
+"37","subj.03","end_IP_cube","cube_human",1,"reversed","cube",2,65,967,1007,"Mix","f","no",20
+"38","subj.03","end_IP_cube","cube_up",1,"reversed","cube",2,902,967,1007,"Mix","f","no",20
+"39","subj.03","end_IP_cube","cube_low",1,"reversed","cube",2,0,967,1007,"Mix","f","no",20
+"40","subj.03","end_IP_cube","cube_human",2,"reversed","cube",2,0,1003,1036,"Mix","f","no",20
+"41","subj.03","end_IP_cube","cube_up",2,"reversed","cube",2,1003,1003,1036,"Mix","f","no",20
+"42","subj.03","end_IP_cube","cube_low",2,"reversed","cube",2,0,1003,1036,"Mix","f","no",20
+"43","subj.03","end_IP_cube","cube_human",3,"reversed","cube",2,503,952,1036,"Mix","f","no",20
+"44","subj.03","end_IP_cube","cube_up",3,"reversed","cube",2,449,952,1036,"Mix","f","no",20
+"45","subj.03","end_IP_cube","cube_low",3,"reversed","cube",2,0,952,1036,"Mix","f","no",20
+"46","subj.03","end_IP_cube","cube_human",4,"reversed","cube",2,0,987,1036,"Mix","f","no",20
+"47","subj.03","end_IP_cube","cube_up",4,"reversed","cube",2,777,987,1036,"Mix","f","no",20
+"48","subj.03","end_IP_cube","cube_low",4,"reversed","cube",2,0,987,1036,"Mix","f","no",20
+"49","subj.04","end_IP_cube","cube_human",1,"normal","cube",1,0,1035,1035,"Mix","f","yes",37
+"50","subj.04","end_IP_cube","cube_up",1,"normal","cube",1,0,1035,1035,"Mix","f","yes",37
+"51","subj.04","end_IP_cube","cube_low",1,"normal","cube",1,1035,1035,1035,"Mix","f","yes",37
+"52","subj.04","end_IP_cube","cube_human",2,"normal","cube",1,0,1036,1036,"Mix","f","yes",37
+"53","subj.04","end_IP_cube","cube_up",2,"normal","cube",1,0,1036,1036,"Mix","f","yes",37
+"54","subj.04","end_IP_cube","cube_low",2,"normal","cube",1,1036,1036,1036,"Mix","f","yes",37
+"55","subj.04","end_IP_cube","cube_human",3,"normal","cube",1,0,886,1036,"Mix","f","yes",37
+"56","subj.04","end_IP_cube","cube_up",3,"normal","cube",1,0,886,1036,"Mix","f","yes",37
+"57","subj.04","end_IP_cube","cube_low",3,"normal","cube",1,628,886,1036,"Mix","f","yes",37
+"58","subj.04","end_IP_cube","cube_human",4,"normal","cube",1,0,1036,1036,"Mix","f","yes",37
+"59","subj.04","end_IP_cube","cube_up",4,"normal","cube",1,0,1036,1036,"Mix","f","yes",37
+"60","subj.04","end_IP_cube","cube_low",4,"normal","cube",1,0,1036,1036,"Mix","f","yes",37
+"61","subj.04","end_IP_cube","cube_human",1,"reversed","cube",2,0,1020,1036,"Mix","f","yes",37
+"62","subj.04","end_IP_cube","cube_up",1,"reversed","cube",2,1020,1020,1036,"Mix","f","yes",37
+"63","subj.04","end_IP_cube","cube_low",1,"reversed","cube",2,0,1020,1036,"Mix","f","yes",37
+"64","subj.04","end_IP_cube","cube_human",2,"reversed","cube",2,859,942,1035,"Mix","f","yes",37
+"65","subj.04","end_IP_cube","cube_up",2,"reversed","cube",2,83,942,1035,"Mix","f","yes",37
+"66","subj.04","end_IP_cube","cube_low",2,"reversed","cube",2,0,942,1035,"Mix","f","yes",37
+"67","subj.04","end_IP_cube","cube_human",3,"reversed","cube",2,0,1036,1036,"Mix","f","yes",37
+"68","subj.04","end_IP_cube","cube_up",3,"reversed","cube",2,0,1036,1036,"Mix","f","yes",37
+"69","subj.04","end_IP_cube","cube_low",3,"reversed","cube",2,0,1036,1036,"Mix","f","yes",37
+"70","subj.04","end_IP_cube","cube_human",4,"reversed","cube",2,0,1036,1036,"Mix","f","yes",37
+"71","subj.04","end_IP_cube","cube_up",4,"reversed","cube",2,0,1036,1036,"Mix","f","yes",37
+"72","subj.04","end_IP_cube","cube_low",4,"reversed","cube",2,0,1036,1036,"Mix","f","yes",37
+"73","subj.05","end_IP_cube","cube_human",1,"reversed","cube",1,1036,1036,1036,"Labrador Retriever","f","yes",26
+"74","subj.05","end_IP_cube","cube_up",1,"reversed","cube",1,0,1036,1036,"Labrador Retriever","f","yes",26
+"75","subj.05","end_IP_cube","cube_low",1,"reversed","cube",1,0,1036,1036,"Labrador Retriever","f","yes",26
+"76","subj.05","end_IP_cube","cube_human",2,"reversed","cube",1,377,988,1036,"Labrador Retriever","f","yes",26
+"77","subj.05","end_IP_cube","cube_up",2,"reversed","cube",1,611,988,1036,"Labrador Retriever","f","yes",26
+"78","subj.05","end_IP_cube","cube_low",2,"reversed","cube",1,0,988,1036,"Labrador Retriever","f","yes",26
+"79","subj.05","end_IP_cube","cube_human",3,"reversed","cube",1,0,1036,1036,"Labrador Retriever","f","yes",26
+"80","subj.05","end_IP_cube","cube_up",3,"reversed","cube",1,1036,1036,1036,"Labrador Retriever","f","yes",26
+"81","subj.05","end_IP_cube","cube_low",3,"reversed","cube",1,0,1036,1036,"Labrador Retriever","f","yes",26
+"82","subj.05","end_IP_cube","cube_human",4,"reversed","cube",1,0,1036,1036,"Labrador Retriever","f","yes",26
+"83","subj.05","end_IP_cube","cube_up",4,"reversed","cube",1,1036,1036,1036,"Labrador Retriever","f","yes",26
+"84","subj.05","end_IP_cube","cube_low",4,"reversed","cube",1,0,1036,1036,"Labrador Retriever","f","yes",26
+"85","subj.05","end_IP_cube","cube_human",1,"normal","cube",2,0,1036,1036,"Labrador Retriever","f","yes",26
+"86","subj.05","end_IP_cube","cube_up",1,"normal","cube",2,0,1036,1036,"Labrador Retriever","f","yes",26
+"87","subj.05","end_IP_cube","cube_low",1,"normal","cube",2,0,1036,1036,"Labrador Retriever","f","yes",26
+"88","subj.05","end_IP_cube","cube_human",2,"normal","cube",2,0,1036,1036,"Labrador Retriever","f","yes",26
+"89","subj.05","end_IP_cube","cube_up",2,"normal","cube",2,0,1036,1036,"Labrador Retriever","f","yes",26
+"90","subj.05","end_IP_cube","cube_low",2,"normal","cube",2,1036,1036,1036,"Labrador Retriever","f","yes",26
+"91","subj.05","end_IP_cube","cube_human",3,"normal","cube",2,0,1036,1036,"Labrador Retriever","f","yes",26
+"92","subj.05","end_IP_cube","cube_up",3,"normal","cube",2,0,1036,1036,"Labrador Retriever","f","yes",26
+"93","subj.05","end_IP_cube","cube_low",3,"normal","cube",2,1036,1036,1036,"Labrador Retriever","f","yes",26
+"94","subj.05","end_IP_cube","cube_human",4,"normal","cube",2,0,1035,1035,"Labrador Retriever","f","yes",26
+"95","subj.05","end_IP_cube","cube_up",4,"normal","cube",2,0,1035,1035,"Labrador Retriever","f","yes",26
+"96","subj.05","end_IP_cube","cube_low",4,"normal","cube",2,1035,1035,1035,"Labrador Retriever","f","yes",26
+"97","subj.06","end_IP_cube","cube_human",1,"normal","cube",1,0,1017,1036,"Mix","m","no",20
+"98","subj.06","end_IP_cube","cube_up",1,"normal","cube",1,0,1017,1036,"Mix","m","no",20
+"99","subj.06","end_IP_cube","cube_low",1,"normal","cube",1,722,1017,1036,"Mix","m","no",20
+"100","subj.06","end_IP_cube","cube_human",2,"normal","cube",1,365,859,1035,"Mix","m","no",20
+"101","subj.06","end_IP_cube","cube_up",2,"normal","cube",1,282,859,1035,"Mix","m","no",20
+"102","subj.06","end_IP_cube","cube_low",2,"normal","cube",1,0,859,1035,"Mix","m","no",20
+"103","subj.06","end_IP_cube","cube_human",3,"normal","cube",1,0,1007,1007,"Mix","m","no",20
+"104","subj.06","end_IP_cube","cube_up",3,"normal","cube",1,0,1007,1007,"Mix","m","no",20
+"105","subj.06","end_IP_cube","cube_low",3,"normal","cube",1,0,1007,1007,"Mix","m","no",20
+"106","subj.06","end_IP_cube","cube_human",4,"normal","cube",1,0,1008,1008,"Mix","m","no",20
+"107","subj.06","end_IP_cube","cube_up",4,"normal","cube",1,0,1008,1008,"Mix","m","no",20
+"108","subj.06","end_IP_cube","cube_low",4,"normal","cube",1,0,1008,1008,"Mix","m","no",20
+"109","subj.06","end_IP_cube","cube_human",1,"reversed","cube",2,0,1006,1035,"Mix","m","no",20
+"110","subj.06","end_IP_cube","cube_up",1,"reversed","cube",2,845,1006,1035,"Mix","m","no",20
+"111","subj.06","end_IP_cube","cube_low",1,"reversed","cube",2,0,1006,1035,"Mix","m","no",20
+"112","subj.06","end_IP_cube","cube_human",2,"reversed","cube",2,0,1012,1035,"Mix","m","no",20
+"113","subj.06","end_IP_cube","cube_up",2,"reversed","cube",2,725,1012,1035,"Mix","m","no",20
+"114","subj.06","end_IP_cube","cube_low",2,"reversed","cube",2,0,1012,1035,"Mix","m","no",20
+"115","subj.06","end_IP_cube","cube_human",3,"reversed","cube",2,0,1017,1035,"Mix","m","no",20
+"116","subj.06","end_IP_cube","cube_up",3,"reversed","cube",2,918,1017,1035,"Mix","m","no",20
+"117","subj.06","end_IP_cube","cube_low",3,"reversed","cube",2,0,1017,1035,"Mix","m","no",20
+"118","subj.06","end_IP_cube","cube_human",4,"reversed","cube",2,0,1018,1035,"Mix","m","no",20
+"119","subj.06","end_IP_cube","cube_up",4,"reversed","cube",2,949,1018,1035,"Mix","m","no",20
+"120","subj.06","end_IP_cube","cube_low",4,"reversed","cube",2,0,1018,1035,"Mix","m","no",20
+"121","subj.07","end_IP_cube","cube_human",1,"normal","cube",1,1017,1017,1036,"Border Collie","f","no",14
+"122","subj.07","end_IP_cube","cube_up",1,"normal","cube",1,0,1017,1036,"Border Collie","f","no",14
+"123","subj.07","end_IP_cube","cube_low",1,"normal","cube",1,0,1017,1036,"Border Collie","f","no",14
+"124","subj.07","end_IP_cube","cube_human",2,"normal","cube",1,182,900,1007,"Border Collie","f","no",14
+"125","subj.07","end_IP_cube","cube_up",2,"normal","cube",1,0,900,1007,"Border Collie","f","no",14
+"126","subj.07","end_IP_cube","cube_low",2,"normal","cube",1,0,900,1007,"Border Collie","f","no",14
+"127","subj.07","end_IP_cube","cube_human",3,"normal","cube",1,0,322,1008,"Border Collie","f","no",14
+"128","subj.07","end_IP_cube","cube_up",3,"normal","cube",1,0,322,1008,"Border Collie","f","no",14
+"129","subj.07","end_IP_cube","cube_low",3,"normal","cube",1,0,322,1008,"Border Collie","f","no",14
+"130","subj.07","end_IP_cube","cube_human",4,"normal","cube",1,0,796,1036,"Border Collie","f","no",14
+"131","subj.07","end_IP_cube","cube_up",4,"normal","cube",1,0,796,1036,"Border Collie","f","no",14
+"132","subj.07","end_IP_cube","cube_low",4,"normal","cube",1,0,796,1036,"Border Collie","f","no",14
+"133","subj.07","end_IP_cube","cube_human",1,"reversed","cube",2,0,946,1036,"Border Collie","f","no",14
+"134","subj.07","end_IP_cube","cube_up",1,"reversed","cube",2,199,946,1036,"Border Collie","f","no",14
+"135","subj.07","end_IP_cube","cube_low",1,"reversed","cube",2,0,946,1036,"Border Collie","f","no",14
+"136","subj.07","end_IP_cube","cube_human",2,"reversed","cube",2,0,954,1036,"Border Collie","f","no",14
+"137","subj.07","end_IP_cube","cube_up",2,"reversed","cube",2,128,954,1036,"Border Collie","f","no",14
+"138","subj.07","end_IP_cube","cube_low",2,"reversed","cube",2,0,954,1036,"Border Collie","f","no",14
+"139","subj.07","end_IP_cube","cube_human",3,"reversed","cube",2,534,938,1007,"Border Collie","f","no",14
+"140","subj.07","end_IP_cube","cube_up",3,"reversed","cube",2,404,938,1007,"Border Collie","f","no",14
+"141","subj.07","end_IP_cube","cube_low",3,"reversed","cube",2,0,938,1007,"Border Collie","f","no",14
+"142","subj.07","end_IP_cube","cube_human",4,"reversed","cube",2,0,903,1036,"Border Collie","f","no",14
+"143","subj.07","end_IP_cube","cube_up",4,"reversed","cube",2,495,903,1036,"Border Collie","f","no",14
+"144","subj.07","end_IP_cube","cube_low",4,"reversed","cube",2,0,903,1036,"Border Collie","f","no",14
+"145","subj.08","end_IP_cube","cube_human",1,"normal","cube",1,959,959,1036,"Border Collie","m","yes",19
+"146","subj.08","end_IP_cube","cube_up",1,"normal","cube",1,0,959,1036,"Border Collie","m","yes",19
+"147","subj.08","end_IP_cube","cube_low",1,"normal","cube",1,0,959,1036,"Border Collie","m","yes",19
+"148","subj.08","end_IP_cube","cube_human",2,"normal","cube",1,988,988,1038,"Border Collie","m","yes",19
+"149","subj.08","end_IP_cube","cube_up",2,"normal","cube",1,0,988,1038,"Border Collie","m","yes",19
+"150","subj.08","end_IP_cube","cube_low",2,"normal","cube",1,0,988,1038,"Border Collie","m","yes",19
+"151","subj.08","end_IP_cube","cube_human",3,"normal","cube",1,1035,1035,1035,"Border Collie","m","yes",19
+"152","subj.08","end_IP_cube","cube_up",3,"normal","cube",1,0,1035,1035,"Border Collie","m","yes",19
+"153","subj.08","end_IP_cube","cube_low",3,"normal","cube",1,0,1035,1035,"Border Collie","m","yes",19
+"154","subj.08","end_IP_cube","cube_human",4,"normal","cube",1,1035,1035,1035,"Border Collie","m","yes",19
+"155","subj.08","end_IP_cube","cube_up",4,"normal","cube",1,0,1035,1035,"Border Collie","m","yes",19
+"156","subj.08","end_IP_cube","cube_low",4,"normal","cube",1,0,1035,1035,"Border Collie","m","yes",19
+"157","subj.08","end_IP_cube","cube_human",1,"reversed","cube",2,0,1007,1007,"Border Collie","m","yes",19
+"158","subj.08","end_IP_cube","cube_up",1,"reversed","cube",2,0,1007,1007,"Border Collie","m","yes",19
+"159","subj.08","end_IP_cube","cube_low",1,"reversed","cube",2,0,1007,1007,"Border Collie","m","yes",19
+"160","subj.08","end_IP_cube","cube_human",2,"reversed","cube",2,0,1036,1036,"Border Collie","m","yes",19
+"161","subj.08","end_IP_cube","cube_up",2,"reversed","cube",2,0,1036,1036,"Border Collie","m","yes",19
+"162","subj.08","end_IP_cube","cube_low",2,"reversed","cube",2,0,1036,1036,"Border Collie","m","yes",19
+"163","subj.08","end_IP_cube","cube_human",3,"reversed","cube",2,0,1036,1036,"Border Collie","m","yes",19
+"164","subj.08","end_IP_cube","cube_up",3,"reversed","cube",2,1036,1036,1036,"Border Collie","m","yes",19
+"165","subj.08","end_IP_cube","cube_low",3,"reversed","cube",2,0,1036,1036,"Border Collie","m","yes",19
+"166","subj.08","end_IP_cube","cube_human",4,"reversed","cube",2,0,1027,1036,"Border Collie","m","yes",19
+"167","subj.08","end_IP_cube","cube_up",4,"reversed","cube",2,889,1027,1036,"Border Collie","m","yes",19
+"168","subj.08","end_IP_cube","cube_low",4,"reversed","cube",2,0,1027,1036,"Border Collie","m","yes",19
+"169","subj.09","end_IP_cube","cube_human",1,"normal","cube",1,0,720,1036,"Border Collie","f","no",25
+"170","subj.09","end_IP_cube","cube_up",1,"normal","cube",1,0,720,1036,"Border Collie","f","no",25
+"171","subj.09","end_IP_cube","cube_low",1,"normal","cube",1,0,720,1036,"Border Collie","f","no",25
+"172","subj.09","end_IP_cube","cube_human",2,"normal","cube",1,0,997,1035,"Border Collie","f","no",25
+"173","subj.09","end_IP_cube","cube_up",2,"normal","cube",1,0,997,1035,"Border Collie","f","no",25
+"174","subj.09","end_IP_cube","cube_low",2,"normal","cube",1,986,997,1035,"Border Collie","f","no",25
+"175","subj.09","end_IP_cube","cube_human",3,"normal","cube",1,0,814,1035,"Border Collie","f","no",25
+"176","subj.09","end_IP_cube","cube_up",3,"normal","cube",1,0,814,1035,"Border Collie","f","no",25
+"177","subj.09","end_IP_cube","cube_low",3,"normal","cube",1,0,814,1035,"Border Collie","f","no",25
+"178","subj.09","end_IP_cube","cube_human",4,"normal","cube",1,0,1032,1036,"Border Collie","f","no",25
+"179","subj.09","end_IP_cube","cube_up",4,"normal","cube",1,0,1032,1036,"Border Collie","f","no",25
+"180","subj.09","end_IP_cube","cube_low",4,"normal","cube",1,0,1032,1036,"Border Collie","f","no",25
+"181","subj.09","end_IP_cube","cube_human",1,"reversed","cube",2,0,973,1036,"Border Collie","f","no",25
+"182","subj.09","end_IP_cube","cube_up",1,"reversed","cube",2,131,973,1036,"Border Collie","f","no",25
+"183","subj.09","end_IP_cube","cube_low",1,"reversed","cube",2,0,973,1036,"Border Collie","f","no",25
+"184","subj.09","end_IP_cube","cube_human",2,"reversed","cube",2,257,869,1036,"Border Collie","f","no",25
+"185","subj.09","end_IP_cube","cube_up",2,"reversed","cube",2,188,869,1036,"Border Collie","f","no",25
+"186","subj.09","end_IP_cube","cube_low",2,"reversed","cube",2,0,869,1036,"Border Collie","f","no",25
+"187","subj.09","end_IP_cube","cube_human",3,"reversed","cube",2,550,898,1036,"Border Collie","f","no",25
+"188","subj.09","end_IP_cube","cube_up",3,"reversed","cube",2,348,898,1036,"Border Collie","f","no",25
+"189","subj.09","end_IP_cube","cube_low",3,"reversed","cube",2,0,898,1036,"Border Collie","f","no",25
+"190","subj.09","end_IP_cube","cube_human",4,"reversed","cube",2,0,949,1036,"Border Collie","f","no",25
+"191","subj.09","end_IP_cube","cube_up",4,"reversed","cube",2,0,949,1036,"Border Collie","f","no",25
+"192","subj.09","end_IP_cube","cube_low",4,"reversed","cube",2,0,949,1036,"Border Collie","f","no",25
+"193","subj.10","end_IP_cube","cube_human",1,"normal","cube",1,0,1010,1010,"Mix","m","yes",18
+"194","subj.10","end_IP_cube","cube_up",1,"normal","cube",1,0,1010,1010,"Mix","m","yes",18
+"195","subj.10","end_IP_cube","cube_low",1,"normal","cube",1,1010,1010,1010,"Mix","m","yes",18
+"196","subj.10","end_IP_cube","cube_human",2,"normal","cube",1,780,939,1037,"Mix","m","yes",18
+"197","subj.10","end_IP_cube","cube_up",2,"normal","cube",1,0,939,1037,"Mix","m","yes",18
+"198","subj.10","end_IP_cube","cube_low",2,"normal","cube",1,159,939,1037,"Mix","m","yes",18
+"199","subj.10","end_IP_cube","cube_human",3,"normal","cube",1,1037,1037,1037,"Mix","m","yes",18
+"200","subj.10","end_IP_cube","cube_up",3,"normal","cube",1,0,1037,1037,"Mix","m","yes",18
+"201","subj.10","end_IP_cube","cube_low",3,"normal","cube",1,0,1037,1037,"Mix","m","yes",18
+"202","subj.10","end_IP_cube","cube_human",4,"normal","cube",1,0,1038,1038,"Mix","m","yes",18
+"203","subj.10","end_IP_cube","cube_up",4,"normal","cube",1,0,1038,1038,"Mix","m","yes",18
+"204","subj.10","end_IP_cube","cube_low",4,"normal","cube",1,1038,1038,1038,"Mix","m","yes",18
+"205","subj.10","end_IP_cube","cube_human",1,"reversed","cube",2,0,1007,1007,"Mix","m","yes",18
+"206","subj.10","end_IP_cube","cube_up",1,"reversed","cube",2,1007,1007,1007,"Mix","m","yes",18
+"207","subj.10","end_IP_cube","cube_low",1,"reversed","cube",2,0,1007,1007,"Mix","m","yes",18
+"208","subj.10","end_IP_cube","cube_human",2,"reversed","cube",2,0,1025,1036,"Mix","m","yes",18
+"209","subj.10","end_IP_cube","cube_up",2,"reversed","cube",2,1025,1025,1036,"Mix","m","yes",18
+"210","subj.10","end_IP_cube","cube_low",2,"reversed","cube",2,0,1025,1036,"Mix","m","yes",18
+"211","subj.10","end_IP_cube","cube_human",3,"reversed","cube",2,0,1035,1035,"Mix","m","yes",18
+"212","subj.10","end_IP_cube","cube_up",3,"reversed","cube",2,1035,1035,1035,"Mix","m","yes",18
+"213","subj.10","end_IP_cube","cube_low",3,"reversed","cube",2,0,1035,1035,"Mix","m","yes",18
+"214","subj.10","end_IP_cube","cube_human",4,"reversed","cube",2,0,1003,1035,"Mix","m","yes",18
+"215","subj.10","end_IP_cube","cube_up",4,"reversed","cube",2,1003,1003,1035,"Mix","m","yes",18
+"216","subj.10","end_IP_cube","cube_low",4,"reversed","cube",2,0,1003,1035,"Mix","m","yes",18
+"217","subj.11","end_IP_cube","cube_human",1,"reversed","cube",1,1037,1037,1037,"Australian Shepherd","f","no",80
+"218","subj.11","end_IP_cube","cube_up",1,"reversed","cube",1,0,1037,1037,"Australian Shepherd","f","no",80
+"219","subj.11","end_IP_cube","cube_low",1,"reversed","cube",1,0,1037,1037,"Australian Shepherd","f","no",80
+"220","subj.11","end_IP_cube","cube_human",2,"reversed","cube",1,1038,1038,1038,"Australian Shepherd","f","no",80
+"221","subj.11","end_IP_cube","cube_up",2,"reversed","cube",1,0,1038,1038,"Australian Shepherd","f","no",80
+"222","subj.11","end_IP_cube","cube_low",2,"reversed","cube",1,0,1038,1038,"Australian Shepherd","f","no",80
+"223","subj.11","end_IP_cube","cube_human",3,"reversed","cube",1,826,987,1038,"Australian Shepherd","f","no",80
+"224","subj.11","end_IP_cube","cube_up",3,"reversed","cube",1,161,987,1038,"Australian Shepherd","f","no",80
+"225","subj.11","end_IP_cube","cube_low",3,"reversed","cube",1,0,987,1038,"Australian Shepherd","f","no",80
+"226","subj.11","end_IP_cube","cube_human",4,"reversed","cube",1,1037,1037,1037,"Australian Shepherd","f","no",80
+"227","subj.11","end_IP_cube","cube_up",4,"reversed","cube",1,0,1037,1037,"Australian Shepherd","f","no",80
+"228","subj.11","end_IP_cube","cube_low",4,"reversed","cube",1,0,1037,1037,"Australian Shepherd","f","no",80
+"229","subj.11","end_IP_cube","cube_human",1,"normal","cube",2,380,770,1036,"Australian Shepherd","f","no",80
+"230","subj.11","end_IP_cube","cube_up",1,"normal","cube",2,0,770,1036,"Australian Shepherd","f","no",80
+"231","subj.11","end_IP_cube","cube_low",1,"normal","cube",2,0,770,1036,"Australian Shepherd","f","no",80
+"232","subj.11","end_IP_cube","cube_human",2,"normal","cube",2,0,878,1035,"Australian Shepherd","f","no",80
+"233","subj.11","end_IP_cube","cube_up",2,"normal","cube",2,0,878,1035,"Australian Shepherd","f","no",80
+"234","subj.11","end_IP_cube","cube_low",2,"normal","cube",2,0,878,1035,"Australian Shepherd","f","no",80
+"235","subj.11","end_IP_cube","cube_human",3,"normal","cube",2,0,710,1038,"Australian Shepherd","f","no",80
+"236","subj.11","end_IP_cube","cube_up",3,"normal","cube",2,0,710,1038,"Australian Shepherd","f","no",80
+"237","subj.11","end_IP_cube","cube_low",3,"normal","cube",2,0,710,1038,"Australian Shepherd","f","no",80
+"238","subj.11","end_IP_cube","cube_human",4,"normal","cube",2,0,967,1035,"Australian Shepherd","f","no",80
+"239","subj.11","end_IP_cube","cube_up",4,"normal","cube",2,0,967,1035,"Australian Shepherd","f","no",80
+"240","subj.11","end_IP_cube","cube_low",4,"normal","cube",2,0,967,1035,"Australian Shepherd","f","no",80
+"241","subj.01","end_IP_cube","cube_human",1,"normal","cube",2,434,579,1036,"Border Collie","m","no",56
+"242","subj.01","end_IP_cube","cube_up",1,"normal","cube",2,0,579,1036,"Border Collie","m","no",56
+"243","subj.01","end_IP_cube","cube_low",1,"normal","cube",2,0,579,1036,"Border Collie","m","no",56
+"244","subj.01","end_IP_cube","cube_human",2,"normal","cube",2,826,967,1035,"Border Collie","m","no",56
+"245","subj.01","end_IP_cube","cube_up",2,"normal","cube",2,0,967,1035,"Border Collie","m","no",56
+"246","subj.01","end_IP_cube","cube_low",2,"normal","cube",2,0,967,1035,"Border Collie","m","no",56
+"247","subj.01","end_IP_cube","cube_human",3,"normal","cube",2,0,1035,1035,"Border Collie","m","no",56
+"248","subj.01","end_IP_cube","cube_up",3,"normal","cube",2,0,1035,1035,"Border Collie","m","no",56
+"249","subj.01","end_IP_cube","cube_low",3,"normal","cube",2,0,1035,1035,"Border Collie","m","no",56
+"250","subj.01","end_IP_cube","cube_human",4,"normal","cube",2,0,924,1035,"Border Collie","m","no",56
+"251","subj.01","end_IP_cube","cube_up",4,"normal","cube",2,0,924,1035,"Border Collie","m","no",56
+"252","subj.01","end_IP_cube","cube_low",4,"normal","cube",2,0,924,1035,"Border Collie","m","no",56
+"253","subj.12","end_IP_cube","cube_human",1,"reversed","cube",1,0,1008,1036,"Collie","m","no",18
+"254","subj.12","end_IP_cube","cube_up",1,"reversed","cube",1,0,1008,1036,"Collie","m","no",18
+"255","subj.12","end_IP_cube","cube_low",1,"reversed","cube",1,0,1008,1036,"Collie","m","no",18
+"256","subj.12","end_IP_cube","cube_human",2,"reversed","cube",1,0,992,1007,"Collie","m","no",18
+"257","subj.12","end_IP_cube","cube_up",2,"reversed","cube",1,0,992,1007,"Collie","m","no",18
+"258","subj.12","end_IP_cube","cube_low",2,"reversed","cube",1,0,992,1007,"Collie","m","no",18
+"259","subj.12","end_IP_cube","cube_human",3,"reversed","cube",1,0,1035,1035,"Collie","m","no",18
+"260","subj.12","end_IP_cube","cube_up",3,"reversed","cube",1,0,1035,1035,"Collie","m","no",18
+"261","subj.12","end_IP_cube","cube_low",3,"reversed","cube",1,0,1035,1035,"Collie","m","no",18
+"262","subj.12","end_IP_cube","cube_human",4,"reversed","cube",1,0,1036,1036,"Collie","m","no",18
+"263","subj.12","end_IP_cube","cube_up",4,"reversed","cube",1,0,1036,1036,"Collie","m","no",18
+"264","subj.12","end_IP_cube","cube_low",4,"reversed","cube",1,0,1036,1036,"Collie","m","no",18
+"265","subj.12","end_IP_cube","cube_human",1,"normal","cube",2,1036,1036,1036,"Collie","m","no",18
+"266","subj.12","end_IP_cube","cube_up",1,"normal","cube",2,0,1036,1036,"Collie","m","no",18
+"267","subj.12","end_IP_cube","cube_low",1,"normal","cube",2,0,1036,1036,"Collie","m","no",18
+"268","subj.12","end_IP_cube","cube_human",2,"normal","cube",2,0,1036,1036,"Collie","m","no",18
+"269","subj.12","end_IP_cube","cube_up",2,"normal","cube",2,0,1036,1036,"Collie","m","no",18
+"270","subj.12","end_IP_cube","cube_low",2,"normal","cube",2,0,1036,1036,"Collie","m","no",18
+"271","subj.12","end_IP_cube","cube_human",3,"normal","cube",2,1036,1036,1036,"Collie","m","no",18
+"272","subj.12","end_IP_cube","cube_up",3,"normal","cube",2,0,1036,1036,"Collie","m","no",18
+"273","subj.12","end_IP_cube","cube_low",3,"normal","cube",2,0,1036,1036,"Collie","m","no",18
+"274","subj.12","end_IP_cube","cube_human",4,"normal","cube",2,0,1020,1035,"Collie","m","no",18
+"275","subj.12","end_IP_cube","cube_up",4,"normal","cube",2,0,1020,1035,"Collie","m","no",18
+"276","subj.12","end_IP_cube","cube_low",4,"normal","cube",2,0,1020,1035,"Collie","m","no",18
+"277","subj.02","end_IP_cube","cube_human",1,"normal","cube",2,0,1036,1036,"Labrador Retriever","f","yes",34
+"278","subj.02","end_IP_cube","cube_up",1,"normal","cube",2,0,1036,1036,"Labrador Retriever","f","yes",34
+"279","subj.02","end_IP_cube","cube_low",1,"normal","cube",2,1036,1036,1036,"Labrador Retriever","f","yes",34
+"280","subj.02","end_IP_cube","cube_human",2,"normal","cube",2,0,1037,1037,"Labrador Retriever","f","yes",34
+"281","subj.02","end_IP_cube","cube_up",2,"normal","cube",2,0,1037,1037,"Labrador Retriever","f","yes",34
+"282","subj.02","end_IP_cube","cube_low",2,"normal","cube",2,0,1037,1037,"Labrador Retriever","f","yes",34
+"283","subj.02","end_IP_cube","cube_human",3,"normal","cube",2,0,1014,1035,"Labrador Retriever","f","yes",34
+"284","subj.02","end_IP_cube","cube_up",3,"normal","cube",2,0,1014,1035,"Labrador Retriever","f","yes",34
+"285","subj.02","end_IP_cube","cube_low",3,"normal","cube",2,552,1014,1035,"Labrador Retriever","f","yes",34
+"286","subj.02","end_IP_cube","cube_human",4,"normal","cube",2,0,1035,1035,"Labrador Retriever","f","yes",34
+"287","subj.02","end_IP_cube","cube_up",4,"normal","cube",2,0,1035,1035,"Labrador Retriever","f","yes",34
+"288","subj.02","end_IP_cube","cube_low",4,"normal","cube",2,0,1035,1035,"Labrador Retriever","f","yes",34
+"289","subj.13","end_IP_cube","cube_human",1,"normal","cube",1,958,958,1037,"Border Collie","f","no",16
+"290","subj.13","end_IP_cube","cube_up",1,"normal","cube",1,0,958,1037,"Border Collie","f","no",16
+"291","subj.13","end_IP_cube","cube_low",1,"normal","cube",1,0,958,1037,"Border Collie","f","no",16
+"292","subj.13","end_IP_cube","cube_human",2,"normal","cube",1,639,966,1035,"Border Collie","f","no",16
+"293","subj.13","end_IP_cube","cube_up",2,"normal","cube",1,327,966,1035,"Border Collie","f","no",16
+"294","subj.13","end_IP_cube","cube_low",2,"normal","cube",1,0,966,1035,"Border Collie","f","no",16
+"295","subj.13","end_IP_cube","cube_human",3,"normal","cube",1,0,1036,1036,"Border Collie","f","no",16
+"296","subj.13","end_IP_cube","cube_up",3,"normal","cube",1,0,1036,1036,"Border Collie","f","no",16
+"297","subj.13","end_IP_cube","cube_low",3,"normal","cube",1,0,1036,1036,"Border Collie","f","no",16
+"298","subj.13","end_IP_cube","cube_human",4,"normal","cube",1,0,895,1035,"Border Collie","f","no",16
+"299","subj.13","end_IP_cube","cube_up",4,"normal","cube",1,0,895,1035,"Border Collie","f","no",16
+"300","subj.13","end_IP_cube","cube_low",4,"normal","cube",1,0,895,1035,"Border Collie","f","no",16
+"301","subj.13","end_IP_cube","cube_human",1,"reversed","cube",2,179,937,1007,"Border Collie","f","no",16
+"302","subj.13","end_IP_cube","cube_up",1,"reversed","cube",2,0,937,1007,"Border Collie","f","no",16
+"303","subj.13","end_IP_cube","cube_low",1,"reversed","cube",2,0,937,1007,"Border Collie","f","no",16
+"304","subj.13","end_IP_cube","cube_human",2,"reversed","cube",2,0,983,1008,"Border Collie","f","no",16
+"305","subj.13","end_IP_cube","cube_up",2,"reversed","cube",2,133,983,1008,"Border Collie","f","no",16
+"306","subj.13","end_IP_cube","cube_low",2,"reversed","cube",2,0,983,1008,"Border Collie","f","no",16
+"307","subj.13","end_IP_cube","cube_human",3,"reversed","cube",2,0,931,1035,"Border Collie","f","no",16
+"308","subj.13","end_IP_cube","cube_up",3,"reversed","cube",2,6,931,1035,"Border Collie","f","no",16
+"309","subj.13","end_IP_cube","cube_low",3,"reversed","cube",2,0,931,1035,"Border Collie","f","no",16
+"310","subj.13","end_IP_cube","cube_human",4,"reversed","cube",2,0,1006,1006,"Border Collie","f","no",16
+"311","subj.13","end_IP_cube","cube_up",4,"reversed","cube",2,0,1006,1006,"Border Collie","f","no",16
+"312","subj.13","end_IP_cube","cube_low",4,"reversed","cube",2,0,1006,1006,"Border Collie","f","no",16
+"313","subj.14","end_IP_cube","cube_human",1,"reversed","cube",1,0,0,0,"Mix","m","yes",62
+"314","subj.14","end_IP_cube","cube_up",1,"reversed","cube",1,0,0,0,"Mix","m","yes",62
+"315","subj.14","end_IP_cube","cube_low",1,"reversed","cube",1,0,0,0,"Mix","m","yes",62
+"316","subj.14","end_IP_cube","cube_human",2,"reversed","cube",1,520,988,1035,"Mix","m","yes",62
+"317","subj.14","end_IP_cube","cube_up",2,"reversed","cube",1,0,988,1035,"Mix","m","yes",62
+"318","subj.14","end_IP_cube","cube_low",2,"reversed","cube",1,0,988,1035,"Mix","m","yes",62
+"319","subj.14","end_IP_cube","cube_human",3,"reversed","cube",1,0,993,1036,"Mix","m","yes",62
+"320","subj.14","end_IP_cube","cube_up",3,"reversed","cube",1,0,993,1036,"Mix","m","yes",62
+"321","subj.14","end_IP_cube","cube_low",3,"reversed","cube",1,0,993,1036,"Mix","m","yes",62
+"322","subj.14","end_IP_cube","cube_human",4,"reversed","cube",1,0,808,1035,"Mix","m","yes",62
+"323","subj.14","end_IP_cube","cube_up",4,"reversed","cube",1,0,808,1035,"Mix","m","yes",62
+"324","subj.14","end_IP_cube","cube_low",4,"reversed","cube",1,0,808,1035,"Mix","m","yes",62
+"325","subj.14","end_IP_cube","cube_human",1,"normal","cube",2,0,834,1035,"Mix","m","yes",62
+"326","subj.14","end_IP_cube","cube_up",1,"normal","cube",2,0,834,1035,"Mix","m","yes",62
+"327","subj.14","end_IP_cube","cube_low",1,"normal","cube",2,525,834,1035,"Mix","m","yes",62
+"328","subj.14","end_IP_cube","cube_human",2,"normal","cube",2,0,1035,1036,"Mix","m","yes",62
+"329","subj.14","end_IP_cube","cube_up",2,"normal","cube",2,0,1035,1036,"Mix","m","yes",62
+"330","subj.14","end_IP_cube","cube_low",2,"normal","cube",2,0,1035,1036,"Mix","m","yes",62
+"331","subj.14","end_IP_cube","cube_human",3,"normal","cube",2,0,930,1035,"Mix","m","yes",62
+"332","subj.14","end_IP_cube","cube_up",3,"normal","cube",2,0,930,1035,"Mix","m","yes",62
+"333","subj.14","end_IP_cube","cube_low",3,"normal","cube",2,478,930,1035,"Mix","m","yes",62
+"334","subj.14","end_IP_cube","cube_human",4,"normal","cube",2,0,1036,1036,"Mix","m","yes",62
+"335","subj.14","end_IP_cube","cube_up",4,"normal","cube",2,0,1036,1036,"Mix","m","yes",62
+"336","subj.14","end_IP_cube","cube_low",4,"normal","cube",2,0,1036,1036,"Mix","m","yes",62
