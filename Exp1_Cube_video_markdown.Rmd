@@ -38,9 +38,15 @@ library(cowplot)
 ```
 
 
+
+## Download sample report (>100MB)
+```{r eval=FALSE}
+library(piggyback)
+pb_download("reversed_videos_sample_data_anonymised.csv", repo = "cvoelter/dog_animacy_perception", dest = "./data")
+```
+
+
 ## Loading data
-
-
 ```{r}
 sample.data<-read.csv(file = "data/reversed_videos_sample_data_anonymised.csv")%>%
   filter(object== "cube")

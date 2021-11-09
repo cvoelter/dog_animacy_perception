@@ -6,7 +6,6 @@ output:
   pdf_document: default
 ---
 
-
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 
@@ -34,6 +33,12 @@ col3 <- 'indianred'
 library(cowplot)
 
 #load("reversed_videos_rope_gamm_workspace.RData")
+```
+
+### Download sample report (>100MB)
+```{r eval=FALSE}
+library(piggyback)
+pb_download("reversed_videos_sample_data_anonymised.csv", repo = "cvoelter/dog_animacy_perception", dest = "./data")
 ```
 
 

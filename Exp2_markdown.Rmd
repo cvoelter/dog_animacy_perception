@@ -41,7 +41,13 @@ library(cowplot)
 ```
 
 
-## Notes: 
+### Download sample report (>100MB)
+```{r eval=FALSE}
+library(piggyback)
+pb_download("variable_motion_sample_data_anonymised.csv", repo = "cvoelter/dog_animacy_perception", dest = "./data")
+```
+
+
 
 ### Loading data
 
