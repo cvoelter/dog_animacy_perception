@@ -19,6 +19,7 @@ library(lme4)
 library(naniar)
 library(gazer)
 library(zoo)
+library(arrow)
 
 ##GAMM
 library(itsadug)
@@ -34,21 +35,14 @@ col3 <- 'indianred'
 library(cowplot)
 
 
-#load("reversed_videos_ball_gamm_workspace.RData")
-```
-
-
-## Download sample report (>100MB)
-```{r eval=FALSE}
-library(piggyback)
-pb_download("reversed_videos_sample_data_anonymised.csv", repo = "cvoelter/dog_animacy_perception", dest = "./data")
+load("reversed_videos_ball_gamm_workspace.RData")
 ```
 
 
 ##Loading data
 `
 ```{r}
-sample.data<-read.csv(file = "data/reversed_videos_sample_data_anonymised.csv")%>%
+sample.data<-read_parquet(file = "data/reversed_videos_sample_data_anonymised.parquet")%>%
   filter(object== "ball")
 
 table(sample.data$subject, sample.data$condition_trial)
@@ -120,6 +114,37 @@ ggsave(artefact_check_t4, filename = "graphics/reversed_videos_ball_artefact_che
 ```
 
 
+* Plot group level raw data
+```{r}
+
+pupil.group.level.raw <- sample.data %>%
+      filter(!(subject=="subj.03" & trial==4), !(subject=="subj.14" & trial==4))%>%
+    mutate(condition=as.factor(condition))%>%
+  group_by(time.frame, condition) %>%
+  summarise(mean.pupil = mean(RIGHT_PUPIL_SIZE_no_blinks, na.rm = TRUE), sd.pupil= sd(RIGHT_PUPIL_SIZE_no_blinks, na.rm = TRUE), se.pupil = sd(RIGHT_PUPIL_SIZE_no_blinks, na.rm = TRUE) / sqrt(length(RIGHT_PUPIL_SIZE_no_blinks)))%>%
+  mutate(condition=fct_recode(condition, "Normal"="normal", "Reversed"="reversed"))%>%
+  droplevels()
+
+plot.reversed_videos_ball.pupil.raw <- ggplot(data = pupil.group.level.raw%>%filter(!is.na(condition)), aes(x = time.frame, y = mean.pupil)) +
+  ylab("Pupil size (arbitrary units)") +
+  xlab("Time (in ms)") +
+  geom_path(aes(x = time.frame, y = mean.pupil, color = condition), alpha = 0.6, size = 0.6) +
+  geom_ribbon(aes(ymin = mean.pupil - se.pupil, ymax = mean.pupil + se.pupil, fill = condition), alpha = 0.4) +
+    xlim(min.time, max.time) +
+    theme_bw()+
+  scale_color_manual(values=c("darkorange", "dodgerblue"))+
+  scale_fill_manual(values=c("darkorange", "dodgerblue"))+
+  theme(panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank(),
+        panel.grid.major.y = element_blank(),
+        panel.grid.minor.y = element_blank(),
+        legend.title = element_blank(), legend.position = c(0.15, 0.85), legend.text=element_text(size=12), 
+        legend.background = element_rect(fill = "transparent"))
+
+
+plot.reversed_videos_ball.pupil.raw
+
+```
 
 
 * Plot distribution of pupil sizes
@@ -141,11 +166,11 @@ exp.data.pupil.base <- sample.data %>%
 
 exp.data.pupil.processed <- sample.data %>%
   filter(time.frame < max.time) %>% 
-  select(subject, sex, time.frame, condition,  trial, condition_trial, RIGHT_GAZE_X_no_blinks, RIGHT_GAZE_Y_no_blinks, RIGHT_PUPIL_SIZE_no_blinks) %>%
+  select(subject, sex, time.frame, condition,  trial, session, condition_trial, RIGHT_GAZE_X_no_blinks, RIGHT_GAZE_Y_no_blinks, RIGHT_PUPIL_SIZE_no_blinks) %>%
   group_by(subject, sex, condition_trial, time.frame) %>%
   full_join(xx%>%select(time.frame)) %>% #add missing time.frames
   ungroup() %>%
-  group_by(subject, sex, condition_trial) %>%
+  group_by(subject, sex, session, condition_trial) %>%
   mutate(pupil.inter = na.approx(RIGHT_PUPIL_SIZE_no_blinks, na.rm = FALSE, maxgap = 500)) %>% #linear interpolation
   full_join(exp.data.pupil.base) %>% #add baseline data
   mutate(pupil.base.corrected = pupil.inter - median.base.pupil)%>% #subtractive baseline correction
@@ -156,8 +181,8 @@ exp.data.pupil.processed <- sample.data %>%
   mutate(bin_low=as.numeric(str_replace_all(bin_low, "\\[|\\]", "")))
   
 exp.data.pupil.processed.downsampled <- exp.data.pupil.processed %>%  
-  group_by(subject, sex, condition,  condition_trial,trial, bin_low)%>%
-  summarise(pupil.base.corrected.binned=median(pupil.base.corrected), Xgaze=mean(RIGHT_GAZE_X_no_blinks), Ygaze=mean(RIGHT_GAZE_Y_no_blinks)) #down sampling to 10hz using median values
+  group_by(subject, sex, condition,  condition_trial,trial,session,  bin_low)%>%
+  summarise(pupil.base.corrected.binned=median(pupil.base.corrected),pupil.raw.binned=median(pupil.inter), Xgaze=mean(RIGHT_GAZE_X_no_blinks), Ygaze=mean(RIGHT_GAZE_Y_no_blinks)) #down sampling to 10hz using median values
 ```
 
 
@@ -190,29 +215,30 @@ ggsave(plot_individual_interpolated, filename = "graphics/reversed_videos_ball_p
 exp.data.pupil.processed.downsampled$condition<-relevel(as.factor(exp.data.pupil.processed.downsampled$condition), "normal", "reversed")
 
 pupil.group.level <- exp.data.pupil.processed.downsampled %>%
-    filter(!(subject=="Hetti" & trial==4), !(subject=="Maylo" & trial==4))%>%
+    filter(!(subject=="subj.03" & trial==4), !(subject=="subj.14" & trial==4))%>%
     mutate(condition=as.factor(condition))%>%
   group_by(bin_low, condition) %>%
   summarise(mean.pupil.corrected.binned = mean(pupil.base.corrected.binned, na.rm = TRUE), sd.pupil.corrected.binned= sd(pupil.base.corrected.binned, na.rm = TRUE), se.pupil.corrected.binned = sd(pupil.base.corrected.binned, na.rm = TRUE) / sqrt(length(pupil.base.corrected.binned)))%>%
   mutate(condition=fct_recode(condition, "Normal"="normal", "Reversed"="reversed"))%>%
   droplevels()
 
-plot.reversed_videos_ball.pupil <- ggplot(data = pupil.group.level%>%filter(!is.na(condition)), aes(x = bin_low, y = mean.pupil.corrected.binned)) +
+plot.reversed_videos_ball.pupil <- ggplot(data = pupil.group.level %>% filter(!is.na(condition)), aes(x = bin_low, y = mean.pupil.corrected.binned)) +
   ylab("Pupil size") +
   xlab("Time (in ms)") +
-#   geom_vline(aes(xintercept=4000), lty=1, col="darkgrey")+
- #  geom_vline(aes(xintercept=5000), lty=2, col="darkgrey")+
   geom_path(aes(x = bin_low, y = mean.pupil.corrected.binned, color = condition), alpha = 0.6, size = 0.6) +
   geom_ribbon(aes(ymin = mean.pupil.corrected.binned - se.pupil.corrected.binned, ymax = mean.pupil.corrected.binned + se.pupil.corrected.binned, fill = condition), alpha = 0.4) +
-    xlim(min.time, max.time) +
-    theme_bw()+
-  scale_color_manual(values=c("darkorange", "dodgerblue"))+
-  scale_fill_manual(values=c("darkorange", "dodgerblue"))+
-  theme(panel.grid.major.x = element_blank(),
-        panel.grid.minor.x = element_blank(),
-        panel.grid.major.y = element_blank(),
-        panel.grid.minor.y = element_blank(),
-        legend.title = element_blank(), legend.position = c(0.2, 0.8), legend.text=element_text(size=12))
+  xlim(min.time, max.time) +
+  theme_bw() +
+  scale_color_manual(values = c("darkorange", "dodgerblue")) +
+  scale_fill_manual(values = c("darkorange", "dodgerblue")) +
+  theme(
+    panel.grid.major.x = element_blank(),
+    panel.grid.minor.x = element_blank(),
+    panel.grid.major.y = element_blank(),
+    panel.grid.minor.y = element_blank(),
+    legend.title = element_blank(), legend.position = c(0.15, 0.85), legend.text = element_text(size = 12),
+    legend.background = element_rect(fill = "transparent")
+  )
 
 
 plot.reversed_videos_ball.pupil
@@ -220,39 +246,6 @@ plot.reversed_videos_ball.pupil
 ggsave(plot.reversed_videos_ball.pupil, filename = "graphics/reversed_videos_ball_pupil_base_corrected.png", height = 6, width = 8, scale = 0.6)
 ```
 
-
-* Plot group level data by trial number
-```{r}
-
-pupil.group.level.trial <- exp.data.pupil.processed.downsampled %>%
-  mutate(condition=as.factor(condition))%>%
-  group_by(bin_low, condition, trial) %>%
-  summarise(mean.pupil.corrected.binned = mean(pupil.base.corrected.binned, na.rm = TRUE), sd.pupil.corrected.binned= sd(pupil.base.corrected.binned, na.rm = TRUE), se.pupil.corrected.binned = sd(pupil.base.corrected.binned, na.rm = TRUE) / sqrt(length(pupil.base.corrected.binned)))%>%
-  mutate(condition=fct_recode(condition, "Normal"="normal", "Reversed"="reversed"))%>%
-  droplevels()
-
-plot.reversed_videos_ball.pupil.trial1 <- ggplot(data = pupil.group.level.trial%>%filter(!is.na(condition), trial==1), aes(x = bin_low, y = mean.pupil.corrected.binned)) +
-  ylab("Pupil size") +
-  xlab("Time (in ms)") +
-  #geom_vline(aes(xintercept=4000), lty=1, col="darkgrey")+
-   #geom_vline(aes(xintercept=5000), lty=2, col="darkgrey")+
-      geom_path(aes(x = bin_low, y = mean.pupil.corrected.binned, color = condition), alpha = 0.5, size = 0.5) +
-  geom_ribbon(aes(ymin = mean.pupil.corrected.binned - se.pupil.corrected.binned, ymax = mean.pupil.corrected.binned + se.pupil.corrected.binned, fill = condition), alpha = 0.5) +
-    xlim(min.time, max.time) +
-    theme_bw()+
-  scale_color_manual(values=c("darkorange", "dodgerblue"))+
-  scale_fill_manual(values=c("darkorange", "dodgerblue"))+
-  theme(panel.grid.major.x = element_blank(),
-        panel.grid.minor.x = element_blank(),
-        panel.grid.major.y = element_blank(),
-        panel.grid.minor.y = element_blank(),
-        legend.title = element_blank(), legend.position = c(0.8, 0.12), legend.text=element_text(size=12))
-
-
-plot.reversed_videos_ball.pupil.trial1
-
-ggsave(plot.reversed_videos_ball.pupil.trial1, filename = "graphics/reversed_videos_ball_pupil_base_corrected_trial1.png", height = 6, width = 8, scale = 0.6)
-```
 
 ```{r}
 save.image(file = "reversed_videos_ball_gamm_workspace.RData")
@@ -284,7 +277,7 @@ bp <- sortBoxplot(exp.data.pupil.processed.downsampled$pupil.base.corrected.binn
 * select interest period
 ```{r}
 dat <- exp.data.pupil.processed.downsampled%>%
-    filter(!(subject=="Hetti" & trial==4), !(subject=="Maylo" & trial==4))%>% #missing data in one condition in the last trial
+    filter(!(subject=="subj.03" & trial==4), !(subject=="subj.14" & trial==4))%>% #missing data in one condition in the last trial
   filter(bin_low >= baseline.end & bin_low <= (max.time))%>% #select interest period
   rename(pupil_base="pupil.base.corrected.binned", time="bin_low")%>%
   arrange(subject, condition, trial, time)%>%#order dataframe
@@ -293,19 +286,48 @@ dat$condition<-as.factor(dat$condition)
 dat$subject<-as.factor(dat$subject)
 ```
 
-#### taking autocorrelation into account
+* Plot individiual variability in pupil size
+
+```{r}
+pupil_size_boxplot<-ggplot(dat)+
+  geom_boxplot(aes(x= reorder(subject, pupil.raw.binned, FUN = median), y=pupil.raw.binned))+
+  ylab("Pupil size (arbitrary units)")+
+  xlab("")+
+  theme_classic()+ 
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+
+
+pupil_size_gaze_position_plot<-ggplot(dat)+
+  geom_point(aes(x= Xgaze, y=Ygaze, color=pupil_base), alpha=0.15)+
+  ylab("Y coordinates")+
+  xlab("X coordinates")+
+  theme_bw()+
+  xlim(0,1024)+
+  ylim(768, 0)+
+  scale_colour_gradient(name= "Pupil size", low = "yellow", high = "darkblue")
+library(cowplot)
+pg_s1<-plot_grid(pupil_size_boxplot, pupil_size_gaze_position_plot, rel_widths=c(1, 1.2), labels=c("B", "C"))
+pg_s2<-plot_grid(plot.reversed_videos_ball.pupil.raw, pg_s1, nrow=2, rel_heights=c(1.5,1), labels=c("A", ""))
+
+ggsave("graphics/reversed_videos_ball_video_pupil_size_sup_info.png", width=11, height=11, scale=0.7)
+
+```
+
+
+
+#### Fitting GAMM
 
 ```{r}
 # Defining events (time series):
 dat$Event <- interaction(dat$subject, dat$condition_trial, drop=TRUE)
 
-m2 <- bam(pupil_base ~ condition + s(time, k=20)+ s(time, by=condition, k=20) 
+m2 <- bam(pupil_base ~ condition + session + s(time, k=20)+ s(time, by=condition, k=20) 
           + s(Xgaze, Ygaze)
           + s(time, Event, bs='fs', m=1)
           , data=dat, discrete=TRUE, nthreads=40, method="ML")
 
 
-m2.null <- bam(pupil_base ~ s(time, k=20)+ 
+m2.null <- bam(pupil_base ~ session + s(time, k=20)+ 
           + s(Xgaze, Ygaze)
           + s(time, Event, bs='fs', m=1)
           , data=dat, discrete=TRUE, nthreads=40, method="ML")
@@ -337,9 +359,9 @@ plot_diff(m2, view="time",
             col=col2, hide.label = TRUE, plot = TRUE)#col.diff=alpha(1,f=0),v0=1800,
 
 plot_diff_no_plot<-plot_diff(m2, view="time", 
-          comp=list(condition=c("normal", "reversed")), rm.ranef=TRUE, main="Normal - Reversed", 
-          las=1, ylab="Est. difference in pupil size", 
-            col=col2, hide.label = TRUE, plot = FALSE)
+          comp=list(condition=c("normal", "reversed")), rm.ranef=TRUE, hide.label = TRUE, plot = FALSE)
+
+x <- find_difference(plot_diff_no_plot$est, plot_diff_no_plot$CI, f=1.0, xVals=plot_diff_no_plot$time)
 
 plot_diff_m2_gg<-ggplot(data=plot_diff_no_plot, aes(x=time, y=est))+
   geom_hline(yintercept = 0)+
@@ -350,25 +372,28 @@ plot_diff_m2_gg<-ggplot(data=plot_diff_no_plot, aes(x=time, y=est))+
     theme(panel.grid.major.x = element_blank(),
         panel.grid.minor.x = element_blank(),
         panel.grid.major.y = element_blank(),
-        panel.grid.minor.y = element_blank())
+        panel.grid.minor.y = element_blank())+
+  geom_vline(xintercept = x$start[1], lty=3, color="red")+
+  geom_vline(xintercept = x$end[1], lty=3, color="red")+
+  geom_segment(aes(x=x$start[1], xend=x$end[1], y=0, yend=0), color="red", lwd=1.1)+
+  geom_vline(xintercept = x$start[2], lty=3, color="red")+
+  geom_vline(xintercept = x$end[2], lty=3, color="red")+
+  geom_segment(aes(x=x$start[2], xend=x$end[2], y=0, yend=0), color="red", lwd=1.1)
 
 ggsave(plot_diff_m2_gg, filename = "graphics/plot_reversed_videos_ball_m2_diffcurve.png", width=6, height=5, scale=0.6)
 ```
 
-```{r}
-library(cowplot)
-pg.1<-cowplot::plot_grid(plot.reversed_videos_ball.pupil,plot_diff_m2_gg, nrow=1,ncol=2, rel.widths=c(1,1),labels = c("D", "E"))
-```
+
 
 * plotting partial effects
 ```{r}
-png("graphics/plot_reversed_videos_ball_m2_paterial_effect.png", width=20, height=16, units="cm", res=300)
+png("graphics/plot_reversed_videos_ball_m2_paterial_effect.png", width=20, height=18, units="cm", res=300)
 plot(m2, pages = 1, all.terms = TRUE, residuals = TRUE, rug=FALSE, pch = 1, cex = 0.5, seWithMean = TRUE, shade = TRUE, shade.col = "lightblue")
 dev.off()
 
 library(mgcViz)
 b <- getViz(m2)
-png("graphics/plot_reversed_videos_ball_m2_paterial_effect2.png", width=20, height=16, units="cm", res=300)
+png("graphics/plot_reversed_videos_ball_m2_paterial_effect2.png", width=20, height=18, units="cm", res=300)
 p1<-plot(b, allTerms = T)+theme_classic() + labs(title = NULL)
 print(p1, pages = 1 )
 dev.off()
@@ -378,17 +403,25 @@ dev.off()
 
 * Summed effects
 ```{r}
-
+png("graphics/plot_reversed_videos_ball_m2_summed_effect.png", width=14, height=10, units="cm", res=600)
+#
 plot_smooth(m2, view="time", cond=list(condition="normal"), rm.ranef=TRUE,
-  v0=0, col=col2, lwd=2, lty=6, rug=FALSE, se=1.96,
-  main="Estimated effects", ylab="Pupil (baselined)", las=1,
-  ylim=c(-1000,1000))
+  v0=0, col="darkorange", lwd=2, lty=6, rug=FALSE, se=1.96,
+  main="", ylab="Pupil size (baseline corrected)", las=1,
+  ylim=c(-1000,1000), xlim=c(0, 5000))
 
 plot_smooth(m2, view="time", cond=list(condition="reversed"), rm.ranef=TRUE,
-  v0=0, col=col2, lwd=2, lty=6, rug=FALSE, se=1.96,
-  main="Estimated effects", ylab="Pupil (baselined)", las=1,
-  ylim=c(-1000,1000))
+  v0=0, col="dodgerblue", lwd=2, lty=6, rug=FALSE, se=1.96, las=1,add=TRUE,
+  ylim=c(-1000,1000), xlim=c(0, 5000))
 
+# legend
+legend('bottomright',
+       legend=c('Normal', "Reversed"),
+       lty=rep(c(1,6), each=2), lwd=rep(c(1,2), each=2),
+       col=rep(c("darkorange", "dodgerblue"), 2), seg.len=1.5,
+       bty='n', cex=.85, ncol=2, xpd=TRUE)
+
+dev.off()
 
 
 ```
@@ -485,16 +518,18 @@ ggsave(plot_reversed_videos_ball_gaze_vertical,filename="graphics/plot_reversed_
 con.labs <- c("Normal", "Reversed")
 names(con.labs) <- c(levels(as.factor(gaze_plot_data$condition)))
 
+gaze_plot_data$x <- rep("x", nrow(gaze_plot_data))
+gaze_plot_data$y <- rep("y", nrow(gaze_plot_data))
 
 
 plot_reversed_videos_ball_gaze_horizontal<-ggplot(data = gaze_plot_data%>%filter(!is.na(condition)), aes(x = time.frame, y = mean.x)) +
       facet_wrap(~condition,labeller=labeller(condition=con.labs)) +
   #moving ball:
   geom_ribbon(data = gaze_plot_data %>% filter(condition=="reversed"), aes(x = time.frame, ymin = x_l_reversed, ymax = x_r_reversed), fill = "darkblue", alpha = 0.8) +
-    geom_ribbon(data = gaze_plot_data %>% filter(condition=="normal"), aes(x = time.frame, ymin = x_l_normal, ymax = x_r_normal), fill = "darkblue", alpha = 0.8) +
+    geom_ribbon(data = gaze_plot_data %>% filter(condition=="normal"), aes(x = time.frame, ymin = x_l_normal, ymax = x_r_normal, fill = condition), alpha = 0.8) +
 # gaze data:
-    geom_point(alpha = 0.1, size=0.5) +
-  geom_path(aes(y = median.x), size = 1.2) +
+    geom_point(aes(fill = x), alpha = 0.1, size=0.5) +
+  geom_path(aes(y = median.x, fill = y), size = 1.2) +
    geom_ribbon(aes(ymin = mean.x - se.x, ymax = mean.x + se.x), alpha = 0.5)+
   ylab("Horizontal coordinates (in px)") +
   xlab("Time (in ms)") +
@@ -504,7 +539,17 @@ plot_reversed_videos_ball_gaze_horizontal<-ggplot(data = gaze_plot_data%>%filter
         panel.grid.minor.x = element_blank(),
         panel.grid.major.y = element_blank(),
         panel.grid.minor.y = element_blank(),
-        strip.text.x = element_text(size = 12))
+        strip.text.x = element_text(size = 12),
+    legend.position = c(0.9, 0.85),
+    legend.key = element_blank(),
+    legend.background = element_rect(fill = "transparent"))+
+  scale_fill_manual(
+    values = c("darkblue", "#5a5e63", "black"),
+    name = "",
+    breaks = c("normal", "x", "y"),
+    labels = c("Ball", "Mean ± SE", "Median")
+  )
+
 
 plot_reversed_videos_ball_gaze_horizontal
 ggsave(plot_reversed_videos_ball_gaze_horizontal,filename="graphics/plot_reversed_videos_ball_horizontal_gaze.png", height = 5, width = 8, scale = 0.7)
@@ -603,6 +648,9 @@ ggsave(plot_end_ball, filename = "graphics/plot_end_pos_ball.png", height=5, wid
 
 
 ```{r}
+library(cowplot)
+pg.1<-cowplot::plot_grid(plot.reversed_videos_ball.pupil,plot_diff_m2_gg, nrow=1,ncol=2, rel.widths=c(1,1),labels = c("D", "E"))
+
 pg.2<-plot_grid(plot_reversed_videos_ball_gaze_horizontal, plot_end_ball,  ncol=2,nrow=1, rel_widths = c(2,1), labels = c("B","C") )
 
 pg.reversed_video_ball.pics<-plot_grid(ball_pics, pg.2, pg.1, ncol=1, rel_heights = c(0.6,0.75 ,  0.75), labels = c("A", "",""))

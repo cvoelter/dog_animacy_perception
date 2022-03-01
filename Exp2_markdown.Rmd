@@ -18,11 +18,12 @@ library(lme4)
 library(naniar)
 library(gazer)
 library(zoo)
-source("../../../../R scripts/Roger/diagnostic_fcns.r")
-source("../../../../R scripts/Roger/glmm_stability.r")
-source("../../../../R scripts/Roger/glmmTMB_stability.r")
-source("../../../../R scripts/Roger/boot_glmm.r")
-source("../../../../R scripts/Roger/drop1_para.r")
+library(arrow)
+source("functions/diagnostic_fcns.r")
+source("functions/glmm_stability.r")
+source("functions/glmmTMB_stability.r")
+source("functions/boot_glmm.r")
+source("functions/drop1_para.r")
 
 ##GAMM
 library(itsadug)
@@ -37,22 +38,13 @@ col2 <- 'black'
 col3 <- 'indianred'
 library(cowplot)
 
-#load("animacy_gamm_workspace3.RData")
+load("Exp2_gamm_workspace.RData")
 ```
-
-
-### Download sample report (>100MB)
-```{r eval=FALSE}
-library(piggyback)
-pb_download("variable_motion_sample_data_anonymised.csv", repo = "cvoelter/dog_animacy_perception", dest = "./data")
-```
-
-
 
 ### Loading data
 
 ```{r}
-sample.data<-read.csv(file = "data/variable_motion_sample_data_anonymised.csv")
+sample.data<-read_parquet(file = "data/variable_motion_sample_data_anonymised.parquet")
 ```
 
 ## Pupil size preprocessing
@@ -68,7 +60,7 @@ baseline.end<-1000
 ```
 
 *Plot raw data
-```{r}
+```{r eval=FALSE}
 raw.pupil_trial4<-ggplot(data = sample.data, aes(x = time.frame, y = RIGHT_PUPIL_SIZE)) +
   ylab("Pupil size") +
   xlab("Time (in ms)") +
@@ -92,6 +84,8 @@ ggsave(raw.pupil_trial4, filename = "graphics/Exp2_pupil_size_raw.png", width=20
 ```{r}
 sample.data<-sample.data%>%
         mutate(RIGHT_PUPIL_SIZE_no_blinks=extend_blinks(RIGHT_PUPIL_SIZE,  hz=1000, fillback=100, fillforward=100), RIGHT_GAZE_X_no_blinks=extend_blinks(RIGHT_GAZE_X,  hz=1000, fillback=100, fillforward=100), RIGHT_GAZE_Y_no_blinks=extend_blinks(RIGHT_GAZE_Y,  hz=1000, fillback=100, fillforward=100))#Extends blinks
+
+table(sample.data$subject, sample.data$session)
 ```
 
 
@@ -117,6 +111,51 @@ ggsave(artefact_check_t4, filename = "graphics/Exp2_contact_artefact_check.png",
 ```
 
 
+* Plot group level raw data
+```{r}
+pupil.group.level.raw <- sample.data %>%
+    mutate(condition=as.factor(condition), stimulus=as.factor(stimulus), motion=as.factor(motion))%>%
+  group_by(time.frame, condition, stimulus, motion) %>%
+  summarise(mean.pupil = mean(RIGHT_PUPIL_SIZE_no_blinks, na.rm = TRUE), sd.pupil= sd(RIGHT_PUPIL_SIZE_no_blinks, na.rm = TRUE), se.pupil = sd(RIGHT_PUPIL_SIZE_no_blinks, na.rm = TRUE) / sqrt(length(RIGHT_PUPIL_SIZE_no_blinks)))%>%
+  mutate(condition=fct_recode(condition, "Ball-constant"="B-C", "Ball-variable"="B-V", "Fur-constant"="F-C", "Fur-variable"="F-V"))%>%
+    mutate(motion=fct_recode(motion, "Constant"="C", "Variable"="V"), stimulus=fct_recode(stimulus, "Fur"="F", "Ball"="B"))%>%
+  droplevels()
+
+plot.exp2.pupil.raw <- ggplot(data = pupil.group.level.raw%>%filter(!is.na(condition)), aes(x = time.frame, y = mean.pupil)) +
+  facet_wrap(~stimulus)+
+  ylab("Pupil size") +
+  xlab("Time (in ms)") +
+   geom_vline(aes(xintercept=4000), lty=1, col="darkgrey")+
+   geom_vline(aes(xintercept=5000), lty=2, col="darkgrey", alpha=0.5)+
+     geom_vline(aes(xintercept=6000), lty=2, col="darkgrey", alpha=0.5)+
+     geom_vline(aes(xintercept=12320), lty=2, col="darkgrey", alpha=0.5)+
+     geom_vline(aes(xintercept=12740), lty=2, col="darkgrey", alpha=0.5)+
+       geom_vline(aes(xintercept=13990), lty=2, col="darkgrey", alpha=0.5)+
+     geom_vline(aes(xintercept=14600), lty=2, col="darkgrey", alpha=0.5)+
+         geom_vline(aes(xintercept=8700), lty=2, col="darkgrey", alpha=0.5)+
+     geom_vline(aes(xintercept=8870), lty=2, col="darkgrey", alpha=0.5)+
+      geom_vline(aes(xintercept=8000), lty=1, col="darkgrey")+
+    geom_vline(aes(xintercept=12000), lty=1, col="darkgrey")+
+      geom_vline(aes(xintercept=16000), lty=1, col="darkgrey")+
+  geom_path(aes(x = time.frame, y = mean.pupil, color = motion), alpha = 0.6, size = 0.6) +
+  geom_ribbon(aes(ymin = mean.pupil - se.pupil, ymax = mean.pupil + se.pupil, fill = motion), alpha = 0.4) +
+    xlim(0, 19000) +
+    theme_bw()+
+  scale_color_manual(values=c("darkorange", "dodgerblue" ))+
+  scale_fill_manual(values=c("darkorange", "dodgerblue" ))+
+  theme(panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank(),
+        panel.grid.major.y = element_blank(),
+        panel.grid.minor.y = element_blank(),
+        legend.title = element_blank(), legend.position = c(0.09, 0.90), legend.text=element_text(size=12),
+        strip.text.x = element_text(size = 12), 
+        legend.background = element_rect(fill = "transparent"))
+
+
+plot.exp2.pupil.raw
+
+```
+
 * Plot distribution of pupil sizes
 ```{r eval=FALSE}
 puphist <- ggplot(sample.data, aes(x = RIGHT_PUPIL_SIZE_no_blinks)) + geom_histogram(aes(y = ..count..), 
@@ -136,7 +175,7 @@ exp.data.pupil.base <- sample.data %>%
 
 exp.data.pupil.processed <- sample.data %>%
   filter(time.frame < max.time) %>% 
-  select(subject, sex, time.frame, condition, stimulus, motion, trial, condition_trial, RIGHT_GAZE_X_no_blinks, RIGHT_GAZE_Y_no_blinks, RIGHT_PUPIL_SIZE_no_blinks) %>%
+  select(subject, sex, time.frame, condition, stimulus, motion, session, trial, condition_trial, RIGHT_GAZE_X_no_blinks, RIGHT_GAZE_Y_no_blinks, RIGHT_PUPIL_SIZE_no_blinks) %>%
   group_by(subject, sex, condition_trial, time.frame) %>%
   full_join(xx%>%select(time.frame)) %>% #add missing time.frames
   ungroup() %>%
@@ -151,8 +190,8 @@ exp.data.pupil.processed <- sample.data %>%
   mutate(bin_low=as.numeric(str_replace_all(bin_low, "\\[|\\]", "")))
   
 exp.data.pupil.processed.downsampled <- exp.data.pupil.processed %>%  
-  group_by(subject, sex, condition, stimulus, motion, condition_trial,trial, bin_low)%>%
-  summarise(pupil.base.corrected.binned=median(pupil.base.corrected), Xgaze=mean(RIGHT_GAZE_X_no_blinks), Ygaze=mean(RIGHT_GAZE_Y_no_blinks)) #down sampling to 10hz using median values
+  group_by(subject, sex, condition, stimulus, motion, condition_trial, session, trial, bin_low)%>%
+  summarise(pupil.base.corrected.binned=median(pupil.base.corrected),pupil.raw.binned=median(pupil.inter), Xgaze=mean(RIGHT_GAZE_X_no_blinks), Ygaze=mean(RIGHT_GAZE_Y_no_blinks)) #down sampling to 10hz using median values
 ```
 
 
@@ -219,7 +258,8 @@ plot.animacy.pupil <- ggplot(data = pupil.group.level%>%filter(!is.na(condition)
         panel.grid.major.y = element_blank(),
         panel.grid.minor.y = element_blank(),
         legend.title = element_blank(), legend.position = c(0.1, 0.85), legend.text=element_text(size=12),
-        strip.text.x = element_text(size = 12))
+        strip.text.x = element_text(size = 12), 
+        legend.background = element_rect(fill = "transparent"))
 
 plot.animacy.pupil
 
@@ -314,6 +354,32 @@ dat$condition<-as.factor(dat$condition)
 dat$subject<-as.factor(dat$subject)
 ```
 
+* Plot individiual variability in pupil size
+
+```{r}
+pupil_size_boxplot<-ggplot(dat%>%filter(!is.na(subject), !is.na(pupil.raw.binned)))+
+  geom_boxplot(aes(x= reorder(subject, pupil.raw.binned, FUN = median), y=pupil.raw.binned))+
+  ylab("Pupil size (arbitrary units)")+
+  xlab("")+
+  theme_classic()+ 
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+
+
+pupil_size_gaze_position_plot<-ggplot(dat)+
+  geom_point(aes(x= Xgaze, y=Ygaze, color=pupil_base), alpha=0.05)+
+  ylab("Y coordinates")+
+  xlab("X coordinates")+
+  theme_bw()+
+  xlim(0,1024)+
+  ylim(768, 0)+
+  scale_colour_gradient(name= "Pupil size", low = "yellow", high = "darkblue")
+library(cowplot)
+pg_s1<-plot_grid(pupil_size_boxplot, pupil_size_gaze_position_plot, rel_widths=c(1, 1.2), labels=c("B", "C"))
+pg_s2<-plot_grid(plot.exp2.pupil.raw, pg_s1, nrow=2, rel_heights=c(1.5,1), labels=c("A", ""))
+
+ggsave("graphics/exp2_pupil_size_sup_info.png", width=11, height=11, scale=0.7)
+
+```
 
 ```{r}
 dat2 <- exp.data.pupil.processed.downsampled%>%
@@ -327,6 +393,8 @@ dat2$condition<-as.factor(dat2$condition)
 dat2$subject<-as.factor(dat2$subject)
 ```
 
+
+### Fit GAMM
 ```{r}
 # Defining events (time series):
 dat$Event <- interaction(dat$subject, dat$condition_trial, drop=TRUE)
@@ -334,14 +402,14 @@ dat$IsFur<- ifelse(dat$stimulus=="F",1,0)
 dat$IsVariable<- ifelse(dat$motion=="V",1,0)
 dat$IsFurVariable<- ifelse(dat$stimulus=="F",1,0)
 
-m2 <- bam(pupil_base ~ condition + s(time, k=20)+ s(time, by=condition, k=20) 
+m2 <- bam(pupil_base ~ condition + session +  s(time, k=20)+ s(time, by=condition, k=20) 
           + s(Xgaze, Ygaze)
           + s(time, Event, bs='fs', m=1)
           , data=dat, discrete=TRUE, nthreads=40, method="ML")
 
 save.image(file = "animacy_gamm_workspace.RData")
 
-m3 <- bam(pupil_base ~  s(time, k=20)+ s(time, by=IsFur, k=20) + s(time, by=IsVariable, k=20)+ s(time, by=IsFurVariable, k=20)
+m3 <- bam(pupil_base ~  session + s(time, k=20)+ s(time, by=IsFur, k=20) + s(time, by=IsVariable, k=20)+ s(time, by=IsFurVariable, k=20)
           + s(Xgaze, Ygaze)
           + s(time, Event, bs='fs', m=1)
           , data=dat, discrete=TRUE, nthreads=40, method="ML")
@@ -351,7 +419,7 @@ save.image(file = "animacy_gamm_workspace3.RData")
 
 
 ```{r}
-m2.null <- bam(pupil_base ~ s(time, k=20)+ 
+m2.null <- bam(pupil_base ~ session + s(time, k=20)+ 
           + s(Xgaze, Ygaze)
           + s(time, Event, bs='fs', m=1)
           , data=dat, discrete=TRUE, nthreads=40, method="ML")
@@ -402,61 +470,6 @@ plot_diff(m2, view="time",
           las=1, ylab="Est. difference in pupil size", 
             col=col2, hide.label = TRUE, plot = TRUE)#col.diff=alpha(1,f=0),v0=1800,
 
-plot_diff_nc_bs<-plot_diff(m2, view="time", 
-          comp=list(condition=c("nc", "bs")), rm.ranef=TRUE, main="Disappear - Reappear", 
-          las=1, ylab="Est. difference in pupil size", 
-            col=col2, hide.label = TRUE, plot = FALSE)
-
-plot_diff_nc_sb<-plot_diff(m2, view="time", 
-          comp=list(condition=c("nc", "sb")), rm.ranef=TRUE, main="Disappear - Reappear", 
-          las=1, ylab="Est. difference in pupil size", 
-            col=col2, hide.label = TRUE, plot = FALSE)
-
-plot_diff_bs_sb<-plot_diff(m2, view="time", 
-          comp=list(condition=c("bs", "sb")), rm.ranef=TRUE, main="Disappear - Reappear", 
-          las=1, ylab="Est. difference in pupil size", 
-            col=col2, hide.label = TRUE, plot = FALSE)
-
-
-plot_diff_m2_nc_bs<-ggplot(data=plot_diff_nc_bs, aes(x=time, y=est))+
-  geom_hline(yintercept = 0)+
-  geom_path(lty=2)+
-  geom_ribbon(aes(x=time, ymin=est-CI, ymax=est+CI), alpha=0.2)+
-  theme_bw()+
-  scale_x_continuous(name="Time (in ms)", breaks=c(3000, 4000, 5000, 6000))+ ylab("Est. difference in pupil size")+ggtitle("No change - Shrinking")+
-    theme(panel.grid.major.x = element_blank(),
-        panel.grid.minor.x = element_blank(),
-        panel.grid.major.y = element_blank(),
-        panel.grid.minor.y = element_blank())
-
-plot_diff_m2_nc_sb<-ggplot(data=plot_diff_nc_sb, aes(x=time, y=est))+
-  geom_hline(yintercept = 0)+
-  geom_path(lty=2)+
-  geom_ribbon(aes(x=time, ymin=est-CI, ymax=est+CI), alpha=0.2)+
-  theme_bw()+
-  scale_x_continuous(name="Time (in ms)", breaks=c(3000, 4000, 5000, 6000))+ ylab("Est. difference in pupil size")+ggtitle("No change - Expanding")+
-    theme(panel.grid.major.x = element_blank(),
-        panel.grid.minor.x = element_blank(),
-        panel.grid.major.y = element_blank(),
-        panel.grid.minor.y = element_blank())
-
-plot_diff_m2_bs_sb<-ggplot(data=plot_diff_bs_sb, aes(x=time, y=est))+
-  geom_hline(yintercept = 0)+
-  geom_path(lty=2)+
-  geom_ribbon(aes(x=time, ymin=est-CI, ymax=est+CI), alpha=0.2)+
-  theme_bw()+
-  scale_x_continuous(name="Time (in ms)", breaks=c(3000, 4000, 5000, 6000))+ ylab("Est. difference in pupil size")+ggtitle("Shrinking - Expanding")+
-    theme(panel.grid.major.x = element_blank(),
-        panel.grid.minor.x = element_blank(),
-        panel.grid.major.y = element_blank(),
-        panel.grid.minor.y = element_blank())
-
-library(cowplot)
-pg.diff<-plot_grid(plot_diff_m2_nc_bs, plot_diff_m2_nc_sb, plot_diff_m2_bs_sb, nrow=1, labels = c("A", "B", "C"))
-pg.diff
-ggsave(pg.diff, filename = "graphics/plot_diff_m2_size_constancy.png", width=15, height=5, scale=0.6)
-
-
 
 ```
 
@@ -479,23 +492,45 @@ dev.off()
 
 
 * Summed effects
+Ball stimulus
 ```{r}
+png("graphics/plot_reversed_videos_exp2_m2_summed_effect_ball.png", width=16, height=12, units="cm", res=600)
 
-plot_smooth(m3, view="time", cond=list(IsVariable=0), rm.ranef=TRUE,
-  v0=0, col=col2, lwd=2, lty=6, rug=FALSE, se=1.96,
-  main="Estimated effects", ylab="Pupil (baselined)", las=1,
-  ylim=c(-2000,2500))
-plot_smooth(m3, view="time", cond=list(IsVariable=1), rm.ranef=TRUE,
-  v0=0, col=col3, lwd=2, lty=6, rug=FALSE, add=TRUE, xpd=TRUE, se=1.96)
+plot_smooth(m2, view="time", cond=list(condition="B-C"), rm.ranef=TRUE,
+  v0=0, col="darkorange", lwd=2, lty=6, rug=FALSE, se=1.96,
+  main="Ball", ylab="Pupil size (baseline corrected)", las=1,
+  ylim=c(-500,3000), xlim=c(0, 20000))
+plot_smooth(m2, view="time", cond=list(condition="B-V"), rm.ranef=TRUE,
+  v0=0, col="dodgerblue", lwd=2, lty=6, rug=FALSE, add=TRUE, xpd=TRUE, se=1.96, ylim=c(-500,3000), xlim=c(0, 20000))
 
 
 # legend
 legend('bottomright',
        legend=c('Constant', "Variable"),
        lty=rep(c(1,6), each=2), lwd=rep(c(1,2), each=2),
-       col=rep(c(col2, col3), 2), seg.len=1.5,
+       col=rep(c("darkorange", "dodgerblue"), 2), seg.len=1.5,
        bty='n', cex=.85, ncol=2, xpd=TRUE)
+dev.off()
+```
+Fur ball:
+```{r}
+png("graphics/plot_reversed_videos_exp2_m2_summed_effect_fur.png", width=16, height=12, units="cm", res=600)
 
+plot_smooth(m2, view="time", cond=list(condition="F-C"), rm.ranef=TRUE,
+  v0=0, col="darkorange", lwd=2, lty=6, rug=FALSE, se=1.96,
+  main="Fur", ylab="Pupil size (baseline corrected)", las=1,
+  ylim=c(-500,3000), xlim=c(0, 20000))
+plot_smooth(m2, view="time", cond=list(condition="F-V"), rm.ranef=TRUE,
+  v0=0, col="dodgerblue", lwd=2, lty=6, rug=FALSE, add=TRUE, xpd=TRUE, se=1.96, ylim=c(-500,3000), xlim=c(0, 20000))
+
+
+# legend
+legend('bottomright',
+       legend=c('Constant', "Variable"),
+       lty=rep(c(1,6), each=2), lwd=rep(c(1,2), each=2),
+       col=rep(c("darkorange", "dodgerblue"), 2), seg.len=1.5,
+       bty='n', cex=.85, ncol=2, xpd=TRUE)
+dev.off()
 ```
 
 ```{r}
@@ -524,7 +559,7 @@ dat2$IsFur<- ifelse(dat2$stimulus=="F",1,0)
 dat2$IsVariable<- ifelse(dat2$motion=="V",1,0)
 dat2$IsFurVariable<- ifelse(dat2$stimulus=="F",1,0)
 
-m4 <- bam(pupil_base ~ condition + s(time, k=20)+ s(time, by=condition, k=20) 
+m4 <- bam(pupil_base ~ condition + session + s(time, k=20)+ s(time, by=condition, k=20) 
           + s(Xgaze, Ygaze)
           + s(time, Event, bs='fs', m=1)
           , data=dat2, discrete=TRUE, nthreads=40, method="ML")
@@ -534,14 +569,14 @@ save.image(file = "animacy_gamm_workspace4.RData")
 
 
 ```{r}
-m5 <- bam(pupil_base ~  s(time, k=20)+ s(time, by=IsFur, k=20) + s(time, by=IsVariable, k=20)+ s(time, by=IsFurVariable, k=20)
+m5 <- bam(pupil_base ~  session + s(time, k=20)+ s(time, by=IsFur, k=20) + s(time, by=IsVariable, k=20)+ s(time, by=IsFurVariable, k=20)
           + s(Xgaze, Ygaze)
           + s(time, Event, bs='fs', m=1)
           , data=dat2, discrete=TRUE, nthreads=40, method="ML")
 
 save.image(file = "animacy_gamm_workspace.RData")
 
-m4.null <- bam(pupil_base ~ s(time, k=20) 
+m4.null <- bam(pupil_base ~ session+ s(time, k=20) 
           + s(Xgaze, Ygaze)
           + s(time, Event, bs='fs', m=1)
           , data=dat2, discrete=TRUE, nthreads=40, method="ML")
@@ -579,6 +614,7 @@ plot_diff(m4, view="time",
           las=1, ylab="Est. difference in pupil size", 
             col=col2, hide.label = TRUE, plot = TRUE)#col.diff=alpha(1,f=0),v0=1800,
 ```
+
 ```{r}
 summary(m5)
 
@@ -609,6 +645,48 @@ b <- getViz(m4)
 png("graphics/Exp2_GAMM_partical_effect2_M4.png", width=20, height=18, units="cm", res=300)
 p1<-plot(b, allTerms = T)+theme_classic() + labs(title = NULL)
 print(p1, pages = 1 )
+dev.off()
+```
+
+* Summed effects
+Ball stimulus
+```{r}
+png("graphics/plot_reversed_videos_exp2_m4_summed_effect_ball.png", width=16, height=12, units="cm", res=600)
+
+plot_smooth(m4, view="time", cond=list(condition="B-C"), rm.ranef=TRUE,
+  v0=0, col="darkorange", lwd=2, lty=6, rug=FALSE, se=1.96,
+  main="Ball", ylab="Pupil size (baseline corrected)", las=1,
+  ylim=c(-500,3000), xlim=c(4000, 8000))
+plot_smooth(m4, view="time", cond=list(condition="B-V"), rm.ranef=TRUE,
+  v0=0, col="dodgerblue", lwd=2, lty=6, rug=FALSE, add=TRUE, xpd=TRUE, se=1.96, ylim=c(-500,3000), xlim=c(4000, 8000))
+
+
+# legend
+legend('bottomright',
+       legend=c('Constant', "Variable"),
+       lty=rep(c(1,6), each=2), lwd=rep(c(1,2), each=2),
+       col=rep(c("darkorange", "dodgerblue"), 2), seg.len=1.5,
+       bty='n', cex=.85, ncol=2, xpd=TRUE)
+dev.off()
+```
+Fur ball:
+```{r}
+png("graphics/plot_reversed_videos_exp2_m4_summed_effect_fur.png", width=16, height=12, units="cm", res=600)
+
+plot_smooth(m4, view="time", cond=list(condition="F-C"), rm.ranef=TRUE,
+  v0=0, col="darkorange", lwd=2, lty=6, rug=FALSE, se=1.96,
+  main="Fur", ylab="Pupil size (baseline corrected)", las=1,
+  ylim=c(-500,3000), xlim=c(4000, 8000))
+plot_smooth(m4, view="time", cond=list(condition="F-V"), rm.ranef=TRUE,
+  v0=0, col="dodgerblue", lwd=2, lty=6, rug=FALSE, add=TRUE, xpd=TRUE, se=1.96, ylim=c(-500,3000), xlim=c(4000, 8000))
+
+
+# legend
+legend('bottomright',
+       legend=c('Constant', "Variable"),
+       lty=rep(c(1,6), each=2), lwd=rep(c(1,2), each=2),
+       col=rep(c("darkorange", "dodgerblue"), 2), seg.len=1.5,
+       bty='n', cex=.85, ncol=2, xpd=TRUE)
 dev.off()
 ```
 
@@ -669,17 +747,18 @@ gaze_plot_data <- exp.data.pupil.processed.downsampled %>%
 con.labs <- c("Ball constant", "Ball variable", "Fur constant", "Fur variable")
 names(con.labs) <- c(levels(as.factor(gaze_plot_data$condition)))
 
-
+gaze_plot_data$x <- rep("x", nrow(gaze_plot_data))
+gaze_plot_data$y <- rep("y", nrow(gaze_plot_data))
 
 gaze_animacy_plot<-ggplot(data = gaze_plot_data%>%filter(!is.na(condition)), aes(x = time.frame, y = mean.x)) +
      # facet_wrap(~condition,labeller=labeller(condition=con.labs)) +
   facet_grid(motion~stimulus)+
   #moving ball:
   geom_ribbon(data = gaze_plot_data %>% filter(motion=="Constant"), aes(x = time.frame, ymin = x_l_constant, ymax = x_r_constant), fill = "#988B2D", alpha = 0.8) +
-    geom_ribbon(data = gaze_plot_data %>% filter(motion=="Variable"), aes(x = time.frame, ymin = x_l_variable, ymax = x_r_variable), fill = "#988B2D", alpha = 0.8) +
+    geom_ribbon(data = gaze_plot_data %>% filter(motion=="Variable"), aes(x = time.frame, ymin = x_l_variable, ymax = x_r_variable, fill = motion), alpha = 0.8) +
 # gaze data:
-    geom_point(alpha = 0.1, size=0.5) +
-  geom_path(aes(y = median.x), size = 1.2) +
+    geom_point(aes(fill = x), alpha = 0.1, size=0.5) +
+  geom_path(aes(y = median.x, fill=y), size = 1.2) +
    geom_ribbon(aes(ymin = mean.x - se.x, ymax = mean.x + se.x), alpha = 0.5)+
   ylab("Horizontal coordinates (in px)") +
   xlab("Time (in ms)") +
@@ -689,7 +768,20 @@ gaze_animacy_plot<-ggplot(data = gaze_plot_data%>%filter(!is.na(condition)), aes
         panel.grid.major.y = element_blank(),
         panel.grid.minor.y = element_blank(),
         strip.text.x = element_text(size = 12),
-        strip.text.y = element_text(size = 12))
+        strip.text.y = element_text(size = 12),
+        legend.position = c(0.925, 0.14),
+        legend.key = element_blank(),
+        legend.background = element_rect(fill = "transparent"),
+        legend.text = element_text(size = 9),
+        legend.key.size = unit(0.33, 'cm')
+  ) + # transparent legend bg
+  scale_y_reverse() +
+  scale_fill_manual(
+    values = c("#988B2D", "#5a5e63", "black"),
+    name = "",
+    breaks = c("Variable", "x", "y"),
+    labels = c("Stimulus", "Mean ± SE", "Median")
+  )
 
 gaze_animacy_plot
 ggsave(gaze_animacy_plot,filename="graphics/animacy_mean_x_gaze.png", height = 5, width = 8, scale = 0.7)
