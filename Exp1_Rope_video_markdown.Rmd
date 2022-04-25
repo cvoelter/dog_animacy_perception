@@ -33,7 +33,7 @@ col2 <- 'black'
 col3 <- 'indianred'
 library(cowplot)
 
-load("reversed_videos_rope_gamm_workspace.RData")
+load("reversed_videos_rope_gamm_workspace_rev.RData")
 ```
 
 ###Loading data
@@ -342,19 +342,26 @@ ggsave("graphics/reversed_videos_rope_video_pupil_size_sup_info.png", width=11, 
 ```{r}
 # Defining events (time series):
 dat$Event <- interaction(dat$subject, dat$condition_trial, drop=TRUE)
+#add order of conditions
+dat <- dat %>%
+  mutate(order = ifelse(((session==1 & condition=="normal")|(session==2 & condition=="reversed")), "normal_first", ifelse(((session==1 & condition=="reversed")|(session==2 & condition=="normal")), "reversed_first", "")))
+```
 
-m2 <- bam(pupil_base ~ condition + session + s(time, k=20)+ s(time, by=condition, k=20) 
+
+```{r}
+m2 <- bam(pupil_base ~ condition + order + s(time, k=20)+ s(time, by=condition, k=20) 
           + s(Xgaze, Ygaze)
-          + s(time, Event, bs='fs', m=1)
+          + s(time, Event, bs='fs', m=1) + s(time, subject, bs='fs', m=1)
           , data=dat, discrete=TRUE, nthreads=40, method="ML")
 
 
-m2.null <- bam(pupil_base ~ session + s(time, k=20)+ 
+m2.null <- bam(pupil_base ~ order + s(time, k=20)+ 
           + s(Xgaze, Ygaze)
-          + s(time, Event, bs='fs', m=1)
+          + s(time, Event, bs='fs', m=1) + s(time, subject, bs='fs', m=1)
           , data=dat, discrete=TRUE, nthreads=40, method="ML")
 
-save.image(file = "reversed_videos_rope_gamm_workspace.RData")
+
+save.image(file = "reversed_videos_rope_gamm_workspace_rev.RData")
 ```
 
 
@@ -409,7 +416,7 @@ dev.off()
 library(mgcViz)
 b <- getViz(m2)
 png("graphics/plot_reversed_videos_rope_m2_paterial_effect2.png", width=20, height=18, units="cm", res=300)
-p1<-plot(b, allTerms = T)+theme_classic() + labs(title = NULL)
+p1<-plot(b, allTerms = T, select=c(1:6, 8))+theme_classic() + labs(title = NULL)
 print(p1, pages = 1 )
 dev.off()
 
