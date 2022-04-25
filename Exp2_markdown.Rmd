@@ -395,6 +395,9 @@ dat2$subject<-as.factor(dat2$subject)
 
 
 ### Fit GAMM
+
+
+
 ```{r}
 # Defining events (time series):
 dat$Event <- interaction(dat$subject, dat$condition_trial, drop=TRUE)
@@ -404,27 +407,27 @@ dat$IsFurVariable<- ifelse(dat$stimulus=="F",1,0)
 
 m2 <- bam(pupil_base ~ condition + session +  s(time, k=20)+ s(time, by=condition, k=20) 
           + s(Xgaze, Ygaze)
-          + s(time, Event, bs='fs', m=1)
+          + s(time, Event, bs='fs', m=1) + s(time, subject, bs='fs', m=1)
           , data=dat, discrete=TRUE, nthreads=40, method="ML")
 
-save.image(file = "animacy_gamm_workspace.RData")
+save.image(file = "animacy_gamm_workspace_2ndrev.RData")
 
 m3 <- bam(pupil_base ~  session + s(time, k=20)+ s(time, by=IsFur, k=20) + s(time, by=IsVariable, k=20)+ s(time, by=IsFurVariable, k=20)
           + s(Xgaze, Ygaze)
-          + s(time, Event, bs='fs', m=1)
+          + s(time, Event, bs='fs', m=1)  + s(time, subject, bs='fs', m=1)
           , data=dat, discrete=TRUE, nthreads=40, method="ML")
 
-save.image(file = "animacy_gamm_workspace3.RData")
+save.image(file = "animacy_gamm_workspace_2ndrev.RData")
 ```
 
 
 ```{r}
 m2.null <- bam(pupil_base ~ session + s(time, k=20)+ 
           + s(Xgaze, Ygaze)
-          + s(time, Event, bs='fs', m=1)
+          + s(time, Event, bs='fs', m=1)  + s(time, subject, bs='fs', m=1)
           , data=dat, discrete=TRUE, nthreads=40, method="ML")
 
-save.image(file = "animacy_gamm_workspace3.RData")
+save.image(file = "animacy_gamm_workspace_2ndrev.RData")
 #concurvity(m2, full = FALSE)
 ```
 
