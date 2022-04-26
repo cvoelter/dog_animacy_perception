@@ -16,7 +16,7 @@ library(summarytools)
 library(exactRankTests)
 library(lme4)
 library(naniar)
-library(gazer)
+#library(gazer)
 library(zoo)
 library(arrow)
 source("functions/diagnostic_fcns.r")
@@ -38,7 +38,7 @@ col2 <- 'black'
 col3 <- 'indianred'
 library(cowplot)
 
-load("Exp2_gamm_workspace.RData")
+load("Exp2_gamm_workspace.RData")
 ```
 
 ### Loading data
