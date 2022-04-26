@@ -38,7 +38,7 @@ col2 <- 'black'
 col3 <- 'indianred'
 library(cowplot)
 
-load("Exp2_gamm_workspace.RData")
+load("animacy_gamm_workspace_2ndrev.RData")
 ```
 
 ### Loading data
@@ -484,7 +484,7 @@ dev.off()
 
 library(mgcViz)
 b <- getViz(m2)
-png("graphics/VoE_animacy_GAMM_partical_effect2_m2.png", width=20, height=17, units="cm", res=300)
+png("graphics/VoE_animacy_GAMM_partical_effect2_m2.png", width=24, height=17, units="cm", res=300)
 p1<-plot(b, allTerms = T)+theme_classic() + labs(title = NULL)
 print(p1, pages = 1 )
 dev.off()
