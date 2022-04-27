@@ -564,28 +564,28 @@ dat2$IsFurVariable<- ifelse(dat2$stimulus=="F",1,0)
 
 m4 <- bam(pupil_base ~ condition + session + s(time, k=20)+ s(time, by=condition, k=20) 
           + s(Xgaze, Ygaze)
-          + s(time, Event, bs='fs', m=1)
+          + s(time, Event, bs='fs', m=1)  + s(time, subject, bs='fs', m=1)
           , data=dat2, discrete=TRUE, nthreads=40, method="ML")
 
-save.image(file = "animacy_gamm_workspace4.RData")
+save.image(file = "animacy_gamm_workspace_2ndrev.RData")
 ```
 
 
 ```{r}
 m5 <- bam(pupil_base ~  session + s(time, k=20)+ s(time, by=IsFur, k=20) + s(time, by=IsVariable, k=20)+ s(time, by=IsFurVariable, k=20)
           + s(Xgaze, Ygaze)
-          + s(time, Event, bs='fs', m=1)
+          + s(time, Event, bs='fs', m=1)  + s(time, subject, bs='fs', m=1)
           , data=dat2, discrete=TRUE, nthreads=40, method="ML")
 
-save.image(file = "animacy_gamm_workspace.RData")
+save.image(file = "animacy_gamm_workspace_2ndrev.RData")
 
 m4.null <- bam(pupil_base ~ session+ s(time, k=20) 
           + s(Xgaze, Ygaze)
-          + s(time, Event, bs='fs', m=1)
+          + s(time, Event, bs='fs', m=1)  + s(time, subject, bs='fs', m=1)
           , data=dat2, discrete=TRUE, nthreads=40, method="ML")
 
 
-save.image(file = "Exp2_gamm_workspace.RData")
+save.image(file = "animacy_gamm_workspace_2ndrev.RData")
 ```
 
 
