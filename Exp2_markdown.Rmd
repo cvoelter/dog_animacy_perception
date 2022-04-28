@@ -633,11 +633,6 @@ plot_diff(m5, view="time",
           las=1, ylab="Est. difference in pupil size", 
             col=col2, hide.label = TRUE, plot = TRUE)#col.diff=alpha(1,f=0),v0=1800,
 
-plot_diff(m5, view="time", 
-          comp=list(condition=c("F-C", "F-V")), rm.ranef=TRUE, main="", 
-          las=1, ylab="Est. difference in pupil size", 
-            col=col2, hide.label = TRUE, plot = TRUE)#col.diff=alpha(1,f=0),v0=1800,
-
 
 ```
 
@@ -645,7 +640,7 @@ plot_diff(m5, view="time",
 ```{r}
 library(mgcViz)
 b <- getViz(m4)
-png("graphics/Exp2_GAMM_partical_effect2_M4.png", width=20, height=18, units="cm", res=300)
+png("graphics/Exp2_GAMM_partical_effect2_M4.png", width=28, height=17, units="cm", res=300)
 p1<-plot(b, allTerms = T)+theme_classic() + labs(title = NULL)
 print(p1, pages = 1 )
 dev.off()
@@ -654,7 +649,7 @@ dev.off()
 * Summed effects
 Ball stimulus
 ```{r}
-png("graphics/plot_reversed_videos_exp2_m4_summed_effect_ball.png", width=16, height=12, units="cm", res=600)
+png("graphics/plot_reversed_videos_exp2_m4_summed_effect_ball.png", width=13, height=12, units="cm", res=600)
 
 plot_smooth(m4, view="time", cond=list(condition="B-C"), rm.ranef=TRUE,
   v0=0, col="darkorange", lwd=2, lty=6, rug=FALSE, se=1.96,
@@ -674,7 +669,7 @@ dev.off()
 ```
 Fur ball:
 ```{r}
-png("graphics/plot_reversed_videos_exp2_m4_summed_effect_fur.png", width=16, height=12, units="cm", res=600)
+png("graphics/plot_reversed_videos_exp2_m4_summed_effect_fur.png", width=13, height=12, units="cm", res=600)
 
 plot_smooth(m4, view="time", cond=list(condition="F-C"), rm.ranef=TRUE,
   v0=0, col="darkorange", lwd=2, lty=6, rug=FALSE, se=1.96,
