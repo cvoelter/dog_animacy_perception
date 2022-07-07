@@ -16,8 +16,11 @@ Includes all data files supporting the analyses.
 ## saves folder
 Data sheets for the dogs average fixation duration etc across the different videos and experiments
 
-## Screenshots
+## screenshots
 Screenshots of the videos
+
+## stimuli
+Video stimuli of Experiment 1 and 2
 
 ## graphics
 Data visualisations

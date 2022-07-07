@@ -809,8 +809,8 @@ pg.animacy<-plot_grid(animacy_pics, pg.animacy1 , ncol=1, nrow=2, rel_heights = 
 
 pg.animacy
 
-ggsave(pg.animacy, filename = "graphics/ET_VoE_animcy_plotgrid.png", width = 9, height=12, scale=0.75)
-ggsave(pg.animacy, filename = "graphics/ET_VoE_animcy_plotgrid.pdf", width = 9, height=14, scale=0.75)
+ggsave(pg.animacy, filename = "graphics/Exp2_ET_VoE_animacy_plotgrid.png", width = 9, height=12, scale=0.75)
+ggsave(pg.animacy, filename = "graphics/Exp2_ET_VoE_animacy_plotgrid.pdf",  width = 9, height=12, scale=0.75)
 ```
 
 
